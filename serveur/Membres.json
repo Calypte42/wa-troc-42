@@ -1,0 +1,32 @@
+[
+    {
+        "email":"sofian.charpentier@gmail.com",
+        "MDP":"PASS42",
+        "nom":"Charpentier",
+        "prenom":"Sofian",
+        "role":"admin",
+        "ville":"Montpellier",
+        "adresse":"Avenue 42",
+        "telephone":"0654321042"
+    },
+    {
+        "email":"jm.charpentier@gmail.com",
+        "MDP":"LOL42",
+        "nom":"Charpentier",
+        "prenom":"Jean-Michel",
+        "role":"user",
+        "ville":"Montpellier",
+        "adresse":"Avenue 51",
+        "telephone":"0621584652"
+    },
+    {
+        "email":"aurelien.lengrand@etu.umontpellier.fr",
+        "MDP":"tutu42",
+        "nom":"Lengrand",
+        "prenom":"Aurélien",
+        "role":"user",
+        "ville":"Lamalou-les-Bains",
+        "adresse":"Quelque part",
+        "telephone":"0678910422"
+    }
+]

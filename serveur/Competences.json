@@ -1,0 +1,32 @@
+[
+    {
+        "descriptif":"Cours de mathématique pour niveau collège",
+        "mots_clefs":["cours","math"],
+        "email":"sofian.charpentier@gmail.com",
+        "disponibilite":
+        [
+            {"jour":"lundi", "heure":"9h-12h"},
+            {"jour":"mardi", "heure":"9h-12h"}
+        ]
+    },
+    {
+        "descriptif":"Cours d'informatique pour débutant",
+        "mots_clefs":["cours","informatique"],
+        "email":"sofian.charpentier@gmail.com",
+        "disponibilite":
+        [
+            {"jour":"lundi", "heure":"9h-12h"},
+            {"jour":"mardi", "heure":"9h-12h"}
+        ]
+    },
+    {
+        "descriptif":"Réparation en tout genre",
+        "mots_clefs":["bricolage"],
+        "email":"aurelien.lengrand@etu.umontpellier.fr",
+        "disponibilite":
+        [
+            {"jour":"lundi", "heure":"9h-12h"},
+            {"jour":"mardi", "heure":"9h-12h"}
+        ]
+    }
+]

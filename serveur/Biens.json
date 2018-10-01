@@ -1,0 +1,23 @@
+[
+    {
+        "descriptif":"Marteau",
+        "mots_clefs":["outil","bricolage"],
+        "email":"sofian.charpentier@gmail.com",
+        "photo":"https://etc.fr",
+        "prix_neuf":30
+    },
+    {
+        "descriptif":"Prêt d'une Twingo",
+        "mots_clefs":["voiture","racing"],
+        "email":"sofian.charpentier@gmail.com",
+        "photo":"https://etc.fr",
+        "prix_neuf":1000
+    },
+    {
+        "descriptif":"Prêt d'une Twingo",
+        "mots_clefs":["voiture","racing"],
+        "email":"jm.charpentier@gmail.com",
+        "photo":"https://etc.fr",
+        "prix_neuf":1000
+    }
+]
