@@ -12,6 +12,6 @@ export class MembresComponent implements OnInit {
   constructor(private membresService: MembresService) { }
 
   ngOnInit() {
-     this.membresService.getMembres().subscribe(res => this.membres = res);
+     this.membresService.getMembres("").subscribe(res => this.membres = res);
   }
 }

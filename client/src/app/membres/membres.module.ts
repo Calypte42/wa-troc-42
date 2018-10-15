@@ -4,11 +4,12 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { MembresComponent } from './membres/membres.component';
 import { MembresService } from './membres.service';
+import { RechercheMembreComponent } from './recherche-membre/recherche-membre.component';
 
 @NgModule({
-  declarations: [ MembresComponent ],
+  declarations: [ MembresComponent, RechercheMembreComponent ],
   imports: [ BrowserModule, HttpClientModule ],
-  exports: [ MembresComponent ],
+  exports: [ MembresComponent, RechercheMembreComponent ],
   providers: [ MembresService ],
   bootstrap: []
 })

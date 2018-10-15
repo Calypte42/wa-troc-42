@@ -8,9 +8,9 @@ export class MembresService {
 
   constructor(private http: HttpClient) { }
 
-  getMembres(): Observable<any> {
+  getMembres(parametres): Observable<any> {
      let observable: Observable<any>;
-     observable =  this.http.get("http://localhost:8888/membres");
+     observable =  this.http.get("http://localhost:8888/membres"+parametres);
      console.log(observable);
      return observable;
   }

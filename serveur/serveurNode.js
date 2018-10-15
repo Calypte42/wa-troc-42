@@ -30,11 +30,12 @@ MongoClient.connect(url, {useNewUrlParser: true}, (err, client) => {
 /* -----------------------REST Membres ------------------------------------- */
 
     app.get('/Membres', (req, res) => {
+        res.setHeader('Access-Control-Allow-Origin','*');
         res.setHeader('Content-type', 'application/json; charset=UTF-8');
         db.collection("Membres").find().toArray((err, documents) => {
             let liste = [];
             for (let document of documents) {
-                liste.push(document['email']);
+                liste.push(document);
             }
             let json = JSON.stringify(liste);
             res.end(json);
@@ -84,10 +85,10 @@ MongoClient.connect(url, {useNewUrlParser: true}, (err, client) => {
     });
 
 
-/*------------------- REST Competences ------------------------------------
+/*------------------- REST Competences ------------------------------------*/
 
 
-/* ------------------- REST Utilisation -----------------------------------
+/* ------------------- REST Utilisation -----------------------------------*/
 });
 
 app.listen(8888);
