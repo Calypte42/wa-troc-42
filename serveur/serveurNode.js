@@ -29,9 +29,11 @@ MongoClient.connect(url, {useNewUrlParser: true}, (err, client) => {
 
 /* -----------------------REST Membres ------------------------------------- */
 
-    app.get('/Membres', (req, res) => {
-        res.setHeader('Access-Control-Allow-Origin','*');
+
+// Renvoi tous les membres
+    app.get('/membres', (req, res) => {
         res.setHeader('Content-type', 'application/json; charset=UTF-8');
+        res.setHeader('access-control-allow-origin','*');
         db.collection("Membres").find().toArray((err, documents) => {
             let liste = [];
             for (let document of documents) {
@@ -43,20 +45,201 @@ MongoClient.connect(url, {useNewUrlParser: true}, (err, client) => {
     });
 
 
-/* -------------------------- REST Biens ---------------------------------*/
-    app.get('/Biens', (req, res) => {
+// renvoi le membre correspondant à l email
+    app.get('/membres/:email', (req, res) => {
         res.setHeader('Content-type', 'application/json; charset=UTF-8');
-        db.collection("Biens").find().toArray((err, documents) => {
+        res.setHeader('access-control-allow-origin','*');
+        db.collection("Membres").find({'email':req.params.email}).toArray((err, documents) => {
             let liste = [];
             for (let document of documents) {
-                liste.push(document['descriptif']);
+                liste.push(document);
             }
             let json = JSON.stringify(liste);
             res.end(json);
         });
     });
 
-    app.get('/Biens/proprietaire/:personne', (req, res) => {
+    // renvoi les membres correspondant au mot cle
+        app.get('/membres/recherche/:motCle', (req, res) => {
+            res.setHeader('Content-type', 'application/json; charset=UTF-8');
+            res.setHeader('access-control-allow-origin','*');
+            let motCle = new RegExp(req.params.motCle);
+            db.collection("Membres").find({$or:[{'email':motCle},{'prenom':motCle},{'nom':motCle}]}).toArray((err, documents) => {
+                let liste = [];
+                for (let document of documents) {
+                    liste.push(document);
+                }
+                let json = JSON.stringify(liste);
+                res.end(json);
+            });
+        });
+
+
+
+    // renvoi les membres correspondant a l email
+        app.get('/membres/recherche/email/:email', (req, res) => {
+            res.setHeader('Content-type', 'application/json; charset=UTF-8');
+            res.setHeader('access-control-allow-origin','*');
+            db.collection("Membres").find({'email':new RegExp(req.params.email)}).toArray((err, documents) => {
+                let liste = [];
+                for (let document of documents) {
+                    liste.push(document);
+                }
+                let json = JSON.stringify(liste);
+                res.end(json);
+            });
+        });
+    // renvoi les membres correspondant au prenom
+        app.get('/membres/recherche/prenom/:prenom', (req, res) => {
+            res.setHeader('Content-type', 'application/json; charset=UTF-8');
+            res.setHeader('access-control-allow-origin','*');
+            db.collection("Membres").find({'prenom':new RegExp(req.params.prenom)}).toArray((err, documents) => {
+                let liste = [];
+                for (let document of documents) {
+                    liste.push(document);
+                }
+                let json = JSON.stringify(liste);
+                res.end(json);
+            });
+        });
+
+        // renvoi les membres correspondant au nom
+            app.get('/membres/recherche/nom/:nom', (req, res) => {
+                res.setHeader('Content-type', 'application/json; charset=UTF-8');
+                res.setHeader('access-control-allow-origin','*');
+                db.collection("Membres").find({'nom':new RegExp(req.params.nom)}).toArray((err, documents) => {
+                    let liste = [];
+                    for (let document of documents) {
+                        liste.push(document);
+                    }
+                    let json = JSON.stringify(liste);
+                    res.end(json);
+                });
+            });
+
+
+
+// renvoi les membres dont le role correspond
+    app.get('/membres/role/:role', (req, res) => {
+        res.setHeader('Content-type', 'application/json; charset=UTF-8');
+        res.setHeader('access-control-allow-origin','*');
+        db.collection("Membres").find({'role':req.params.role}).toArray((err, documents) => {
+            let liste = [];
+            for (let document of documents) {
+                liste.push(document);
+            }
+            let json = JSON.stringify(liste);
+            res.end(json);
+        });
+    });
+
+// renvoi les membres d une ville
+    app.get('/membres/ville/:ville', (req, res) => {
+        res.setHeader('Content-type', 'application/json; charset=UTF-8');
+        res.setHeader('access-control-allow-origin','*');
+        db.collection("Membres").find({'ville':req.params.ville}).toArray((err, documents) => {
+            let liste = [];
+            for (let document of documents) {
+                liste.push(document);
+            }
+            let json = JSON.stringify(liste);
+            res.end(json);
+        });
+    });
+
+// Renvoi les informations des membres qui propose des compétences
+// dont le descriptif est passé en parametre.
+
+    app.get('/membres/competence/:competence', (req, res) => {
+
+        res.setHeader('Content-type', 'application/json; charset=UTF-8');
+        res.setHeader('access-control-allow-origin','*');
+        // On recupere tout d'abord les competences qui correspondent
+        db.collection("Competences").aggregate([
+            {
+                $match: {"descriptif":new RegExp(req.params.competence)}
+            },
+            {
+                $lookup: // On realise ensuite la jointure
+                {
+                    from: 'Membres', // en prenant la collection membres comme table de jointure
+                    localField: 'email', // le champs de tri sur competences est email
+                    foreignField: 'email', // le champs de tri sur membres est email
+                    as: 'listeMembres' // On nomme le resultat de la jointure pour utilisation
+                }
+            }
+        ]).toArray(function(err, documents) {
+            let liste = [];
+            for (let document of documents) {
+                liste.push(document.listeMembres);
+            }
+            let json = JSON.stringify(liste);
+            res.end(json);
+        })
+    });
+
+
+/* -------------------------- REST Biens ---------------------------------*/
+    app.get('/biens', (req, res) => {
+        res.setHeader('Content-type', 'application/json; charset=UTF-8');
+        res.setHeader('access-control-allow-origin','*');
+        db.collection("Biens").find().toArray((err, documents) => {
+            let liste = [];
+            for (let document of documents) {
+                liste.push(document);
+            }
+            let json = JSON.stringify(liste);
+            res.end(json);
+        });
+    });
+
+    app.get('/biens/type/:type', (req, res) => {
+        res.setHeader('Content-type', 'application/json; charset=UTF-8');
+        res.setHeader('access-control-allow-origin','*');
+        db.collection("Biens").find({'type': new RegExp(req.params.type)}).toArray((err, documents) => {
+            let liste = [];
+            for (let document of documents) {
+                liste.push(document);
+            }
+            let json = JSON.stringify(liste);
+            res.end(json);
+        });
+    });
+
+
+    app.get('/biens/type/:type/ville/:ville', (req, res) => {
+
+        res.setHeader('Content-type', 'application/json; charset=UTF-8');
+        res.setHeader('access-control-allow-origin','*');
+        // On recupere tout d'abord les membres qui correspondent
+        db.collection("Membres").aggregate([
+            {
+                $match: {"ville":req.params.ville}
+            },
+            {
+                $lookup: // On realise ensuite la jointure
+                {
+                    from: 'Biens', // en prenant la collection biens comme table de jointure
+                    localField: 'email', // le champs de tri sur competences est email
+                    foreignField: 'email', // le champs de tri sur membres est email
+                    as: 'listeBiens' // On nomme le resultat de la jointure pour utilisation
+                }
+            }
+        ]).toArray(function(err, documents) {
+            let liste = [];
+            for (let document of documents) {
+                for (let bien of document.listeBiens){
+                    if (bien.type== req.params.type){
+                      liste.push(bien);
+                    }
+                }
+            }
+            let json = JSON.stringify(liste);
+            res.end(json);
+        })
+    });
+
+    app.get('/biens/proprietaire/:personne', (req, res) => {
 
         let personne = req.params.personne;
 

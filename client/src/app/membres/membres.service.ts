@@ -14,4 +14,14 @@ export class MembresService {
      console.log(observable);
      return observable;
   }
+
+  rechercheMembres(parametre): Observable<any> {
+     let observable: Observable<any>;
+     observable =  this.http.get("http://localhost:8888/membres/recherche/"+parametre);
+     console.log(observable);
+     return observable;
+  }
+
+
+
 }

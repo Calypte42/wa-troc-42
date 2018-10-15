@@ -6,11 +6,17 @@ import { MembresModule } from './membres/membres.module';
 import { TrajetsModule } from './trajets/trajets.module';
 
 import { AppComponent } from './app.component';
+import { BiensComponent } from './biens/biens.component';
+import { CompetencesComponent } from './competences/competences.component';
+import { EmpruntComponent } from './emprunt/emprunt.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    BiensComponent,
+    CompetencesComponent,
+    EmpruntComponent
   ],
   imports: [
     BrowserModule,
