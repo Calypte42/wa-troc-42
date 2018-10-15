@@ -4,6 +4,9 @@ import { NgModule } from '@angular/core';
 
 import { MembresModule } from './membres/membres.module';
 import { TrajetsModule } from './trajets/trajets.module';
+import { BiensModule} from './biens/biens.module';
+import { CompetencesModule} from './competences/competences.module';
+import { EmpruntModule} from './emprunt/emprunt.module';
 
 import { AppComponent } from './app.component';
 
@@ -16,7 +19,10 @@ import { AppComponent } from './app.component';
     BrowserModule,
     FormsModule,
     MembresModule,
-    TrajetsModule
+    TrajetsModule,
+    BiensModule,
+    CompetencesModule,
+    EmpruntModule
   ],
   providers: [],
   bootstrap: [AppComponent]
