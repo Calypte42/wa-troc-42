@@ -29,6 +29,8 @@ MongoClient.connect(url, {useNewUrlParser: true}, (err, client) => {
 
 /* -----------------------REST Membres ------------------------------------- */
 
+
+// Renvoi tous les membres
     app.get('/membres', (req, res) => {
         res.setHeader('Content-type', 'application/json; charset=UTF-8');
         res.setHeader('access-control-allow-origin','*');
@@ -43,6 +45,7 @@ MongoClient.connect(url, {useNewUrlParser: true}, (err, client) => {
     });
 
 
+// renvoi le membre correspondant à l email
     app.get('/membres/:email', (req, res) => {
         res.setHeader('Content-type', 'application/json; charset=UTF-8');
         res.setHeader('access-control-allow-origin','*');
@@ -56,6 +59,67 @@ MongoClient.connect(url, {useNewUrlParser: true}, (err, client) => {
         });
     });
 
+    // renvoi les membres correspondant au mot cle
+        app.get('/membres/recherche/:motCle', (req, res) => {
+            res.setHeader('Content-type', 'application/json; charset=UTF-8');
+            res.setHeader('access-control-allow-origin','*');
+            let motCle = new RegExp(req.params.motCle);
+            db.collection("Membres").find({$or:[{'email':motCle},{'prenom':motCle},{'nom':motCle}]}).toArray((err, documents) => {
+                let liste = [];
+                for (let document of documents) {
+                    liste.push(document);
+                }
+                let json = JSON.stringify(liste);
+                res.end(json);
+            });
+        });
+
+
+
+    // renvoi les membres correspondant a l email
+        app.get('/membres/recherche/email/:email', (req, res) => {
+            res.setHeader('Content-type', 'application/json; charset=UTF-8');
+            res.setHeader('access-control-allow-origin','*');
+            db.collection("Membres").find({'email':new RegExp(req.params.email)}).toArray((err, documents) => {
+                let liste = [];
+                for (let document of documents) {
+                    liste.push(document);
+                }
+                let json = JSON.stringify(liste);
+                res.end(json);
+            });
+        });
+    // renvoi les membres correspondant au prenom
+        app.get('/membres/recherche/prenom/:prenom', (req, res) => {
+            res.setHeader('Content-type', 'application/json; charset=UTF-8');
+            res.setHeader('access-control-allow-origin','*');
+            db.collection("Membres").find({'prenom':new RegExp(req.params.prenom)}).toArray((err, documents) => {
+                let liste = [];
+                for (let document of documents) {
+                    liste.push(document);
+                }
+                let json = JSON.stringify(liste);
+                res.end(json);
+            });
+        });
+
+        // renvoi les membres correspondant au nom
+            app.get('/membres/recherche/nom/:nom', (req, res) => {
+                res.setHeader('Content-type', 'application/json; charset=UTF-8');
+                res.setHeader('access-control-allow-origin','*');
+                db.collection("Membres").find({'nom':new RegExp(req.params.nom)}).toArray((err, documents) => {
+                    let liste = [];
+                    for (let document of documents) {
+                        liste.push(document);
+                    }
+                    let json = JSON.stringify(liste);
+                    res.end(json);
+                });
+            });
+
+
+
+// renvoi les membres dont le role correspond
     app.get('/membres/role/:role', (req, res) => {
         res.setHeader('Content-type', 'application/json; charset=UTF-8');
         res.setHeader('access-control-allow-origin','*');
@@ -69,6 +133,7 @@ MongoClient.connect(url, {useNewUrlParser: true}, (err, client) => {
         });
     });
 
+// renvoi les membres d une ville
     app.get('/membres/ville/:ville', (req, res) => {
         res.setHeader('Content-type', 'application/json; charset=UTF-8');
         res.setHeader('access-control-allow-origin','*');
