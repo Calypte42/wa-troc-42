@@ -1,16 +1,23 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { MembresService } from '../membres.service';
 
 @Component({
   selector: 'app-recherche-membre',
   templateUrl: './recherche-membre.component.html',
   styleUrls: ['./recherche-membre.component.css']
 })
-export class RechercheMembreComponent implements OnInit {
+export class RechercheMembreComponent {
   private membres: Object[];
 
-  constructor() { }
+  @Input()
+  set nomDuMembre(nom: string) {
+    this.rechercheMembre(nom);
+  }
 
-  ngOnInit() {
+  constructor(private membresService: MembresService) { }
+
+  rechercheMembre(nom) {
+    this.membresService.getMembres("/recherche/nom/" + nom).subscribe(res => this.membres = res);
   }
 
 }
