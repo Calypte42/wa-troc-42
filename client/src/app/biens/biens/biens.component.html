@@ -1,3 +1,6 @@
-<p>
-  biens works!
-</p>
+<div>
+  Voici la liste des biens :
+  <ul>
+    <li *ngFor="let bien of biens"> {{bien.descriptif}}, {{bien.email}}</li>
+  </ul>
+</div>

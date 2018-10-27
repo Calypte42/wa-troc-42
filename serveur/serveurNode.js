@@ -13,7 +13,9 @@ var express = require('express');
 var app = express();
 var MongoClient = require('mongodb').MongoClient;
 var url = "mongodb://localhost:27017";
+var bodyParser = require('body-parser');
 
+app.use(bodyParser.urlencoded({extended:true}));
 
 MongoClient.connect(url, {useNewUrlParser: true}, (err, client) => {
     let db = client.db("TROC");
@@ -177,6 +179,30 @@ MongoClient.connect(url, {useNewUrlParser: true}, (err, client) => {
             res.end(json);
         })
     });
+
+/*----------------------------- POST Membres -----------------------------*/
+
+
+    app.post('/add/membre',(req,res) =>{
+        /*for(let e in req.body){
+            console.log(e +" : "+req.body[e]);
+        }
+        console.log("voug");*/
+        db.collection("Membres").insert(
+            {
+                "email":req.body["email"],
+                "MDP":req.body["mdp"],
+                "nom":req.body["nom"],
+                "prenom":req.body["prenom"],
+                "role":req.body["role"],
+                "ville":req.body["ville"],
+                "adresse":req.body["adresse"],
+                "telephone":req.body["telephone"]
+            }
+        )
+    }
+)
+
 
 
 /* -------------------------- REST Biens ---------------------------------*/

@@ -1,7 +1,7 @@
 <header>
     &nbsp;&nbsp;<br/>Bienvenue sur le site de {{ title }} !<br/>&nbsp;
 </header>
-<div> <app-trajets></app-trajets> </div>
+<div> <app-biens></app-biens> </div>
 <div>
     <table>
         <tr><td><app-membres></app-membres></td></tr>
@@ -9,4 +9,7 @@
         <tr>
         <tr> <td><app-recherche-membre [nomDuMembre]="nom"></app-recherche-membre></td> </tr>
     </table>
+</div>
+<div>
+    <app-inscription-membre></app-inscription-membre>
 </div>

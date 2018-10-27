@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { BiensService } from '../biens.service';
 
 @Component({
   selector: 'app-biens',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BiensComponent implements OnInit {
 
-  constructor() { }
+    private biens:Object[];
+
+  constructor(private biensService: BiensService) {}
 
   ngOnInit() {
+      this.biensService.getBiens("").subscribe(res => this.biens = res);
   }
 
 }

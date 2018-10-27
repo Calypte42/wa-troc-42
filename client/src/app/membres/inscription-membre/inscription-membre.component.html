@@ -1,0 +1,26 @@
+<div name='formulaireInscription' class="formulaire">
+    Pour rejoindre notre communauté veuillez remplir ce formulaire :
+
+    <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+        <label for="nom"> Nom :</label>
+        <input type="text" id="nom" name="nom" ngModel />
+        <label for="prenom"> Prénom :</label>
+        <input type="text" id="prenom" name="prenom" ngModel/>
+        <label for="email"> email :</label>
+        <input type="email" id="email" name="email" ngModel />
+        <label for="ville"> Ville :</label>
+        <input type="text" id="ville" name="ville" ngModel/>
+        <label for="adresse"> Adresse :</label>
+        <input type="text" id="adresse" name="adresse" ngModel />
+        <label for="telephone"> Télephone :</label>
+        <input type="tel" id="telephone" name="telephone" ngModel />
+
+        <button class="" type="submit">Enregistrer</button>
+
+
+
+
+
+
+    </form>
+</div>
