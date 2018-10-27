@@ -1,7 +1,8 @@
 [
     {
         "email":"sofian.charpentier@etu.umontpellier.fr",
-        "ID_comp_bien":1,
-        "date":"02/09/2018"
+        "ID_comp_bien":ObjectId("5bb1ea7d6ae26740fb7c7a3f"),
+        "date":"02/09/2018",
+	"type":"bien"
     }
 ]
