@@ -13,6 +13,7 @@ var express = require('express');
 var app = express();
 var MongoClient = require('mongodb').MongoClient;
 var url = "mongodb://localhost:27017";
+var ObjectId = require('mongodb').ObjectID;
 
 
 MongoClient.connect(url, {useNewUrlParser: true}, (err, client) => {
@@ -270,8 +271,152 @@ MongoClient.connect(url, {useNewUrlParser: true}, (err, client) => {
 
 /*------------------- REST Competences ------------------------------------*/
 
+    app.get('/competences', (req, res) => {
+        res.setHeader('Content-type', 'application/json; charset=UTF-8');
+        res.setHeader('access-control-allow-origin','*');
+        db.collection("Competences").find().toArray((err, documents) => {
+            let liste = [];
+            for (let document of documents) {
+                liste.push(document);
+            }
+            let json = JSON.stringify(liste);
+            res.end(json);
+        });
+    });
+
+    app.get('/competences/membre/:email', (req, res) => {
+        let email = req.params.email;
+
+        res.setHeader('Content-type', 'application/json; charset=UTF-8');
+        res.setHeader('access-control-allow-origin','*');
+        db.collection("Competences").find({"email":email}).toArray((err, documents) => {
+            let liste = [];
+            for (let document of documents) {
+                liste.push(document);
+            }
+            let json = JSON.stringify(liste);
+            res.end(json);
+        });
+    });
+
+    app.get('/competences/id/:id', (req, res) => {
+        let id = req.params.id;
+
+        res.setHeader('Content-type', 'application/json; charset=UTF-8');
+        res.setHeader('access-control-allow-origin','*');
+        db.collection("Competences").find({"_id":new ObjectId(id)}).toArray((err, documents) => {
+            let liste = [];
+            for (let document of documents) {
+                liste.push(document);
+            }
+            let json = JSON.stringify(liste);
+            res.end(json);
+        });
+    });
 
 /* ------------------- REST Utilisation -----------------------------------*/
+
+    app.get('/utilisations', (req, res) => {
+        res.setHeader('Content-type', 'application/json; charset=UTF-8');
+        res.setHeader('access-control-allow-origin','*');
+        db.collection("Utilisations").find().toArray((err, documents) => {
+            let liste = [];
+            for (let document of documents) {
+                liste.push(document);
+            }
+            let json = JSON.stringify(liste);
+            res.end(json);
+        });
+    });
+
+    app.get('/utilisations/membre/preteur/biens/:email', (req, res) => {
+        let email = req.params.email;
+        res.setHeader('Content-type', 'application/json; charset=UTF-8');
+        res.setHeader('access-control-allow-origin','*');
+        db.collection("Biens").aggregate([
+            {
+                $match: {"email":email}
+            },
+            {
+                $lookup: 
+                {
+                    from: 'Utilisations', 
+                    localField: '_id',
+                    foreignField: 'ID_comp_bien',
+                    as: 'listeBiensUtilisations'
+                }
+            }
+        ]).toArray(function(err, documents) {
+            let liste = [];
+            for (let document of documents) {
+                for (let bienUtilisation of document.listeBiensUtilisations){
+                    liste.push(bienUtilisation);
+                }
+            }
+            let json = JSON.stringify(liste);
+            res.end(json);
+        })
+    });
+
+    app.get('/utilisations/membre/preteur/competences/:email', (req, res) => {
+        let email = req.params.email;
+        res.setHeader('Content-type', 'application/json; charset=UTF-8');
+        res.setHeader('access-control-allow-origin','*');
+        db.collection("Competences").aggregate([
+            {
+                $match: {"email":email}
+            },
+            {
+                $lookup: 
+                {
+                    from: 'Utilisations', 
+                    localField: '_id',
+                    foreignField: 'ID_comp_bien',
+                    as: 'listeCompetencesUtilisations'
+                }
+            }
+        ]).toArray(function(err, documents) {
+            let liste = [];
+            for (let document of documents) {
+                for (let competenceUtilisation of document.listeCompetencesUtilisations){
+                    liste.push(competenceUtilisation);
+                }
+            }
+            let json = JSON.stringify(liste);
+            res.end(json);
+        })
+    });
+
+    app.get('/utilisations/membre/utilisateur/:email', (req, res) => {
+            let email = req.params.email;
+
+            res.setHeader('Content-type', 'application/json; charset=UTF-8');
+            res.setHeader('access-control-allow-origin','*');
+            db.collection("Utilisations").find({"email":email}).toArray((err, documents) => {
+                let liste = [];
+                for (let document of documents) {
+                    liste.push(document);
+                }
+                let json = JSON.stringify(liste);
+                res.end(json);
+            });
+        });
+
+    app.get('/utilisation/id/:id', (req, res) => {
+        let id = req.params.id;
+
+        res.setHeader('Content-type', 'application/json; charset=UTF-8');
+        res.setHeader('access-control-allow-origin','*');
+        db.collection("Utilisations").find({"_id":new ObjectId(id)}).toArray((err, documents) => {
+            let liste = [];
+            for (let document of documents) {
+                liste.push(document);
+            }
+            let json = JSON.stringify(liste);
+            res.end(json);
+        });
+    });
+
 });
 
 app.listen(8888);
