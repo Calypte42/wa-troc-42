@@ -17,10 +17,23 @@ var bodyParser = require('body-parser');
 var ObjectId = require('mongodb').ObjectID;
 
 app.use(bodyParser.urlencoded({extended:true}));
+app.use(bodyParser.json());
+
+app.use(function(req, res, next) {
+ res.header("Access-Control-Allow-Origin", "*");
+ res.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT");
+ res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+ next();
+});
 
 MongoClient.connect(url, {useNewUrlParser: true}, (err, client) => {
+
+
+
     let db = client.db("TROC");
     assert.equal(null, err);
+
+    console.log("Serveur connecté ! ");
 
     app.get('/', (req, res) => {
         res.setHeader('Content-type', 'text/html');
@@ -185,10 +198,11 @@ MongoClient.connect(url, {useNewUrlParser: true}, (err, client) => {
 
 
     app.post('/add/membre',(req,res) =>{
-        /*for(let e in req.body){
+        console.log(req.body);
+        for(let e in req.body){
             console.log(e +" : "+req.body[e]);
         }
-        console.log("voug");*/
+        console.log("voug");
         db.collection("Membres").insert(
             {
                 "email":req.body["email"],
@@ -200,9 +214,11 @@ MongoClient.connect(url, {useNewUrlParser: true}, (err, client) => {
                 "adresse":req.body["adresse"],
                 "telephone":req.body["telephone"]
             }
-        )
+        );
+        res.status(200);
+        res.end();
     }
-)
+);
 
 
 
