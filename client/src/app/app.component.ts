@@ -10,6 +10,7 @@ export class AppComponent {
 
   isAuth = false;
   userMail=null;
+  role = null;
 
 
   modifLogIn(event){
@@ -24,5 +25,10 @@ export class AppComponent {
   modifUser(event){
       this.userMail=event;
   }
+
+  modifRole(event){
+      this.role=event;
+  }
+
 
 }

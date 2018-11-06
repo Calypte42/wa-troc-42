@@ -18,6 +18,7 @@ export class AuthentificationComponent implements OnInit {
 
     @Output() change: EventEmitter<boolean> = new EventEmitter<boolean>(true);
     @Output() changeUser : EventEmitter<String> = new EventEmitter<String>(true);
+    @Output() changeRole : EventEmitter<String> = new EventEmitter<String>(true);
 
     private resultat:Object[];
 
@@ -43,12 +44,14 @@ export class AuthentificationComponent implements OnInit {
       else{
           this.change.emit(true);
           this.changeUser.emit(this.resultat[0].email);
+          this.changeRole.emit(this.resultat[0].role);
       }
   }
 
   logout(){
        this.change.emit(false);
        this.changeUser.emit(null);
+       this.changeRole.emit(null);
   }
 
 }

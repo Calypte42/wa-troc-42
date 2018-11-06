@@ -1,8 +1,9 @@
 <header>
     &nbsp;&nbsp;<br/>Bienvenue sur le site de {{ title }} !<br/>&nbsp;
     <div style="text-align:right;margin-right:10px;">
-        <app-authentification [isAuth]=isAuth [email]=userMail (change)="modifLogIn($event);"
-            (changeUser)="modifUser($event)"></app-authentification>
+        <app-authentification [isAuth]=isAuth [email]=userMail
+        (change)="modifLogIn($event);" (changeUser)="modifUser($event)"
+        (changeRole)="modifRole($event)"></app-authentification>
     </div>
 </header>
 
