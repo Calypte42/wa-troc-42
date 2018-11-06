@@ -1,6 +1,27 @@
 <header>
     &nbsp;&nbsp;<br/>Bienvenue sur le site de {{ title }} !<br/>&nbsp;
+    <div style="text-align:right;margin-right:10px;">
+        <app-authentification [isAuth]=isAuth [email]=userMail (change)="modifLogIn($event);"
+            (changeUser)="modifUser($event)"></app-authentification>
+    </div>
 </header>
+
+
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-collapse">
+      <ul class="nav navbar-nav">
+        <li><a routerLink="creationMembre">Creer membre</a></li>
+        <li><a routerLink="listeCompetence">Les competences</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<div>
+    <router-outlet></router-outlet>
+</div>
+
+<!--
 <div> <app-biens></app-biens> </div>
 <div>
     <table>
@@ -11,5 +32,6 @@
     </table>
 </div>
 <div>
+
     <app-inscription-membre></app-inscription-membre>
-</div>
+</div> -->

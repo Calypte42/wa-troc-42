@@ -1,0 +1,14 @@
+<div *ngIf='!isAuth'style="display:inline">
+    Connexion :
+    <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+        <label for="email">email :</label>
+        <input type="email" name="email" ngModel required/>
+        <label for="password"> Mot de passe : </label>
+        <input type="password" name="password" ngModel required/>
+        <button type="submit" [disabled]="f.invalid">Valider</button>
+    </form>
+</div>
+<div *ngIf='isAuth'>
+    {{email}} est connecté !
+    <button (click)="logout()">Déconnexion</button>
+</div>

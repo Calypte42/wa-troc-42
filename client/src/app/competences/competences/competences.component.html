@@ -1,0 +1,7 @@
+<div>
+  Voici la liste des competences :
+  <ul>
+    <li *ngFor="let competence of competences"> {{ competence.descriptif}}</li>
+  </ul>
+</div>
+<button (click)="versCreationCompetence()">Nouvelle competence</button>

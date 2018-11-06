@@ -7,4 +7,22 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'allo Voisin !';
+
+  isAuth = false;
+  userMail=null;
+
+
+  modifLogIn(event){
+      if(event==true){
+          this.isAuth=true;
+      }
+      else{
+          this.isAuth=false;
+      }
+  }
+
+  modifUser(event){
+      this.userMail=event;
+  }
+
 }

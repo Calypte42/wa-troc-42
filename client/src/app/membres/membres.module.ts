@@ -7,11 +7,12 @@ import { MembresComponent } from './membres/membres.component';
 import { MembresService } from './membres.service';
 import { RechercheMembreComponent } from './recherche-membre/recherche-membre.component';
 import { InscriptionMembreComponent } from './inscription-membre/inscription-membre.component';
+import { AuthentificationComponent } from './authentification/authentification.component';
 
 @NgModule({
-  declarations: [ MembresComponent, RechercheMembreComponent, InscriptionMembreComponent ],
+  declarations: [ MembresComponent, RechercheMembreComponent, InscriptionMembreComponent, AuthentificationComponent ],
   imports: [ BrowserModule, HttpClientModule, FormsModule ],
-  exports: [ MembresComponent, RechercheMembreComponent, InscriptionMembreComponent ],
+  exports: [ MembresComponent, RechercheMembreComponent, InscriptionMembreComponent,AuthentificationComponent ],
   providers: [ MembresService ],
   bootstrap: []
 })

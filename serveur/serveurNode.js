@@ -194,15 +194,27 @@ MongoClient.connect(url, {useNewUrlParser: true}, (err, client) => {
         })
     });
 
+
+
+    app.get('/membres/authentification/:email/:password', (req, res) => {
+        res.setHeader('Content-type', 'application/json; charset=UTF-8');
+        res.setHeader('access-control-allow-origin','*');
+        db.collection("Membres").find({'email':req.params.email,'MDP':req.params.password}).toArray((err, documents) => {
+            let liste = [];
+            for (let document of documents) {
+                liste.push(document);
+            }
+            let json = JSON.stringify(liste);
+            res.end(json);
+        });
+    });
+
+
 /*----------------------------- POST Membres -----------------------------*/
 
 
     app.post('/add/membre',(req,res) =>{
         console.log(req.body);
-        for(let e in req.body){
-            console.log(e +" : "+req.body[e]);
-        }
-        console.log("voug");
         db.collection("Membres").insert(
             {
                 "email":req.body["email"],
@@ -314,6 +326,7 @@ MongoClient.connect(url, {useNewUrlParser: true}, (err, client) => {
 /*------------------- REST Competences ------------------------------------*/
 
     app.get('/competences', (req, res) => {
+        console.log("je suis dans /competences");
         res.setHeader('Content-type', 'application/json; charset=UTF-8');
         res.setHeader('access-control-allow-origin','*');
         db.collection("Competences").find().toArray((err, documents) => {
@@ -322,6 +335,7 @@ MongoClient.connect(url, {useNewUrlParser: true}, (err, client) => {
                 liste.push(document);
             }
             let json = JSON.stringify(liste);
+            console.log(json);
             res.end(json);
         });
     });
@@ -355,6 +369,25 @@ MongoClient.connect(url, {useNewUrlParser: true}, (err, client) => {
             res.end(json);
         });
     });
+
+/* -------------------     POST COMPETENCE  -----------------------------------*/
+
+app.post('/add/competence',(req,res) =>{
+    console.log(req.body);
+    db.collection("Competences").insert(
+        {
+
+            "descriptif":req.body["descriptif"],
+            "mots_clefs":req.body["motsCle"],
+            "email": req.body["email"],
+            "disponibilite": req.body["disponibilite"]
+        }
+    );
+    res.status(200);
+    res.end();
+}
+);
+
 
 /* ------------------- REST Utilisation -----------------------------------*/
 
