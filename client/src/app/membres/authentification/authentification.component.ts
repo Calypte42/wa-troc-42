@@ -3,7 +3,9 @@ import { MembresService } from '../membres.service';
 import {NgForm} from '@angular/forms';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {RequestOptions} from '@angular/http';
-import { Router } from '@angular/router'
+import { Router } from '@angular/router';
+
+import { Membre } from '../membre';
 
 @Component({
   selector: 'app-authentification',
@@ -20,7 +22,7 @@ export class AuthentificationComponent implements OnInit {
     @Output() changeUser : EventEmitter<String> = new EventEmitter<String>(true);
     @Output() changeRole : EventEmitter<String> = new EventEmitter<String>(true);
 
-    private resultat:Object[];
+    private resultat:any[];
 
   constructor(private membresService : MembresService) {}
 

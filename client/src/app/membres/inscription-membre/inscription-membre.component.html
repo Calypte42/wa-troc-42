@@ -15,7 +15,7 @@
         <label for="telephone"> Télephone *:</label>
         <input type="tel" id="telephone" name="telephone" ngModel required/>
 
-        <button class="" type="submit">Enregistrer</button>
+        <button class="" type="submit" [disabled]="f.invalid">Enregistrer</button>
         <button type="button" name="" (click)="retourAccueil()"> Annuler </button>
 
 

@@ -9,6 +9,8 @@ import { RechercheMembreComponent } from './recherche-membre/recherche-membre.co
 import { InscriptionMembreComponent } from './inscription-membre/inscription-membre.component';
 import { AuthentificationComponent } from './authentification/authentification.component';
 
+
+
 @NgModule({
   declarations: [ MembresComponent, RechercheMembreComponent, InscriptionMembreComponent, AuthentificationComponent ],
   imports: [ BrowserModule, HttpClientModule, FormsModule ],

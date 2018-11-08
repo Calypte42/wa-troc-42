@@ -4,6 +4,8 @@ import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 import {RequestOptions} from '@angular/http';
 
+import {Membre} from './membre';
+
 @Injectable()
 export class MembresService {
 
