@@ -1,3 +1,23 @@
-<p>
-  creation-competence works!
-</p>
+<div name='formulaireCompetence' class="formulaire">
+    Creation d'une nouvelle compétence :
+
+    <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+
+        <label for="descriptif"> descriptif * :</label>
+        <input type="text" id="descriptif" name="descriptif" ngModel required />
+        <label for="mots_clefs"> Mots clefs * :</label>
+        <input type="text" id="mots_clefs" name="mots_clefs" ngModel required/>
+        <label for="disponibilite"> disponibilite *:</label>
+        <input type="text" id="disponibilite" name="disponibilite" ngModel required/>
+
+
+        <button class="" type="submit" [disabled]="f.invalid">Enregistrer</button>
+        <button type="button" name="" (click)="retourAccueil()"> Annuler </button>
+
+
+
+
+
+
+    </form>
+</div>

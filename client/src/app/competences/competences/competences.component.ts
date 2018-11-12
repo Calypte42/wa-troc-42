@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {CompetencesService} from '../competences.service';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-competences',
@@ -9,14 +11,19 @@ import {CompetencesService} from '../competences.service';
 export class CompetencesComponent implements OnInit {
     private competences: Object[];
 
-  constructor(private competencesService : CompetencesService) { }
+  constructor(private router : Router,private competencesService : CompetencesService) { }
 
   ngOnInit() {
        this.competencesService.getCompetences("").subscribe(res => this.competences = res);
   }
 
-  refresh(){
-      console.log(this.competences);
+
+  versCreationCompetence(){
+      this.router.navigate(['creationCompetence']);
   }
+
+
+
+
 
 }
