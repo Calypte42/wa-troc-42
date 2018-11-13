@@ -12,6 +12,7 @@ import { InscriptionMembreComponent} from './membres/inscription-membre/inscript
 import { MembresComponent} from './membres/membres/membres.component';
 import { CompetencesComponent} from './competences/competences/competences.component';
 import { CreationCompetenceComponent} from './competences/creation-competence/creation-competence.component';
+import { FicheCompetenceComponent } from './competences/fiche-competence/fiche-competence.component';
 
 import { AppComponent } from './app.component';
 
@@ -21,7 +22,8 @@ const appRoutes: Routes = [
   { path: 'creationMembre', component: InscriptionMembreComponent },
   { path: '', component:  MembresComponent },
   { path: 'listeCompetence', component: CompetencesComponent},
-  {path: 'creationCompetence', component: CreationCompetenceComponent}
+  {path: 'creationCompetence', component: CreationCompetenceComponent},
+  { path : 'ficheCompetence', component: FicheCompetenceComponent}
 ];
 
 @NgModule({

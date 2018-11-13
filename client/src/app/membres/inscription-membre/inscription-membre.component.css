@@ -5,3 +5,9 @@ input {
 button {
     margin: 15px;
 }
+
+.formulaire{
+    margin-left: 30%;
+}
+
+.form-control { margin-bottom: 10px; }

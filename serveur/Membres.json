@@ -28,5 +28,25 @@
         "ville":"Lamalou-les-Bains",
         "adresse":"Quelque part",
         "telephone":"0678910422"
+    },
+    {
+        "email":"admin",
+        "MDP":"admin",
+        "nom":"AdminN",
+        "prenom":"AdminP",
+        "role":"admin",
+        "ville":"Lamalou-les-Bains",
+        "adresse":"Quelque part",
+        "telephone":"0678910422"
+    },
+    {
+        "email":"user",
+        "MDP":"user",
+        "nom":"userN",
+        "prenom":"userP",
+        "role":"user",
+        "ville":"Lamalou-les-Bains",
+        "adresse":"Quelque part",
+        "telephone":"0678910422"
     }
 ]

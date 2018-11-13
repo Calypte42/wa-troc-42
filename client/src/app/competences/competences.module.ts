@@ -8,12 +8,13 @@ import { CompetencesService } from './competences.service';
 import { BrowserModule } from '@angular/platform-browser';
 import {FormsModule} from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { FicheCompetenceComponent } from './fiche-competence/fiche-competence.component';
 
 @NgModule({
   imports: [
     CommonModule, FormsModule,BrowserModule,HttpClientModule
   ],
-  declarations: [CreationCompetenceComponent, CompetencesComponent],
+  declarations: [CreationCompetenceComponent, CompetencesComponent, FicheCompetenceComponent],
   exports: [ CompetencesComponent],
   providers: [ CompetencesService ],
 })

@@ -1,5 +1,44 @@
-<div *ngIf='!isAuth'style="display:inline">
-    Connexion :
+<div class="login">
+
+<div *ngIf='!isAuth'>
+    <div class="container-fluid">
+
+        <div class="col-md-3">
+            <div class="login-panel panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Connexion</h3>
+                </div>
+                <div class="panel-body">
+                    <form role="form" (ngSubmit)="onSubmit(f)" #f="ngForm">
+                        <fieldset>
+                            <div class="form-group">
+                                <input class="form-control" placeholder="E-mail" name="email" type="email" autofocus="" ngModel required>
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control" placeholder="Password" name="password" type="password" value="" ngModel required>
+                            </div>
+                            <!--<div class="checkbox">
+                                <label>
+                                    <input name="remember" type="checkbox" value="Remember Me">Remember Me
+                                </label>
+                            </div>-->
+                            <!-- Change this to a button or input when using this as a form -->
+
+                        </fieldset>
+                        <button type="submit" [disabled]="f.invalid">Login</button>
+                        <button type="button" (click)="versCreationMembre()">Inscription</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div *ngIf='isAuth'>
+    {{email}} est connecté !
+    <button (click)="logout()">Déconnexion</button>
+</div>
+</div>
+<!--    Connexion :
     <form (ngSubmit)="onSubmit(f)" #f="ngForm">
         <label for="email">email :</label>
         <input type="email" name="email" ngModel required/>
@@ -7,8 +46,9 @@
         <input type="password" name="password" ngModel required/>
         <button type="submit" [disabled]="f.invalid">Valider</button>
     </form>
+    <a routerLink="creationMembre">Inscription</a>
 </div>
 <div *ngIf='isAuth'>
     {{email}} est connecté !
     <button (click)="logout()">Déconnexion</button>
-</div>
+</div> -->

@@ -1,2 +1,13 @@
-header { background-color: lightgrey; font-size: 24pt; font-weight: bold; text-align: center; }
-div { float:left; width:44%; margin: 2%; }
+header {
+    background-color: lightgrey;
+    text-align: center;
+}
+
+h1 {
+    font-size: 24pt;
+    font-weight: bold;
+}
+
+.up{
+    display: inline;
+}

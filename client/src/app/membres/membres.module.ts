@@ -3,6 +3,8 @@ import {FormsModule} from '@angular/forms'
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 
+import { Routes, RouterModule } from '@angular/router';
+
 import { MembresComponent } from './membres/membres.component';
 import { MembresService } from './membres.service';
 import { RechercheMembreComponent } from './recherche-membre/recherche-membre.component';
@@ -13,7 +15,7 @@ import { AuthentificationComponent } from './authentification/authentification.c
 
 @NgModule({
   declarations: [ MembresComponent, RechercheMembreComponent, InscriptionMembreComponent, AuthentificationComponent ],
-  imports: [ BrowserModule, HttpClientModule, FormsModule ],
+  imports: [ BrowserModule, HttpClientModule, FormsModule,RouterModule ],
   exports: [ MembresComponent, RechercheMembreComponent, InscriptionMembreComponent,AuthentificationComponent ],
   providers: [ MembresService ],
   bootstrap: []

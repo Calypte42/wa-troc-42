@@ -24,7 +24,7 @@ export class AuthentificationComponent implements OnInit {
 
     private resultat:any[];
 
-  constructor(private membresService : MembresService) {}
+  constructor(private router:Router,private membresService : MembresService) {}
 
   ngOnInit() {
   }
@@ -55,5 +55,10 @@ export class AuthentificationComponent implements OnInit {
        this.changeUser.emit(null);
        this.changeRole.emit(null);
   }
+
+  versCreationMembre(){
+      this.router.navigate(['creationMembre']);
+  }
+
 
 }
