@@ -31,5 +31,19 @@ export class CompetencesService {
   }
 
 
+  deleteCompetence(id): Observable<any>{
+      console.log("delete competence appele sur " + id);
+      let url="http://localhost:8888/delete/competence/"+id;
+      //let data={"id":id};
+
+      const httpOptions = { headers: new HttpHeaders({
+                'Content-Type':  'application/json'
+              })
+            };
+
+      return this.http.delete(url,httpOptions);
+  }
+
+
 
 }

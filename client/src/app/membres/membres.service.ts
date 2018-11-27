@@ -19,9 +19,9 @@ export class MembresService {
   }
 
 
-  putMembre(nom, prenom, email, ville, adresse, telephone): Observable<any>{
+  putMembre(nom, prenom, email,mdp, ville, adresse, telephone): Observable<any>{
       let url="http://localhost:8888/add/membre";
-      let data={"nom":nom,"prenom":prenom,"email":email,
+      let data={"nom":nom,"prenom":prenom,"email":email,"mdp":mdp,"role":"user",
                 "ville":ville,"adresse":adresse,"telephone":telephone};
 
       const httpOptions = { headers: new HttpHeaders({

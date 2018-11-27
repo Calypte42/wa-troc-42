@@ -1,18 +1,22 @@
-<div>
-  Voici la liste des competences :
+<div class="row">
 
-  <table>
-      <tr>
-         <td>
-             Descriptif
-         </td>
-      </tr>
-      <tr *ngFor="let competence of competences">
-          <td>
-              {{competence.descriptif}}
-          </td>
-
-      </tr>
-  </table>
+    <button *ngIf='isAuth==true' (click)="versMesCompetences()"> Mes compétences</button>
 </div>
-<button (click)="versCreationCompetence()">Nouvelle competence</button>
+<div class="row">
+
+      Voici la liste des competences :
+
+      <table>
+          <tr>
+             <td>
+                 Descriptif
+             </td>
+          </tr>
+          <tr *ngFor="let competence of competences">
+              <td>
+                  {{competence.descriptif}}
+              </td>
+
+          </tr>
+      </table>
+</div>

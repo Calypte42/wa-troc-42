@@ -23,10 +23,11 @@ export class InscriptionMembreComponent implements OnInit {
       const nom = form.value['nom'];
       const prenom = form.value['prenom'];
       const email = form.value['email'];
+      const mdp = form.value['password'];
       const ville = form.value['ville'];
       const adresse = form.value['adresse'];
       const telephone = form.value['telephone'];
-      let retourServeur = this.membresService.putMembre(nom, prenom, email, ville, adresse, telephone).subscribe();
+      let retourServeur = this.membresService.putMembre(nom, prenom, email, mdp, ville, adresse, telephone).subscribe();
       console.log(retourServeur);
       this.router.navigate(['']);
 

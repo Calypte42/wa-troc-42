@@ -389,6 +389,41 @@ app.post('/add/competence',(req,res) =>{
 );
 
 
+/* -------------------     DELETE COMPETENCE  -----------------------------------*/
+
+app.delete('/delete/competence/:id',(req,res) =>{
+    let id = req.params.id;
+    console.log("Je suis dans la suppression de : "+id);
+    let filtre = {"_id":ObjectId(id)};
+    console.log(JSON.stringify(filtre));
+    db.collection("Competences").deleteOne(
+        filtre
+    );
+    res.status(200);
+    res.end();
+}
+);
+
+
+/* -------------------     UPDATE COMPETENCE  -----------------------------------*/
+
+app.put('/update/competence/:id',(req,res) =>{
+    let id = req.params.id;
+    console.log("Je suis dans la modification de : "+id);
+    db.collection("Competences").update(
+        {"_id":ObjectId(id)},
+        {"descriptif":req.body["descriptif"],
+        "mots_clefs":req.body["motsCle"],
+        "email": req.body["email"],
+        "disponibilite": req.body["disponibilite"]
+        }
+    );
+    res.status(200);
+    res.end();
+}
+);
+
+
 /* ------------------- REST Utilisation -----------------------------------*/
 
     app.get('/utilisations', (req, res) => {

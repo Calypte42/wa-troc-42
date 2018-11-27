@@ -1,0 +1,32 @@
+<div class="row">
+    <button *ngIf='this.email!=""' (click)="versCreationCompetence()">Nouvelle competence</button>
+</div>
+<div class="row">
+
+      Voici la liste de vos competences :
+
+
+<table class="table table-bordered table-striped">
+			<tr>
+				<th>Descriptif </th>
+				<th>Mots clés </th>
+				<th>Disponibilite </th>
+				<th>Modifier </th>
+				<th> Supprimer </th>
+			</tr>
+
+            <tr *ngFor="let competence of competences">
+
+               <td>{{competence.descriptif}}</td>
+               <td>{{competence.mots_clefs}}</td>
+               <td><ul>
+                   <li *ngFor="let dispo of disponibilite">
+                       {{dispo}}
+                   </li>
+               </ul></td>
+               <td> <button (click)="modification(competence._id)">Modifier</button> </td>
+			   <td> <button (click)="suppression(competence._id)">Supprimer</button> </td>
+
+            </tr>
+
+		</table>

@@ -1,12 +1,19 @@
-    <header>
-        <div class="up">
-            <h1>Bienvenue sur le site de {{ title }} !</h1>
+    <header class="row">
+        <div class="row">
 
-                <app-authentification [isAuth]=isAuth [email]=userMail
-                (change)="modifLogIn($event);" (changeUser)="modifUser($event)"
-                (changeRole)="modifRole($event)"></app-authentification>
+            <div class="col-lg-offset-2 col-lg-6">
+				<h1>Bienvenue sur le site d' {{title}} !</h1>
+			</div>
+
+            <div class=" col-lg-offset-1 col-lg-3">
+                <app-authentification (changeUser)="modifUser()" ></app-authentification>
+<!-- [isAuth]=isAuth [email]=userMail
+(change)="modifLogIn($event);" (changeUser)="modifUser($event)"
+(changeRole)="modifRole($event)" -->
+            </div>
 
         </div>
+        <div class="row">
             <nav class="navbar navbar-default">
               <div class="container-fluid">
                 <div class="navbar-collapse">
@@ -14,18 +21,19 @@
                     <li> <a routerLink="">Accueil</a> </li>
                     <li> <a routerLink="">Les biens</a></li>
                     <li> <a routerLink="listeCompetence">Les competences</a></li>
-                    <li *ngIf='isAuth'><a routerLing="">Admin</a></li>
+                    <li *ngIf='role=="admin"'><a routerLink="">Admin</a></li>
                   </ul>
                 </div>
               </div>
             </nav>
 
+        </div>
     </header>
 
 
 
     <div class="row">
-        <div class="center-block" style=float:none;>
+        <div class="col-lg-offset-1 col-lg-10">
             <router-outlet></router-outlet>
         </div>
 

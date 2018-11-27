@@ -12,7 +12,10 @@ import { InscriptionMembreComponent} from './membres/inscription-membre/inscript
 import { MembresComponent} from './membres/membres/membres.component';
 import { CompetencesComponent} from './competences/competences/competences.component';
 import { CreationCompetenceComponent} from './competences/creation-competence/creation-competence.component';
+import { MesCompetencesComponent } from './competences/mes-competences/mes-competences.component';
 import { FicheCompetenceComponent } from './competences/fiche-competence/fiche-competence.component';
+import { ModifCompetenceComponent } from './competences/modif-competence/modif-competence.component';
+import { MesCookies} from './mesCookies';
 
 import { AppComponent } from './app.component';
 
@@ -22,8 +25,12 @@ const appRoutes: Routes = [
   { path: 'creationMembre', component: InscriptionMembreComponent },
   { path: '', component:  MembresComponent },
   { path: 'listeCompetence', component: CompetencesComponent},
+  { path: 'listeCompetence/:email/:isAuth', component: CompetencesComponent},
   {path: 'creationCompetence', component: CreationCompetenceComponent},
-  { path : 'ficheCompetence', component: FicheCompetenceComponent}
+  { path : 'ficheCompetence', component: FicheCompetenceComponent},
+  {path : 'mesCompetences', component:MesCompetencesComponent},
+  {path : 'modifCompetence/:id', component:ModifCompetenceComponent}
+
 ];
 
 @NgModule({
@@ -40,7 +47,7 @@ const appRoutes: Routes = [
     EmpruntModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [],
+  providers: [MesCookies],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
