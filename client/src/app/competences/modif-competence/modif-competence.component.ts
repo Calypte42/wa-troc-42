@@ -21,14 +21,13 @@ export class ModifCompetenceComponent implements OnInit {
           this.id=params.id;
           console.log("modif competence : "+this.id);
 
+
         /*  if(params.email!=""){
                 this.userMail=params.email;
                 this.isAuth=true;
             }
         console.log(this.userMail);*/
-  }
-
-
-  
+    });
+}
 
 }
