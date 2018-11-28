@@ -61,6 +61,39 @@ MongoClient.connect(url, {useNewUrlParser: true}, (err, client) => {
     });
 
 
+    // Renvoi tous les membres bloquer ou qui peuvent l etre
+        app.get('/membres/blocage', (req, res) => {
+            res.setHeader('Content-type', 'application/json; charset=UTF-8');
+            res.setHeader('access-control-allow-origin','*');
+            db.collection("Membres").find({$or: [{'score':{$lte:-5}},{'status':'bloquer'}]}).toArray((err, documents) => {
+                let liste = [];
+                for (let document of documents) {
+                    liste.push(document);
+                }
+                let json = JSON.stringify(liste);
+                res.end(json);
+            });
+        });
+
+        app.put('/membre/debloquerMembre/:id',(req,res)=>{
+            let id = req.params.id;
+            res.setHeader('Content-type', 'application/json; charset=UTF-8');
+            res.setHeader('access-control-allow-origin','*');
+            db.collection('Membres').update({'_id':ObjectId(id)},{$set:{'status':'debloquer'}});
+            res.status(200);
+            res.end;
+        })
+
+        app.put('/membre/bloquerMembre/:id',(req,res)=>{
+            let id = req.params.id;
+            res.setHeader('Content-type', 'application/json; charset=UTF-8');
+            res.setHeader('access-control-allow-origin','*');
+            db.collection('Membres').update({'_id':ObjectId(id)},{$set:{'status':'bloquer'}});
+            res.status(200);
+            res.end;
+        })
+
+
 // renvoi le membre correspondant à l email
     app.get('/membres/:email', (req, res) => {
         res.setHeader('Content-type', 'application/json; charset=UTF-8');
@@ -222,6 +255,8 @@ MongoClient.connect(url, {useNewUrlParser: true}, (err, client) => {
                 "nom":req.body["nom"],
                 "prenom":req.body["prenom"],
                 "role":req.body["role"],
+                "status":"debloquer",
+                "score":0,
                 "ville":req.body["ville"],
                 "adresse":req.body["adresse"],
                 "telephone":req.body["telephone"]

@@ -1,6 +1,28 @@
-<div>
-  Voici la liste des membres :
-  <ul>
-    <li *ngFor="let membre of membres"> {{membre.email}}</li>
-  </ul>
+<div class="row">
+    <button (click)="actualisation()">Actualiser</button>
+  Voici la liste des membres dont le score d'utilisation est inférieur a -5
+  ou dont le status est bloqué :
+
+
+  <table class="table table-bordered table-striped">
+  			<tr>
+  				<th>Email </th>
+  				<th>Score </th>
+  				<th>Status </th>
+  				<th>Action</th>
+  			</tr>
+
+              <tr *ngFor="let membre of membres">
+
+                 <td>{{membre.email}}</td>
+                 <td>{{membre.score}}</td>
+                 <td>{{membre.status}}</td>
+
+                 <td> <button *ngIf="membre.status=='bloquer'" (click)="debloquerStatus(membre._id)">Debloquer</button>
+                     <button *ngIf="membre.status=='debloquer'" (click)="bloquerStatus(membre._id)">Bloquer</button>
+  			    </td>
+
+              </tr>
+
+  		</table>
 </div>

@@ -10,6 +10,7 @@ import { EmpruntModule} from './emprunt/emprunt.module';
 
 import { InscriptionMembreComponent} from './membres/inscription-membre/inscription-membre.component';
 import { MembresComponent} from './membres/membres/membres.component';
+import { AccueilComponent} from './membres/accueil/accueil.component';
 import { CompetencesComponent} from './competences/competences/competences.component';
 import { CreationCompetenceComponent} from './competences/creation-competence/creation-competence.component';
 import { MesCompetencesComponent } from './competences/mes-competences/mes-competences.component';
@@ -23,13 +24,14 @@ import { Routes, RouterModule } from '@angular/router';
 
 const appRoutes: Routes = [
   { path: 'creationMembre', component: InscriptionMembreComponent },
-  { path: '', component:  MembresComponent },
+  { path: '', component:  AccueilComponent },
+  { path:'gestionAdmin', component:MembresComponent},
   { path: 'listeCompetence', component: CompetencesComponent},
   { path: 'listeCompetence/:email/:isAuth', component: CompetencesComponent},
-  {path: 'creationCompetence', component: CreationCompetenceComponent},
+  { path: 'creationCompetence', component: CreationCompetenceComponent},
   { path : 'ficheCompetence', component: FicheCompetenceComponent},
-  {path : 'mesCompetences', component:MesCompetencesComponent},
-  {path : 'modifCompetence/:id', component:ModifCompetenceComponent}
+  { path : 'mesCompetences', component:MesCompetencesComponent},
+  { path : 'modifCompetence/:id', component:ModifCompetenceComponent}
 
 ];
 

@@ -5,6 +5,8 @@
         "nom":"Charpentier",
         "prenom":"Sofian",
         "role":"admin",
+        "status":"debloquer",
+        "score":0,
         "ville":"Montpellier",
         "adresse":"Avenue 42",
         "telephone":"0654321042"
@@ -15,6 +17,8 @@
         "nom":"Charpentier",
         "prenom":"Jean-Michel",
         "role":"user",
+        "status":"debloquer",
+        "score":0,
         "ville":"Montpellier",
         "adresse":"Avenue 51",
         "telephone":"0621584652"
@@ -25,6 +29,8 @@
         "nom":"Lengrand",
         "prenom":"Aurélien",
         "role":"user",
+        "status":"debloquer",
+        "score":0,
         "ville":"Lamalou-les-Bains",
         "adresse":"Quelque part",
         "telephone":"0678910422"
@@ -35,6 +41,8 @@
         "nom":"AdminN",
         "prenom":"AdminP",
         "role":"admin",
+        "status":"debloquer",
+        "score":0,
         "ville":"Lamalou-les-Bains",
         "adresse":"Quelque part",
         "telephone":"0678910422"
@@ -45,6 +53,20 @@
         "nom":"userN",
         "prenom":"userP",
         "role":"user",
+        "status":"debloquer",
+        "score":-5,
+        "ville":"Lamalou-les-Bains",
+        "adresse":"Quelque part",
+        "telephone":"0678910422"
+    },
+    {
+        "email":"userbloquer",
+        "MDP":"userbloquer",
+        "nom":"userN",
+        "prenom":"userP",
+        "role":"user",
+        "status":"bloquer",
+        "score":0,
         "ville":"Lamalou-les-Bains",
         "adresse":"Quelque part",
         "telephone":"0678910422"
