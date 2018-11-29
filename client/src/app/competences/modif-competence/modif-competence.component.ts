@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {CompetencesService} from '../competences.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import {MesCookies} from '../../mesCookies';
-
+import {NgForm} from '@angular/forms';
 
 @Component({
   selector: 'app-modif-competence',
@@ -10,24 +10,57 @@ import {MesCookies} from '../../mesCookies';
   styleUrls: ['./modif-competence.component.css']
 })
 export class ModifCompetenceComponent implements OnInit {
-    private id : String="";
+    private id : String;
+
+    private competences:Object[];
+    private competence:any;
 
 
-  constructor(private route : ActivatedRoute) { }
+  constructor(private mesCookies:MesCookies,private router : Router,
+      private competencesService : CompetencesService,
+      private route : ActivatedRoute) { }
 
   ngOnInit() {
-      this.route.params.subscribe(function(params:Params){
-          console.log("modif competence : "+params.id);
-          this.id=params.id;
-          console.log("modif competence : "+this.id);
+      // Utilise pour pouvoir acceder a this (component) dans une fonction.
+      var self = this;
+      let monSubscribe = this.route.params.subscribe(function(params:Params){
+
+          console.log(params.id);
+          self.id=params.id;
+          self.competencesService.getCompetences("/id/"+params.id).subscribe(res => {
+              self.competences = res;
+              console.log("resultat : "+JSON.stringify(res[0]));
+              self.competence=res[0];
+          });
+          });
 
 
-        /*  if(params.email!=""){
-                this.userMail=params.email;
-                this.isAuth=true;
-            }
-        console.log(this.userMail);*/
-    });
+}
+
+onSubmit(form: NgForm) {
+        console.log(form);
+        const descriptif = form.value['descriptif'];
+        const mots_clefs = form.value['mots_clefs'];
+        let retourServeur = this.competencesService.updateCompetence(this.id,descriptif,mots_clefs).subscribe();
+        console.log(retourServeur);
+
+
+    this.ngOnInit();
+
+}
+
+onSubmitDispo(form:NgForm){
+    let nouvelleDispo=[];
+    for(let dispo of this.competence.disponibilite){
+        nouvelleDispo.push(dispo);
+    }
+    nouvelleDispo.push(
+        {"date":form.value['date'],"heureD":form.value['heureD'],
+        "heureF":form.value['heureF'],"status":"Disponible"}
+    );
+    let retourServeur = this.competencesService.updateDisponibilite(this.id,nouvelleDispo).subscribe();
+    this.ngOnInit();
+
 }
 
 }

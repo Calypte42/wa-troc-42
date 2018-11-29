@@ -447,17 +447,34 @@ app.put('/update/competence/:id',(req,res) =>{
     console.log("Je suis dans la modification de : "+id);
     db.collection("Competences").update(
         {"_id":ObjectId(id)},
-        {"descriptif":req.body["descriptif"],
-        "mots_clefs":req.body["motsCle"],
-        "email": req.body["email"],
-        "disponibilite": req.body["disponibilite"]
+        {$set:{
+            "descriptif": req.body["descriptif"],
+            "mots_clefs":req.body["motsCle"]
+            }
         }
+
     );
     res.status(200);
     res.end();
 }
 );
 
+
+app.put('/update/disponibilite/:id',(req,res) =>{
+    let id = req.params.id;
+    console.log("Je suis dans la modification des disponibilite de : "+id);
+    db.collection("Competences").update(
+        {"_id":ObjectId(id)},
+        {$set:{
+            "disponibilite": req.body["disponibilite"]
+            }
+        }
+
+    );
+    res.status(200);
+    res.end();
+}
+);
 
 /* ------------------- REST Utilisation -----------------------------------*/
 

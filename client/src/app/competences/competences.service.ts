@@ -45,5 +45,26 @@ export class CompetencesService {
   }
 
 
+  updateCompetence(id,descriptif,mots_clefs):Observable<any>{
+      let url="http://localhost:8888/update/competence/"+id;
+      let data={"descriptif":descriptif,"motsCle":mots_clefs};
+      const httpOptions = { headers: new HttpHeaders({
+                'Content-Type':  'application/json'
+              })
+            };
+      return this.http.put(url,data,httpOptions);
+  }
+
+  updateDisponibilite(id,nouvelleDispo):Observable<any>{
+      let url="http://localhost:8888/update/disponibilite/"+id;
+      let data={"disponibilite":nouvelleDispo};
+      const httpOptions = { headers: new HttpHeaders({
+                'Content-Type':  'application/json'
+              })
+            };
+      return this.http.put(url,data,httpOptions);
+  }
+
+
 
 }
