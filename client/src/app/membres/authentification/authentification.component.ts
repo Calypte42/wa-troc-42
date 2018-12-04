@@ -15,13 +15,6 @@ import {MesCookies} from '../../mesCookies';
 export class AuthentificationComponent implements OnInit {
 
     private email: String;
-    /*@Input() isAuth : boolean;
-
-
-
-    @Output() change: EventEmitter<boolean> = new EventEmitter<boolean>(true);
-
-    @Output() changeRole : EventEmitter<String> = new EventEmitter<String>(true);*/
 
     @Output() changeUser : EventEmitter<String> = new EventEmitter<String>(true);
 
@@ -39,7 +32,11 @@ export class AuthentificationComponent implements OnInit {
       const email = form.value["email"];
       const password = form.value["password"];
       console.log("/authentification/"+email+"/"+password);
-      this.membresService.getMembres("/authentification/"+email+"/"+password).subscribe(res => {this.resultat = res;console.log("resultat :"+res);this.login();});
+      this.membresService.getMembres("/authentification/"+email+"/"+password).subscribe(res => {
+          this.resultat = res;
+          console.log("resultat :"+res);
+          this.login();
+      });
       // Connexion
 
   }

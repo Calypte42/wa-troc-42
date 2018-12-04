@@ -47,6 +47,11 @@ export class CompetencesComponent implements OnInit {
   }
 
 
+  inscription(id){
+      this.router.navigate(['ficheCompetence',id]);
+  }
+
+
 
 
 

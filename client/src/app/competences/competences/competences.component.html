@@ -6,17 +6,29 @@
 
       Voici la liste des competences :
 
-      <table>
-          <tr>
-             <td>
-                 Descriptif
-             </td>
-          </tr>
-          <tr *ngFor="let competence of competences">
-              <td>
-                  {{competence.descriptif}}
-              </td>
 
-          </tr>
-      </table>
+      <table class="table table-bordered table-striped">
+      			<tr>
+      				<th>Descriptif </th>
+      				<th>Mots clés </th>
+      				<th>Disponibilite </th>
+      				<th>S'inscrire</th>
+
+      			</tr>
+
+                  <tr *ngFor="let competence of competences">
+
+                     <td>{{competence.descriptif}}</td>
+                     <td>{{competence.mots_clefs}}</td>
+                     <td><ul>
+                         <li *ngFor="let dispo of competence.disponibilite">
+                             {{dispo.date}}, {{dispo.heureD}}, {{dispo.heureF}}, {{dispo.status}}
+                         </li>
+                     </ul></td>
+                     <td> <button (click)="inscription(competence._id)">S'inscire</button> </td>
+      			 
+
+                  </tr>
+
+      		</table>
 </div>

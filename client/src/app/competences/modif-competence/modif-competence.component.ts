@@ -11,6 +11,7 @@ import {NgForm} from '@angular/forms';
 })
 export class ModifCompetenceComponent implements OnInit {
     private id : String;
+    private userMail : String;
 
     private competences:Object[];
     private competence:any;
@@ -23,6 +24,7 @@ export class ModifCompetenceComponent implements OnInit {
   ngOnInit() {
       // Utilise pour pouvoir acceder a this (component) dans une fonction.
       var self = this;
+      this.userMail = this.mesCookies.getUserMail();
       let monSubscribe = this.route.params.subscribe(function(params:Params){
 
           console.log(params.id);
@@ -43,9 +45,10 @@ onSubmit(form: NgForm) {
         const mots_clefs = form.value['mots_clefs'];
         let retourServeur = this.competencesService.updateCompetence(this.id,descriptif,mots_clefs).subscribe();
         console.log(retourServeur);
+    let self = this;
+    setTimeout(function(){self.ngOnInit()},900);
 
-
-    this.ngOnInit();
+    //this.ngOnInit();
 
 }
 
@@ -59,8 +62,13 @@ onSubmitDispo(form:NgForm){
         "heureF":form.value['heureF'],"status":"Disponible"}
     );
     let retourServeur = this.competencesService.updateDisponibilite(this.id,nouvelleDispo).subscribe();
-    this.ngOnInit();
+    let self = this;
+    setTimeout(function(){self.ngOnInit()},900);
 
 }
 
+
+versMesCompetences(){
+    this.router.navigate(['mesCompetences']);
+}
 }

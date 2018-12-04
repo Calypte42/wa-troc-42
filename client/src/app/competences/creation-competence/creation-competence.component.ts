@@ -24,7 +24,7 @@ export class CreationCompetenceComponent implements OnInit {
 
 
     onSubmit(form: NgForm) {
-        if(this.mesCookies.getUserMail()!="invit"){
+        if(this.mesCookies.getRole()!="invit"){
 
             console.log(form);
             const descriptif = form.value['descriptif'];
@@ -33,8 +33,9 @@ export class CreationCompetenceComponent implements OnInit {
             let retourServeur = this.competencesService.putCompetence(descriptif,mots_clefs,this.mesCookies.getUserMail(),disponibilite).subscribe();
             console.log(retourServeur);
         }
-
-        this.router.navigate(['mesCompetences']);
+        let self=this;
+        setTimeout(function(){self.router.navigate(['mesCompetences'])},1000);
+        //this.router.navigate(['mesCompetences']);
 
     }
 

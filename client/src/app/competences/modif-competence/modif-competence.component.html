@@ -1,8 +1,8 @@
-<div class="row">
-
-    <button *ngIf='isAuth==true' (click)="versMesCompetences()"> Mes compétences</button>
+<div class="row" >
+    <p *ngIf='this.userMail==""'>Nous n'etes pas connecté veuillez vous connecter ou vous rendre à l'accueil !</p>
+    <button *ngIf='this.userMail!=""' (click)="versMesCompetences()"> Retour</button>
 </div>
-<div class="row">
+<div class="row" *ngIf='this.userMail!=""'>
 
     Modification de la competence: <br/>
     {{competence.descriptif}}
@@ -39,28 +39,30 @@
     </form>
 
 </div>
+<div *ngIf='this.userMail!=""'>
+    Liste des disponibilités :
+    <table class="table table-bordered table-striped">
+        <tr>
+            <th>Date </th>
+            <th>Heure début</th>
+            <th>Heure fin </th>
+            <th>Status </th>
+        </tr>
 
-Liste des disponibilités :
-<table class="table table-bordered table-striped">
-    <tr>
-        <th>Date </th>
-        <th>Heure début</th>
-        <th>Heure fin </th>
-        <th>Status </th>
-    </tr>
+        <tr *ngFor="let dispo of competence.disponibilite">
 
-    <tr *ngFor="let dispo of competence.disponibilite">
+            <td>{{dispo.date}}</td>
+            <td>{{dispo.heureD}}</td>
+            <td>{{dispo.heureF}}</td>
+            <td>{{dispo.status}}</td>
+        </tr>
 
-        <td>{{dispo.date}}</td>
-        <td>{{dispo.heureD}}</td>
-        <td>{{dispo.heureF}}</td>
-        <td>{{dispo.status}}</td>
-    </tr>
-
-</table>
+    </table>
+</div>
 
 
-<div>
+
+<div *ngIf='this.userMail!=""'>
     <form class="form-group"(ngSubmit)="onSubmitDispo(f)" #f="ngForm">
         <div class="row">
             <div class="col-lg-2">

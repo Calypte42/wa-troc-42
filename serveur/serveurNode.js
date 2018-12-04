@@ -199,14 +199,14 @@ MongoClient.connect(url, {useNewUrlParser: true}, (err, client) => {
 // Renvoi les informations des membres qui propose des compétences
 // dont le descriptif est passé en parametre.
 
-    app.get('/membres/competence/:competence', (req, res) => {
+    app.get('/membres/competence/:id', (req, res) => {
 
         res.setHeader('Content-type', 'application/json; charset=UTF-8');
         res.setHeader('access-control-allow-origin','*');
         // On recupere tout d'abord les competences qui correspondent
         db.collection("Competences").aggregate([
             {
-                $match: {"descriptif":new RegExp(req.params.competence)}
+                $match: {"_id":ObjectId(req.params.id)}
             },
             {
                 $lookup: // On realise ensuite la jointure
@@ -220,7 +220,7 @@ MongoClient.connect(url, {useNewUrlParser: true}, (err, client) => {
         ]).toArray(function(err, documents) {
             let liste = [];
             for (let document of documents) {
-                liste.push(document.listeMembres);
+                liste.push(document);
             }
             let json = JSON.stringify(liste);
             res.end(json);

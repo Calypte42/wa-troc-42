@@ -18,6 +18,7 @@ export class MesCompetencesComponent implements OnInit {
     private userMail : String;
 
     private competences: Object[];
+    
   constructor(private mesCookies:MesCookies,
        private competencesService: CompetencesService,
         private router : Router) { }

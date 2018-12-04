@@ -10,7 +10,7 @@ export class CompetencesService {
   constructor(private http: HttpClient) { }
 
   getCompetences(parametres): Observable<any> {
-     let observable: Observable<any>;
+     //let observable: Observable<any>;
      return this.http.get("http://localhost:8888/competences"+parametres);
   }
 
@@ -63,6 +63,11 @@ export class CompetencesService {
               })
             };
       return this.http.put(url,data,httpOptions);
+  }
+
+
+  getAllInformationCompetence(id):Observable<any>{
+       return this.http.get("http://localhost:8888/membres/competence/"+id);
   }
 
 

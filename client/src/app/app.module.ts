@@ -29,7 +29,7 @@ const appRoutes: Routes = [
   { path: 'listeCompetence', component: CompetencesComponent},
   { path: 'listeCompetence/:email/:isAuth', component: CompetencesComponent},
   { path: 'creationCompetence', component: CreationCompetenceComponent},
-  { path : 'ficheCompetence', component: FicheCompetenceComponent},
+  { path : 'ficheCompetence/:id', component: FicheCompetenceComponent},
   { path : 'mesCompetences', component:MesCompetencesComponent},
   { path : 'modifCompetence/:id', component:ModifCompetenceComponent}
 

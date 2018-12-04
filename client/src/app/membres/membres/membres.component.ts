@@ -24,10 +24,14 @@ export class MembresComponent implements OnInit {
 
   debloquerStatus(id){
       this.membresService.debloquerMembre(id).subscribe();
+      var self=this;
+      setTimeout(function(){self.ngOnInit()},700);
   }
 
   bloquerStatus(id){
       this.membresService.bloquerMembre(id).subscribe();
+      var self=this;
+      setTimeout(function(){self.ngOnInit()},700);
   }
 
 
