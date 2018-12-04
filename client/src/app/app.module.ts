@@ -24,6 +24,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 const appRoutes: Routes = [
   { path: 'creationMembre', component: InscriptionMembreComponent },
+  { path: 'creationMembre/:erreur', component: InscriptionMembreComponent },
   { path: '', component:  AccueilComponent },
   { path:'gestionAdmin', component:MembresComponent},
   { path: 'listeCompetence', component: CompetencesComponent},

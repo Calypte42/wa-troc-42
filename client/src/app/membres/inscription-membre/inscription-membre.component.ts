@@ -3,7 +3,7 @@ import {NgForm} from '@angular/forms';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {RequestOptions} from '@angular/http';
 import { MembresService } from '../membres.service';
-import { Router } from '@angular/router'
+import { Router, ActivatedRoute, Params } from '@angular/router'
 
 @Component({
   selector: 'app-inscription-membre',
@@ -12,10 +12,18 @@ import { Router } from '@angular/router'
 })
 export class InscriptionMembreComponent implements OnInit {
 
-  constructor(private http:HttpClient, private membresService:MembresService,
-                private router:Router) { }
+    private erreur : boolean =false;
 
-  ngOnInit() {}
+  constructor(private http:HttpClient, private membresService:MembresService,
+                private router:Router,  private route : ActivatedRoute) { }
+
+  ngOnInit() {
+      let self=this;
+      let monSubscribe = this.route.params.subscribe(function(params:Params){
+          self.erreur=params.erreur;
+     });
+     console.log("Vient d une redirection : " + this.erreur);
+  }
 
 
   onSubmit(form: NgForm) {
@@ -27,9 +35,17 @@ export class InscriptionMembreComponent implements OnInit {
       const ville = form.value['ville'];
       const adresse = form.value['adresse'];
       const telephone = form.value['telephone'];
-      let retourServeur = this.membresService.putMembre(nom, prenom, email, mdp, ville, adresse, telephone).subscribe();
-      console.log(retourServeur);
-      this.router.navigate(['']);
+      let self=this;
+      let verificationServeur = this.membresService.getMembres("/"+email).subscribe(res =>{
+          if(res.length==0){
+               let retourServeur = this.membresService.putMembre(nom, prenom, email, mdp, ville, adresse, telephone).subscribe();
+               this.router.navigate(['']);
+          }
+          else{
+              self.router.navigate(['creationMembre/true']);
+          }
+      });
+
 
   }
 

@@ -14,7 +14,7 @@ export class ModifCompetenceComponent implements OnInit {
     private userMail : String;
 
     private competences:Object[];
-    private competence:any;
+    private competence:any={"descriptif":"Une erreur est survenu"};
 
 
   constructor(private mesCookies:MesCookies,private router : Router,
@@ -35,6 +35,7 @@ export class ModifCompetenceComponent implements OnInit {
               self.competence=res[0];
           });
           });
+
 
 
 }
@@ -70,5 +71,17 @@ onSubmitDispo(form:NgForm){
 
 versMesCompetences(){
     this.router.navigate(['mesCompetences']);
+}
+
+
+suppressionDate(removeDate, removeHeureD, removeHeureF){
+    let ancienneDate = this.competence.disponibilite;
+    let nouvelleDate = [];
+    for (let dispo of ancienneDate ){
+        if(dispo.date!=removeDate || dispo.heureD!=removeHeureD || dispo.heureF!=removeHeureF){
+            nouvelleDate.push(dispo);
+        }
+    }
+    this.competencesService.updateDisponibilite(this.competence._id,nouvelleDate).subscribe();
 }
 }
