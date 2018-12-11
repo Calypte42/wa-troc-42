@@ -51,8 +51,4 @@ export class CompetencesComponent implements OnInit {
       this.router.navigate(['ficheCompetence',id]);
   }
 
-
-
-
-
 }

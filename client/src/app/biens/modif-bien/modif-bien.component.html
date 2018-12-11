@@ -1,0 +1,73 @@
+<div class="row" >
+    <h2 *ngIf='this.userMail==""'>Vous n'etes pas connecté veuillez vous connecter ou vous rendre à l'accueil !</h2>
+    <button *ngIf='this.userMail!=""' (click)="versMesBiens()"> Retour</button>
+</div>
+<div class="row" *ngIf='this.userMail!=""'>
+    <h2> Modification du bien : {{bien.descriptif}}</h2>
+</div>
+<div class="row" *ngIf='this.userMail!=""'>
+
+
+
+    <form class="form-group col-lg-offset-1 col-lg-8" style="border:1px solid black" (ngSubmit)="onSubmit(f)" #f="ngForm">
+        <fieldset>
+            <legend>
+                Modification de l'intitulé du bien :
+            </legend>
+
+
+        <div class="row">
+            <div class="col-lg-3">
+                <label for="descriptif"> descriptif * :</label>
+            </div>
+            <div class="col-lg-5">
+                <input type="text" value={{bien.descriptif}} placeholder="descriptif" class="form-control" id="descriptif" name="descriptif" ngModel required />
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col-lg-3">
+                <label for="type"> type * :</label>
+            </div>
+            <div class="col-lg-5">
+                <input type="text" value={{bien.type}} placeholder="type" class="form-control" id="type" name="type" ngModel required />
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col-lg-3">
+                <label for="mots_clefs"> Mots clefs * :</label>
+            </div>
+            <div class="col-lg-5">
+                <input type="text" value={{bien.mots_clefs}} class="form-control" placeholder="Mots clés" id="mots_clefs" name="mots_clefs" ngModel required/>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-3">
+                <label for="photo"> Photo (lien) * :</label>
+            </div>
+            <div class="col-lg-5">
+                <input type="text" value={{bien.photo}} class="form-control" placeholder="photo" id="photo" name="photo" ngModel required/>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-3">
+                <label for="prix_neuf"> Prix neuf * :</label>
+            </div>
+            <div class="col-lg-5">
+                <input type="number" value={{bien.prix_neuf}} class="form-control" placeholder="prix_neuf" id="prix_neuf" name="prix_neuf" ngModel required/>
+            </div>
+        </div>
+
+        <div class="row">
+            <button class="btn btn-primary mb-2 col-lg-offset-3" name="boutonMarge" type="submit" [disabled]="f.invalid">Enregistrer</button>
+        </div>
+
+        </fieldset>
+    </form>
+
+</div>

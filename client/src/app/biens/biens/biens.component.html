@@ -1,6 +1,32 @@
-<div>
-  Voici la liste des biens :
-  <ul>
-    <li *ngFor="let bien of biens"> {{bien.descriptif}}, {{bien.email}}</li>
-  </ul>
+<div class="row">
+
+    <button *ngIf='isAuth==true' (click)="versMesBiens()"> Mes biens</button>
+</div>
+<div class="row">
+
+      Voici la liste des biens :
+
+
+      <table class="table table-bordered table-striped">
+      			<tr>
+      				<th>Descriptif</th>
+                    <th>Type</th>
+      				<th>Mots clés</th>
+                    <th>Prix neuf</th>
+      				<th>Emprunter</th>
+
+      			</tr>
+
+                  <tr *ngFor="let bien of biens">
+
+                     <td>{{bien.descriptif}}</td>
+                     <td>{{bien.type}}</td>
+                     <td>{{bien.mots_clefs}}</td>
+                     <td>{{bien.prix_neuf}}</td>
+                     <td> <button (click)="inscription(bien._id)" width="50px" height="50px">Emprunter</button> </td>
+
+
+                  </tr>
+
+      		</table>
 </div>

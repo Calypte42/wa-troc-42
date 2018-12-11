@@ -227,6 +227,34 @@ MongoClient.connect(url, {useNewUrlParser: true}, (err, client) => {
         })
     });
 
+    app.get('/membres/bien/:id', (req, res) => {
+
+        res.setHeader('Content-type', 'application/json; charset=UTF-8');
+        res.setHeader('access-control-allow-origin','*');
+        // On recupere tout d'abord les competences qui correspondent
+        db.collection("Biens").aggregate([
+            {
+                $match: {"_id":ObjectId(req.params.id)}
+            },
+            {
+                $lookup: // On realise ensuite la jointure
+                {
+                    from: 'Membres', // en prenant la collection membres comme table de jointure
+                    localField: 'email', // le champs de tri sur biens est email
+                    foreignField: 'email', // le champs de tri sur membres est email
+                    as: 'listeMembres' // On nomme le resultat de la jointure pour utilisation
+                }
+            }
+        ]).toArray(function(err, documents) {
+            let liste = [];
+            for (let document of documents) {
+                liste.push(document);
+            }
+            let json = JSON.stringify(liste);
+            res.end(json);
+        })
+    });
+
 
 
     app.get('/membres/authentification/:email/:password', (req, res) => {
@@ -329,6 +357,21 @@ MongoClient.connect(url, {useNewUrlParser: true}, (err, client) => {
         })
     });
 
+    app.get('/biens/membre/:email', (req, res) => {
+        let email = req.params.email;
+
+        res.setHeader('Content-type', 'application/json; charset=UTF-8');
+        res.setHeader('access-control-allow-origin','*');
+        db.collection("Biens").find({"email":email}).toArray((err, documents) => {
+            let liste = [];
+            for (let document of documents) {
+                liste.push(document);
+            }
+            let json = JSON.stringify(liste);
+            res.end(json);
+        });
+    });
+
     app.get('/biens/proprietaire/:personne', (req, res) => {
 
         let personne = req.params.personne;
@@ -357,6 +400,21 @@ MongoClient.connect(url, {useNewUrlParser: true}, (err, client) => {
         })
     });
 
+    app.get('/biens/id/:id', (req, res) => {
+        let id = req.params.id;
+
+        res.setHeader('Content-type', 'application/json; charset=UTF-8');
+        res.setHeader('access-control-allow-origin','*');
+        db.collection("Biens").find({"_id":new ObjectId(id)}).toArray((err, documents) => {
+            let liste = [];
+            for (let document of documents) {
+                liste.push(document);
+            }
+            let json = JSON.stringify(liste);
+            res.end(json);
+        });
+    });
+
 /*----------------------------- POST Biens -----------------------------*/
 
     app.post('/add/bien',(req,res) =>{
@@ -374,6 +432,43 @@ MongoClient.connect(url, {useNewUrlParser: true}, (err, client) => {
         res.status(200);
         res.end();
     });
+
+    /*----------------------------UPDATE Biens -----------------------------*/
+
+    app.put('/update/bien/:id',(req,res) =>{
+        let id = req.params.id;
+        console.log("Je suis dans la modification de : "+id);
+        db.collection("Biens").update(
+            {"_id":ObjectId(id)},
+            {$set:{
+                "descriptif":req.body["descriptif"],
+                "type":req.body["type"],
+                "mots_clefs":req.body["mots_clefs"],
+                "photo":req.body["photo"],
+                "prix_neuf":req.body["prix_neuf"]
+                }
+            }
+
+        );
+        res.status(200);
+        res.end();
+    }
+    );
+
+    /* -------------------     DELETE Bien  -----------------------------------*/
+
+    app.delete('/delete/bien/:id',(req,res) =>{
+        let id = req.params.id;
+        console.log("Je suis dans la suppression de : "+id);
+        let filtre = {"_id":ObjectId(id)};
+        console.log(JSON.stringify(filtre));
+        db.collection("Biens").deleteOne(
+            filtre
+        );
+        res.status(200);
+        res.end();
+    }
+    );
 
 
 /*------------------- REST Competences ------------------------------------*/
