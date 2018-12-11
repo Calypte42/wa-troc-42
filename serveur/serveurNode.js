@@ -229,12 +229,12 @@ MongoClient.connect(url, {useNewUrlParser: true}, (err, client) => {
         );
         res.status(200);
         res.end();
-    }
-);
+    });
 
 
 
 /* -------------------------- REST Biens ---------------------------------*/
+/*----------------------------- GET Biens -----------------------------*/
     app.get('/biens', (req, res) => {
         res.setHeader('Content-type', 'application/json; charset=UTF-8');
         res.setHeader('access-control-allow-origin','*');
@@ -320,6 +320,24 @@ MongoClient.connect(url, {useNewUrlParser: true}, (err, client) => {
             let json = JSON.stringify(liste);
             res.end(json);
         })
+    });
+
+/*----------------------------- POST Biens -----------------------------*/
+
+    app.post('/add/bien',(req,res) =>{
+        console.log(req.body);
+        db.collection("Biens").insert(
+            {
+                "email":req.body["email"],
+                "descriptif":req.body["descriptif"],
+                "type":req.body["type"],
+                "mots_clefs":req.body["mots_clefs"],
+                "photo":req.body["photo"],
+                "prix_neuf":req.body["prix_neuf"]
+            }
+        );
+        res.status(200);
+        res.end();
     });
 
 

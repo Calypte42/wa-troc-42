@@ -5,6 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { BiensComponent } from './biens/biens.component';
 import { BiensService } from './biens.service';
+import { InsertionBienComponent } from './insertion-bien/insertion-bien.component';
 
 @NgModule({
   imports: [
@@ -14,7 +15,8 @@ import { BiensService } from './biens.service';
       BiensComponent
   ],
   declarations: [
-      BiensComponent
+      BiensComponent,
+      InsertionBienComponent
   ],
   providers:[
       BiensService

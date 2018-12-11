@@ -1,0 +1,33 @@
+<div class="container">
+    Ajout d'un bien :
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-4 well well-sm">
+            <legend><a href="http://www.jquery2dotnet.com"><i class="glyphicon glyphicon-globe"></i></a>Ajout d'un bien</legend>
+            <form (ngSubmit)="onSubmit(f)" #f="ngForm" role="form">
+            <div class="row">
+                <div class="col-xs-6 col-md-6">
+                    <input class="form-control" name="nom" placeholder="Nom" type="text"
+                        required autofocus ngModel />
+                </div>
+                <div class="col-xs-6 col-md-6">
+                    <input class="form-control" name="prenom" placeholder="Prenom" type="text"
+                        required autofocus ngModel />
+                </div>
+            </div>
+
+                    <input class="form-control" name="ville" placeholder="Ville" type="text"
+                        required autofocus ngModel/>
+
+                    <input class="form-control" name="adresse" placeholder="Adresse" type="text"
+                        required autofocus ngModel/>
+
+                    <input class="form-control" name="telephone" placeholder="Telephone" type="tel"
+                        required autofocus ngModel />
+
+            <button class="btn btn-lg btn-primary btn-block" type="submit" [disabled]="f.invalid">
+                Nous rejoindre ! </button>
+            <button class="btn btn-lg btn-primary btn-block" type="button" name="" (click)="retourAccueil()"> Annuler </button>
+            </form>
+        </div>
+    </div>
+</div>
