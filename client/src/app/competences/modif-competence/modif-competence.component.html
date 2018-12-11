@@ -1,0 +1,114 @@
+<div class="row" >
+    <h2 *ngIf='this.userMail==""'>Vous n'etes pas connecté veuillez vous connecter ou vous rendre à l'accueil !</h2>
+    <button *ngIf='this.userMail!=""' (click)="versMesCompetences()"> Retour</button>
+</div>
+<div class="row" *ngIf='this.userMail!=""'>
+    <h2> Modification de la compétence : {{competence.descriptif}}</h2>
+</div>
+<div class="row" *ngIf='this.userMail!=""'>
+
+
+
+    <form class="form-group col-lg-offset-1 col-lg-8" style="border:1px solid black" (ngSubmit)="onSubmit(f)" #f="ngForm">
+        <fieldset>
+            <legend>
+                Modification de l'intitulé de la compétence :
+            </legend>
+
+
+        <div class="row">
+            <div class="col-lg-3">
+                <label for="descriptif"> descriptif * :</label>
+            </div>
+            <div class="col-lg-5">
+                <input type="text" value={{competence.descriptif}} placeholder="descriptif" class="form-control" id="descriptif" name="descriptif" ngModel required />
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col-lg-3">
+                <label for="mots_clefs"> Mots clefs * :</label>
+            </div>
+            <div class="col-lg-5">
+                <input type="text" value={{competence.mots_clefs}} class="form-control" placeholder="Mots clés" id="mots_clefs" name="mots_clefs" ngModel required/>
+            </div>
+        </div>
+
+
+
+        <div class="row">
+            <button class="btn btn-primary mb-2 col-lg-offset-3" name="boutonMarge" type="submit" [disabled]="f.invalid">Enregistrer</button>
+        </div>
+
+        </fieldset>
+    </form>
+
+</div>
+
+<div style="border:1px solid black">
+    <div class="row">
+        <div *ngIf='this.userMail!=""' class="col-lg-offset-1 col-lg-8">
+            Liste des disponibilités :
+            <table class="table table-bordered table-striped">
+                <tr>
+                    <th>Date </th>
+                    <th>Heure début</th>
+                    <th>Heure fin </th>
+                    <th>Status </th>
+                    <th>
+                        Supprimer
+                    </th>
+                </tr>
+
+                <tr *ngFor="let dispo of competence.disponibilite">
+
+                    <td>{{dispo.date}}</td>
+                    <td>{{dispo.heureD}}</td>
+                    <td>{{dispo.heureF}}</td>
+                    <td>{{dispo.status}}</td>
+                    <th><button (click)="suppressionDate(dispo.date,dispo.heureD,dispo.heureF)"> Supprimer</button></th>
+                </tr>
+
+            </table>
+        </div>
+    </div>
+
+
+    <div class="row">
+
+        <div *ngIf='this.userMail!=""'>
+            <form class="form-group col-lg-offset-1 col-lg-10"(ngSubmit)="onSubmitDispo(f)" #f="ngForm">
+                <fieldset>
+
+                    <legend>
+                        Rajouter une date :
+                    </legend>
+
+                <div class="row">
+                    <div class="col-lg-2">
+                        <label for="date"> Date :</label>
+                    </div>
+                    <div class="col-lg-2">
+                        <input type="date" class="form-control" id="date" name="date" ngModel required />
+                    </div>
+                    <div class="col-lg-2">
+                        <label for="heureD"> Heure début :</label>
+                    </div>
+                    <div class="col-lg-2">
+                        <input type="time" class="form-control" id="heureD"  name="heureD" ngModel required />
+                    </div>
+                    <div class="col-lg-2">
+                        <label for="heureF"> Heure fin:</label>
+                    </div>
+                    <div class="col-lg-2">
+                        <input type="time" class="form-control" id="heureF" name="heureF" ngModel required/>
+                    </div>
+                </div>
+                <button class="btn btn-primary mb-2" type="submit" [disabled]="f.invalid">Ajouter une disponibilite</button>
+                </fieldset>
+            </form>
+        </div>
+
+    </div>
+</div>

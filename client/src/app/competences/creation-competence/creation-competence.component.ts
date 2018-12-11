@@ -5,6 +5,8 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {NgForm} from '@angular/forms';
 import {RequestOptions} from '@angular/http';
 
+import {MesCookies} from '../../mesCookies';
+
 @Component({
   selector: 'app-creation-competence',
   templateUrl: './creation-competence.component.html',
@@ -12,22 +14,28 @@ import {RequestOptions} from '@angular/http';
 })
 export class CreationCompetenceComponent implements OnInit {
 
-    @Input() email : String;
+    //@Input() email : String;
 
-    constructor(private http:HttpClient, private competencesService:CompetencesService,
+    constructor(private mesCookies:MesCookies,
+        private http:HttpClient, private competencesService:CompetencesService,
                   private router:Router) { }
 
     ngOnInit() {}
 
 
     onSubmit(form: NgForm) {
-        console.log(form);
-        const descriptif = form.value['descriptif'];
-        const mots_clefs = form.value['mots_clefs'];
-        const disponibilite = form.value['disponibilite'];
-        let retourServeur = this.competencesService.putCompetence(descriptif,mots_clefs,this.email,disponibilite).subscribe();
-        console.log(retourServeur);
-        this.router.navigate(['listeCompetence']);
+        if(this.mesCookies.getRole()!="invit"){
+
+            console.log(form);
+            const descriptif = form.value['descriptif'];
+            const mots_clefs = form.value['mots_clefs'];
+            const disponibilite = [];
+            let retourServeur = this.competencesService.putCompetence(descriptif,mots_clefs,this.mesCookies.getUserMail(),disponibilite).subscribe();
+            console.log(retourServeur);
+        }
+        let self=this;
+        setTimeout(function(){self.router.navigate(['mesCompetences'])},1000);
+        //this.router.navigate(['mesCompetences']);
 
     }
 

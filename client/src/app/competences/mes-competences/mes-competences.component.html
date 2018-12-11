@@ -1,0 +1,33 @@
+<div class="row">
+    <p *ngIf='this.userMail==""'>Nous n'etes pas connecté veuillez vous connecter ou vous rendre à l'accueil !</p>
+    <button *ngIf='this.userMail!=""' (click)="versCreationCompetence()">Nouvelle competence</button>
+</div>
+<div class="row" *ngIf='this.userMail!=""'>
+
+      Voici la liste de vos competences :
+
+
+<table class="table table-bordered table-striped">
+			<tr>
+				<th>Descriptif </th>
+				<th>Mots clés </th>
+				<th>Disponibilite </th>
+				<th>Modifier </th>
+				<th> Supprimer </th>
+			</tr>
+
+            <tr *ngFor="let competence of competences">
+
+               <td>{{competence.descriptif}}</td>
+               <td>{{competence.mots_clefs}}</td>
+               <td><ul>
+                   <li *ngFor="let dispo of competence.disponibilite">
+                       {{dispo.date}}, {{dispo.heureD}}, {{dispo.heureF}}, {{dispo.status}}
+                   </li>
+               </ul></td>
+               <td> <button (click)="modification(competence._id)">Modifier</button> </td>
+			   <td> <button (click)="suppression(competence._id)">Supprimer</button> </td>
+
+            </tr>
+
+		</table>

@@ -1,10 +1,42 @@
-<div>
-    <button type="button"> Retour</button>
-    <div>
-        {{descriptif}}
-    </div>
-    <div>
-        <button type="button">S'inscrire</button>
-    </div>
+<div class="row" >
+    <p *ngIf='this.userMail==""'>Nous n'etes pas connecté veuillez vous connecter ou vous rendre à l'accueil !</p>
+    <button *ngIf='this.userMail!=""' (click)="versCompetences()"> Retour</button>
+</div>
+<div class="row" *ngIf='this.userMail!=""'>
 
+    Inscription à la competence: <br/>
+    {{proprietaire.nom}} {{proprietaire.prenom}} <br/>
+
+    à l'adresse : {{proprietaire.adresse}}  <br />
+
+
+    Descriptif de la compétences :
+
+    {{information.descriptif}}
+
+
+
+
+</div>
+<div *ngIf='this.userMail!=""'>
+    Liste des disponibilités :
+    <table class="table table-bordered table-striped">
+        <tr>
+            <th>Date </th>
+            <th>Heure début</th>
+            <th>Heure fin </th>
+            <th>Status </th>
+            <th>Reservation</th>
+        </tr>
+
+        <tr *ngFor="let dispo of information.disponibilite">
+
+            <td>{{dispo.date}}</td>
+            <td>{{dispo.heureD}}</td>
+            <td>{{dispo.heureF}}</td>
+            <td>{{dispo.status}}</td>
+            <td ><button *ngIf='dispo.status=="Disponible" && this.userMail!=""'>Reserver {{dispo.date}} {{dispo.heureD}}</button></td>
+        </tr>
+
+    </table>
 </div>

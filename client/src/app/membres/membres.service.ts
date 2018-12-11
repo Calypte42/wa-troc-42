@@ -18,10 +18,29 @@ export class MembresService {
      return observable;
   }
 
+  debloquerMembre(id):Observable<any>{
+      let url="http://localhost:8888/membre/debloquerMembre/"+id;
 
-  putMembre(nom, prenom, email, ville, adresse, telephone): Observable<any>{
+      const httpOptions = { headers: new HttpHeaders({
+                'Content-Type':  'application/json'
+              })
+            };
+      return this.http.put(url,httpOptions);
+  }
+
+  bloquerMembre(id):Observable<any>{
+      let url="http://localhost:8888/membre/bloquerMembre/"+id;
+      const httpOptions = { headers: new HttpHeaders({
+                'Content-Type':  'application/json'
+              })
+            };
+      return this.http.put(url,httpOptions);
+  }
+
+
+  putMembre(nom, prenom, email,mdp, ville, adresse, telephone): Observable<any>{
       let url="http://localhost:8888/add/membre";
-      let data={"nom":nom,"prenom":prenom,"email":email,
+      let data={"nom":nom,"prenom":prenom,"email":email,"mdp":mdp,"role":"user",
                 "ville":ville,"adresse":adresse,"telephone":telephone};
 
       const httpOptions = { headers: new HttpHeaders({

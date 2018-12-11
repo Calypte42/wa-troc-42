@@ -1,55 +1,74 @@
-
-
-<!--    <form (ngSubmit)="onSubmit(f)" #f="ngForm">
-        <label for="nom"> Nom * :</label>
-        <input type="text" id="nom" name="nom" ngModel required />
-        <label for="prenom"> Prénom * :</label>
-        <input type="text" id="prenom" name="prenom" ngModel required/>
-        <label for="email"> email * :</label>
-        <input type="email" id="email" name="email" ngModel required/>
-        <label for="ville"> Ville *:</label>
-        <input type="text" id="ville" name="ville" ngModel required/>
-        <label for="adresse"> Adresse *:</label>
-        <input type="text" id="adresse" name="adresse" ngModel required/>
-        <label for="telephone"> Télephone *:</label>
-        <input type="tel" id="telephone" name="telephone" ngModel required/>
-
-        <button class="" type="submit" [disabled]="f.invalid">Enregistrer</button>
-        <button type="button" name="" (click)="retourAccueil()"> Annuler </button> -->
-
-
+<div class="row">
+    <div class="col-lg-offset-1 col-lg-5 ">
         <div class="container">
             Pour rejoindre notre communauté veuillez remplir ce formulaire :
             <div class="row">
-                <div class="col-xs-12 col-sm-12 col-md-4 well well-sm">
+                <div class="col-xs-12 col-lg-8 col-sm-12 col-md-4 ">
                     <legend><a href="http://www.jquery2dotnet.com"><i class="glyphicon glyphicon-globe"></i></a> S'inscrire!</legend>
                     <form (ngSubmit)="onSubmit(f)" #f="ngForm" role="form">
-                    <div class="row">
-                        <div class="col-xs-6 col-md-6">
-                            <input class="form-control" name="nom" placeholder="Nom" type="text"
+                        <div class="row">
+                            <div class="col-xs-6 col-md-6">
+                                <input class="form-control" name="nom" placeholder="Nom" type="text"
                                 required autofocus ngModel />
-                        </div>
-                        <div class="col-xs-6 col-md-6">
-                            <input class="form-control" name="prenom" placeholder="Prenom" type="text"
+                            </div>
+                            <div class="col-xs-6 col-md-6">
+                                <input class="form-control" name="prenom" placeholder="Prenom" type="text"
                                 required autofocus ngModel />
+                            </div>
                         </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <input class="form-control" name="email" placeholder="Email" type="email"
+                                required autofocus ngModel email/>
+                            </div>
+                            <div class="col-lg-offset-1 col-lg-2" *ngIf='this.erreur=="true"'>
+                                Cet email est déja utilisé !
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <input class="form-control" name="password" placeholder="Mots de passe" type="password"
+                                required autofocus ngModel/>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <input class="form-control" name="ville" placeholder="Ville" type="text"
+                                required autofocus ngModel/>
+
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-8">
+                                <input class="form-control" name="adresse" placeholder="Adresse" type="text"
+                                required autofocus ngModel/>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <input class="form-control" name="telephone" placeholder="Telephone" type="tel"
+                                required autofocus ngModel maxlength="12" minlength="10"/>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-5">
+                                <button class="btn btn-lg btn-primary btn-block" type="submit" [disabled]="f.invalid">
+                                    Nous rejoindre ! </button>
+                                </div>
+                                <div class="col-lg-5">
+                                    <button class="btn btn-lg btn-primary btn-block" type="button" name="" (click)="retourAccueil()"> Annuler </button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
-                            <input class="form-control" name="email" placeholder="Email" type="email"
-                                required autofocus ngModel/>
-
-                            <input class="form-control" name="ville" placeholder="Ville" type="text"
-                                required autofocus ngModel/>
-
-                            <input class="form-control" name="adresse" placeholder="Adresse" type="text"
-                                required autofocus ngModel/>
-
-                            <input class="form-control" name="telephone" placeholder="Telephone" type="tel"
-                                required autofocus ngModel />
-
-                    <button class="btn btn-lg btn-primary btn-block" type="submit" [disabled]="f.invalid">
-                        Nous rejoindre ! </button>
-                    <button class="btn btn-lg btn-primary btn-block" type="button" name="" (click)="retourAccueil()"> Annuler </button>
-                    </form>
                 </div>
             </div>
         </div>
+
+
+    </div>

@@ -5,8 +5,8 @@
         "email":"sofian.charpentier@gmail.com",
         "disponibilite":
         [
-            {"jour":"lundi", "heure":"9h-12h"},
-            {"jour":"mardi", "heure":"9h-12h"}
+            {"date":"2018-11-12", "heureD":"03:25", "heureF":"04:00", "status":"Disponible"},
+            {"date":"2018-11-12", "heureD":"03:25", "heureF":"04:00", "status":"Disponible"}
         ]
     },
     {
@@ -15,8 +15,8 @@
         "email":"sofian.charpentier@gmail.com",
         "disponibilite":
         [
-            {"jour":"lundi", "heure":"9h-12h"},
-            {"jour":"mardi", "heure":"9h-12h"}
+            {"date":"2018-11-12", "heureD":"03:25", "heureF":"04:00", "status":"Disponible"},
+            {"date":"2018-11-12", "heureD":"04:00", "heureF":"05:00", "status":"Disponible"}
         ]
     },
     {
@@ -25,8 +25,8 @@
         "email":"aurelien.lengrand@etu.umontpellier.fr",
         "disponibilite":
         [
-            {"jour":"lundi", "heure":"9h-12h"},
-            {"jour":"mardi", "heure":"9h-12h"}
+            {"date":"2018-11-12", "heureD":"03:25", "heureF":"04:00", "status":"Disponible"},
+            {"date":"2018-11-12", "heureD":"04:00", "heureF":"05:00", "status":"Disponible"}
         ]
     }
 ]

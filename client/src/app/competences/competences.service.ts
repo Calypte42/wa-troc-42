@@ -10,7 +10,7 @@ export class CompetencesService {
   constructor(private http: HttpClient) { }
 
   getCompetences(parametres): Observable<any> {
-     let observable: Observable<any>;
+     //let observable: Observable<any>;
      return this.http.get("http://localhost:8888/competences"+parametres);
   }
 
@@ -28,6 +28,46 @@ export class CompetencesService {
     console.log("Je suis le service competence : \n mes donnees sont : "+JSON.stringify(data));
 
       return this.http.post(url,data,httpOptions);
+  }
+
+
+  deleteCompetence(id): Observable<any>{
+      console.log("delete competence appele sur " + id);
+      let url="http://localhost:8888/delete/competence/"+id;
+      //let data={"id":id};
+
+      const httpOptions = { headers: new HttpHeaders({
+                'Content-Type':  'application/json'
+              })
+            };
+
+      return this.http.delete(url,httpOptions);
+  }
+
+
+  updateCompetence(id,descriptif,mots_clefs):Observable<any>{
+      let url="http://localhost:8888/update/competence/"+id;
+      let data={"descriptif":descriptif,"motsCle":mots_clefs};
+      const httpOptions = { headers: new HttpHeaders({
+                'Content-Type':  'application/json'
+              })
+            };
+      return this.http.put(url,data,httpOptions);
+  }
+
+  updateDisponibilite(id,nouvelleDispo):Observable<any>{
+      let url="http://localhost:8888/update/disponibilite/"+id;
+      let data={"disponibilite":nouvelleDispo};
+      const httpOptions = { headers: new HttpHeaders({
+                'Content-Type':  'application/json'
+              })
+            };
+      return this.http.put(url,data,httpOptions);
+  }
+
+
+  getAllInformationCompetence(id):Observable<any>{
+       return this.http.get("http://localhost:8888/membres/competence/"+id);
   }
 
 

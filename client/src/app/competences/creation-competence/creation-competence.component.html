@@ -1,22 +1,31 @@
 <div name='formulaireCompetence' class="formulaire">
     Creation d'une nouvelle compétence :
 
-    <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+    <form class="form-group"(ngSubmit)="onSubmit(f)" #f="ngForm">
 
-        <label for="descriptif"> descriptif * :</label>
-        <input type="text" id="descriptif" name="descriptif" ngModel required />
-        <label for="mots_clefs"> Mots clefs * :</label>
-        <input type="text" id="mots_clefs" name="mots_clefs" ngModel required/>
-        <label for="disponibilite"> disponibilite *:</label>
-        <input type="text" id="disponibilite" name="disponibilite" ngModel required/>
+        <div class="row">
+            <div class="col-lg-3">
+                <label for="descriptif"> descriptif * :</label>
+            </div>
+            <div class="col-lg-5">
+                <input type="text" placeholder="descriptif" class="form-control" id="descriptif" name="descriptif" ngModel required />
+            </div>
 
+        </div>
 
-        <button class="" type="submit" [disabled]="f.invalid">Enregistrer</button>
-        <button type="button" name="" (click)="retourAccueil()"> Annuler </button>
+        <div class="row">
+            <div class="col-lg-3">
+                <label for="mots_clefs"> Mots clefs * :</label>
+            </div>
+            <div class="col-lg-5">
+                <input type="text" class="form-control" placeholder="Mots clés" id="mots_clefs" name="mots_clefs" ngModel required/>
+            </div>
+        </div>
 
-
-
-
+        <div class="row">
+            <button class="btn btn-primary mb-2" type="submit" [disabled]="f.invalid">Enregistrer</button> 
+            <button class="btn btn-primary mb-2" type="button" name="" (click)="retourAccueil()"> Annuler </button>
+        </div>
 
 
     </form>
