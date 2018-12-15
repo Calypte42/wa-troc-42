@@ -85,12 +85,6 @@ export class AuthentificationComponent implements OnInit {
       this.router.navigate(['creationMembre']);
   }
 
-  gestionEmprunts() {
-      this.router.navigate(['gestionEmprunts']);
-  }
 
-  mesEmprunts() {
-      this.router.navigate(['mesEmprunts']);
-  }
 
 }

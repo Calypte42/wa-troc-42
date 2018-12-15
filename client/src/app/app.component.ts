@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-
+import { Router } from '@angular/router';
 import { MesCookies} from './mesCookies';
+
 
 @Component({
   selector: 'app-root',
@@ -15,7 +16,7 @@ export class AppComponent {
     userMail : String ="";
     role : String = "";
 
-    constructor(private mesCookies:MesCookies){
+    constructor(private mesCookies:MesCookies, private router:Router){
         this.isAuth = mesCookies.getIsAuth();
         this.userMail= mesCookies.getUserMail();
         this.role = mesCookies.getRole();
@@ -44,6 +45,14 @@ export class AppComponent {
       this.isAuth = this.mesCookies.getIsAuth();
       this.userMail= this.mesCookies.getUserMail();
       this.role = this.mesCookies.getRole();
+  }
+
+  gestionEmprunts() {
+      this.router.navigate(['gestionEmprunts']);
+  }
+
+  mesEmprunts() {
+      this.router.navigate(['mesEmprunts']);
   }
 
 

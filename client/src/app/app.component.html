@@ -12,6 +12,17 @@
 (changeRole)="modifRole($event)" -->
             </div>
 
+
+        </div>
+        <div class="row" *ngIf='this.userMail!=""'>
+            <div class="col-lg-offset-9 col-lg-3">
+                <div class="rox">
+                    <button (click)="gestionEmprunts()">Gestion des emprunts</button>
+                    <button (click)="mesEmprunts()">Mes emprunts</button>
+                </div>
+
+            </div>
+
         </div>
         <div class="row">
             <nav class="navbar navbar-default">
