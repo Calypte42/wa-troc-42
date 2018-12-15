@@ -1,0 +1,37 @@
+<div class="row">
+  <p *ngIf='this.userMail==""'>Nous n'etes pas connecté veuillez vous connecter ou vous rendre à l'accueil !</p>
+</div>
+<div class="row" *ngIf='this.userMail!=""'>
+
+  Mes emprunts en cours :
+
+
+  <table class="table table-bordered table-striped">
+    <tr>
+      <th>Descriptif</th>
+      <th>Type</th>
+      <th>Prix neuf</th>
+      <th>Prêteur</th>
+      <th>Status</th>
+      <th colspan="2">Gestion</th>
+    </tr>
+
+    <tr *ngFor="let emprunt of mesEmprunts">
+
+      <td>{{emprunt['bien'].descriptif}}</td>
+      <td>{{emprunt['bien'].type}}</td>
+      <td>{{emprunt['bien'].prix_neuf}}</td>
+      <td>{{emprunt['preteur'].prenom}} {{emprunt['preteur'].nom}}<br>
+        {{emprunt['preteur'].email}}
+      </td>
+      <td>
+        <p *ngIf="emprunt.status =='attente'">DEMANDE D'EMPRUNT</p>
+        <p *ngIf="emprunt.status =='en_cours'">EN COURS D'EMPRUNT</p>
+      </td>
+      <div *ngIf="emprunt.status =='attente'">
+        <td> <button (click)="annuler(emprunt._id, this.userMail)">Annuler</button> </td>
+      </div>
+
+    </tr>
+
+  </table>

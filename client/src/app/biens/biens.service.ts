@@ -23,17 +23,12 @@ export class BiensService {
               })
             };
 
-    console.log("Je suis le service : \n mes donnees sont : "+JSON.stringify(data));
-
-      //let httpOptions = new HttpHeaders({ headers:'Content-Type':'application/json'});
-     // let options = new RequestOptions({ headers: headers});
       return this.http.post(url,data,httpOptions);
   }
 
   deleteBien(id): Observable<any>{
       console.log("delete bien appele sur " + id);
       let url="http://localhost:8888/delete/bien/"+id;
-      //let data={"id":id};
 
       const httpOptions = { headers: new HttpHeaders({
                 'Content-Type':  'application/json'
@@ -57,6 +52,5 @@ export class BiensService {
   getAllInformationBien(id):Observable<any>{
        return this.http.get("http://localhost:8888/membres/bien/"+id);
   }
-
 
 }

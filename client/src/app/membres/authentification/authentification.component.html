@@ -35,6 +35,8 @@
 </div>
 <div *ngIf='this.email!=""'>
     {{email}} est connecté !
+    <button (click)="gestionEmprunts()">Gestion des emprunts</button>
+    <button (click)="mesEmprunts()">Mes emprunts</button>
     <button (click)="logout()">Déconnexion</button>
 </div>
 </div>

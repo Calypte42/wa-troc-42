@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {BiensService} from '../biens.service';
+import { BiensService } from '../biens.service';
+import { EmpruntService } from '../../emprunt/emprunt.service'
+import { MembresService } from '../../membres/membres.service'
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import {MesCookies} from '../../mesCookies';
-import {NgForm} from '@angular/forms';
+import { MesCookies } from '../../mesCookies';
+import { NgForm } from '@angular/forms';
 @Component({
   selector: 'app-fiche-bien',
   templateUrl: './fiche-bien.component.html',
@@ -10,32 +12,36 @@ import {NgForm} from '@angular/forms';
 })
 export class FicheBienComponent implements OnInit {
 
-    private proprietaire : any;
-    private userMail : String;
-    private information : any;
+  private proprietaire: any;
+  private userMail: String;
+  private information: any;
+  private membre: Object[];
 
 
-  constructor(private mesCookies:MesCookies,private router : Router,
-      private biensService : BiensService,
-      private route : ActivatedRoute) { }
+  constructor(private mesCookies: MesCookies, private router: Router,
+    private biensService: BiensService,
+    private empruntService : EmpruntService,
+    private membresService : MembresService,
+    private route: ActivatedRoute) { }
 
   ngOnInit() {
-      var self = this;
-      this.userMail = this.mesCookies.getUserMail();
-      let monSubscribe = this.route.params.subscribe(function(params:Params){
-          //self.id=params.id;
-          self.biensService.getAllInformationBien(params.id).subscribe(res => {
-              self.information = res[0];
-              console.log("resultat : "+JSON.stringify(self.information));
-              console.log(self.information.listeMembres[0]);
-              self.proprietaire=self.information.listeMembres[0];
-         });
-     });
-
+    var self = this;
+    this.userMail = this.mesCookies.getUserMail();
+    let monSubscribe = this.route.params.subscribe(function(params: Params) {
+      self.biensService.getAllInformationBien(params.id).subscribe(res => {
+        self.information = res[0];
+        self.proprietaire = self.information.listeMembres[0];
+      });
+    });
+    this.membresService.getMembres("/email/" + this.mesCookies.getUserMail()).subscribe(res => this.membre = res[0]);
   }
 
-  versBiens(){
-      this.router.navigate(['listeBien']);
+  emprunt() {
+      this.empruntService.empruntBien(this.information._id, this.userMail).subscribe();
+  }
+
+  versBiens() {
+    this.router.navigate(['listeBien']);
   }
 
 }

@@ -47,7 +47,7 @@ export class AuthentificationComponent implements OnInit {
       }
       else{
 
-          console.log("Avant conncexion : ");
+          console.log("Avant connexion : ");
           console.log(this.mesCookies.getUserMail());
 
           this.mesCookies.setIsAuth(true);
@@ -62,7 +62,7 @@ export class AuthentificationComponent implements OnInit {
 
           this.changeRole.emit(this.resultat[0].role);*/
       }
-      console.log("Apres conncexion : ");
+      console.log("Apres connexion : ");
       console.log(this.mesCookies.getUserMail());
       this.router.navigate(['']);
   }
@@ -85,5 +85,12 @@ export class AuthentificationComponent implements OnInit {
       this.router.navigate(['creationMembre']);
   }
 
+  gestionEmprunts() {
+      this.router.navigate(['gestionEmprunts']);
+  }
+
+  mesEmprunts() {
+      this.router.navigate(['mesEmprunts']);
+  }
 
 }

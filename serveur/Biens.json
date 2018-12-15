@@ -8,16 +8,16 @@
         "prix_neuf":30
     },
     {
-        "descriptif":"Prêt d'une Twingo",
-        "type":"véhicules",
+        "descriptif":"Twingo",
+        "type":"véhicule",
         "mots_clefs":["voiture","racing"],
         "email":"sofian.charpentier@gmail.com",
         "photo":"https://etc.fr",
         "prix_neuf":1000
     },
     {
-        "descriptif":"Prêt d'une Twingo",
-        "type":"véhicules",
+        "descriptif":"Peugeot 807",
+        "type":"véhicule",
         "mots_clefs":["voiture","racing"],
         "email":"jm.charpentier@gmail.com",
         "photo":"https://etc.fr",

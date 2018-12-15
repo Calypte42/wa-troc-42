@@ -38,7 +38,13 @@ export class BiensComponent implements OnInit {
         //recuperation des données de la route :
 
         //-------------------------------------
-         this.biensService.getBiens("").subscribe(res => this.biens = res);
+        if (this.userMail != ""){
+        console.log(this.userMail);
+        this.biensService.getBiens("/avecUtilisations/identifie/"+this.userMail).subscribe(res => this.biens = res);
+    } else {
+        this.biensService.getBiens("/avecUtilisations").subscribe(res => this.biens = res);
+    }
+
     }
 
     versMesBiens(){

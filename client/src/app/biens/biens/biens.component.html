@@ -13,7 +13,8 @@
                     <th>Type</th>
       				<th>Mots clés</th>
                     <th>Prix neuf</th>
-      				<th>Emprunter</th>
+                    <th>Status</th>
+      				<th>Voir</th>
 
       			</tr>
 
@@ -23,7 +24,17 @@
                      <td>{{bien.type}}</td>
                      <td>{{bien.mots_clefs}}</td>
                      <td>{{bien.prix_neuf}}</td>
-                     <td> <button (click)="inscription(bien._id)" width="50px" height="50px">Emprunter</button> </td>
+                     <td>
+                         <div *ngIf="bien['listeBiensUtilisations'].length != 0">
+                             <p *ngIf="bien['listeBiensUtilisations'][bien['listeBiensUtilisations'].length - 1].status =='attente'">INDISPONIBLE</p>
+                             <p *ngIf="bien['listeBiensUtilisations'][bien['listeBiensUtilisations'].length - 1].status =='termine'">DISPONIBLE</p>
+                             <p *ngIf="bien['listeBiensUtilisations'][bien['listeBiensUtilisations'].length - 1].status =='en_cours'">INDISPONIBLE</p>
+                         </div>
+                         <div *ngIf="bien['listeBiensUtilisations'].length == 0">
+                             DISPONIBLE
+                         </div>
+                     </td>
+                     <td> <button (click)="inscription(bien._id)" width="50px" height="50px">Voir</button> </td>
 
 
                   </tr>

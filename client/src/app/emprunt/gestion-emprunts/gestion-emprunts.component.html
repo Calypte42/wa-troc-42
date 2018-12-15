@@ -1,0 +1,41 @@
+<div class="row">
+  <p *ngIf='this.userMail==""'>Nous n'etes pas connecté veuillez vous connecter ou vous rendre à l'accueil !</p>
+</div>
+<div class="row" *ngIf='this.userMail!=""'>
+
+  Gestion des emprunts :
+
+
+  <table class="table table-bordered table-striped">
+    <tr>
+      <th>Descriptif</th>
+      <th>Type</th>
+      <th>Prix neuf</th>
+      <th>Emprunteur</th>
+      <th>Status</th>
+      <th colspan="2">Gestion</th>
+    </tr>
+
+    <tr *ngFor="let demandeEmpruntBien of demandesEmpruntBien">
+
+      <td>{{demandeEmpruntBien['bien'].descriptif}}</td>
+      <td>{{demandeEmpruntBien['bien'].type}}</td>
+      <td>{{demandeEmpruntBien['bien'].prix_neuf}}</td>
+      <td>{{demandeEmpruntBien['emprunteur'].prenom}} {{demandeEmpruntBien['emprunteur'].nom}}<br>
+        {{demandeEmpruntBien['emprunteur'].email}}
+      </td>
+      <td>
+        <p *ngIf="demandeEmpruntBien.status =='attente'">DEMANDE D'EMPRUNT</p>
+        <p *ngIf="demandeEmpruntBien.status =='en_cours'">EN COURS D'EMPRUNT</p>
+      </td>
+      <div *ngIf="demandeEmpruntBien.status =='attente'">
+        <td> <button (click)="accepter(demandeEmpruntBien._id, demandeEmpruntBien['emprunteur'].email)">Accepter</button> </td>
+        <td> <button (click)="refuser(demandeEmpruntBien._id, demandeEmpruntBien['emprunteur'].email)">Refuser</button> </td>
+      </div>
+      <div *ngIf="demandeEmpruntBien.status =='en_cours'">
+        <td> <button (click)="empruntFini(demandeEmpruntBien._id)">Bien récupéré</button> </td>
+      </div>
+
+    </tr>
+
+  </table>

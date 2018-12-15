@@ -9,7 +9,6 @@
 
     à l'adresse : {{proprietaire.adresse}}  <br/><br/>
 
-
     Descriptif du bien : <br/>
 
     {{information.descriptif}} <br/><br/>
@@ -26,6 +25,9 @@
 
     {{information.prix_neuf}} <br/><br/>
 
-<button *ngIf='this.userMail!=""'>Emprunter</button>
+<div *ngIf='this.userMail!=""'>
+    <button *ngIf='membre.status != "bloquer"' [disabled]="this.userMail == proprietaire.email" (click)="emprunt()" >Emprunter</button>
+    <p *ngIf='membre.status == "bloquer"'>Compte bloqué, vous ne pouvez pas emprunter</p>
+</div>
 
 </div>

@@ -24,6 +24,9 @@ import { MesBiensComponent } from './biens/mes-biens/mes-biens.component';
 import { ModifBienComponent } from './biens/modif-bien/modif-bien.component';
 import { FicheBienComponent } from './biens/fiche-bien/fiche-bien.component';
 
+import { GestionEmpruntsComponent } from './emprunt/gestion-emprunts/gestion-emprunts.component';
+import { MesEmpruntsComponent } from './emprunt/mes-emprunts/mes-emprunts.component';
+
 import { MesCookies} from './mesCookies';
 
 import { AppComponent } from './app.component';
@@ -46,7 +49,9 @@ const appRoutes: Routes = [
   { path: 'creationBien', component: CreationBienComponent},
   { path : 'modifBien/:id', component:ModifBienComponent},
   { path : 'ficheBien/:id', component: FicheBienComponent},
-  { path : 'mesBiens', component:MesBiensComponent}
+  { path : 'mesBiens', component:MesBiensComponent},
+  { path : 'gestionEmprunts', component:GestionEmpruntsComponent},
+  { path : 'mesEmprunts', component:MesEmpruntsComponent}
 ];
 
 @NgModule({
