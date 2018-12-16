@@ -15,11 +15,13 @@ export class AppComponent {
     isAuth : boolean = false;
     userMail : String ="";
     role : String = "";
+    adminNombre : Number = 0;
 
     constructor(private mesCookies:MesCookies, private router:Router){
         this.isAuth = mesCookies.getIsAuth();
         this.userMail= mesCookies.getUserMail();
         this.role = mesCookies.getRole();
+
     }
 
 
@@ -45,6 +47,11 @@ export class AppComponent {
       this.isAuth = this.mesCookies.getIsAuth();
       this.userMail= this.mesCookies.getUserMail();
       this.role = this.mesCookies.getRole();
+  }
+
+  isAdmin(event){
+      this.adminNombre=event;
+      console.log(this.adminNombre);
   }
 
   gestionEmprunts() {

@@ -17,6 +17,7 @@ export class AuthentificationComponent implements OnInit {
     private email: String;
 
     @Output() changeUser : EventEmitter<String> = new EventEmitter<String>(true);
+    @Output() isAdmin : EventEmitter<Number> = new EventEmitter<Number>(true);
 
     private resultat:any[];
 
@@ -53,9 +54,19 @@ export class AuthentificationComponent implements OnInit {
           this.mesCookies.setIsAuth(true);
           this.mesCookies.setUserMail(this.resultat[0].email);
           this.mesCookies.setRole(this.resultat[0].role);
+          this.mesCookies.setVille(this.resultat[0].ville);
 
           this.email=this.mesCookies.getUserMail();
 
+          if(this.resultat[0].role=="admin"){
+              var adminNombre=0;
+              this.membresService.getMembres("/blocage").subscribe(res => {
+                  adminNombre = res.length;
+                  this.isAdmin.emit(adminNombre);
+
+               });
+
+          }
           this.changeUser.emit();
 
         /*  this.change.emit(true);
@@ -71,6 +82,7 @@ export class AuthentificationComponent implements OnInit {
       this.mesCookies.setIsAuth(false);
       this.mesCookies.setUserMail("");
       this.mesCookies.setRole("invit");
+      this.mesCookies.setVille("");
 
       this.email=this.mesCookies.getUserMail();
 

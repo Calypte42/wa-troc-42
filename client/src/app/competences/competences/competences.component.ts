@@ -15,6 +15,9 @@ export class CompetencesComponent implements OnInit {
     private userMail : String;
     private isAuth : boolean = false;
     private params : Params;
+    private ville : String ="";
+
+    private voirTout : boolean = false;
 
   constructor(private mesCookies:MesCookies,private router : Router,
       private competencesService : CompetencesService,
@@ -24,6 +27,10 @@ export class CompetencesComponent implements OnInit {
 
       this.userMail=this.mesCookies.getUserMail();
       this.isAuth=this.mesCookies.getIsAuth();
+      this.ville=this.mesCookies.getVille();
+      if(this.ville==""){
+          this.voirTout=true;
+      }
       /*this.route.params.subscribe(function(params:Params){
           console.log(params.email);
 
@@ -38,12 +45,28 @@ export class CompetencesComponent implements OnInit {
       //recuperation des données de la route :
 
       //-------------------------------------
-       this.competencesService.getCompetences("").subscribe(res => this.competences = res);
+      if(this.ville!="" && this.voirTout==false){
+            this.competencesService.getCompetences("/ville/"+this.mesCookies.getVille()).subscribe(res => this.competences = res);
+        }
+        else{
+            this.competencesService.getCompetences("").subscribe(res => this.competences = res);
+        }
+
   }
 
   versMesCompetences(){
       // Rajouter le mail de l'utilisateur
       this.router.navigate(['mesCompetences']);
+  }
+
+  voirToute(){
+      this.voirTout=true;
+      this.ngOnInit();
+  }
+
+  voirLocal(){
+      this.voirTout=false;
+      this.ngOnInit();
   }
 
 

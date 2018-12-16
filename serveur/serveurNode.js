@@ -117,6 +117,26 @@ MongoClient.connect(url, {
         res.end;
     })
 
+    app.put('/update/membre/:email', (req, res) => {
+        let email = req.params.email;
+        res.setHeader('Content-type', 'application/json; charset=UTF-8');
+        res.setHeader('access-control-allow-origin', '*');
+        db.collection('Membres').update({
+            'email': email
+        }, {
+            $set: {
+                "MDP": req.body["mdp"],
+                "nom": req.body["nom"],
+                "prenom": req.body["prenom"],
+                "ville": req.body["ville"],
+                "adresse": req.body["adresse"],
+                "telephone": req.body["telephone"]
+            }
+        });
+        res.status(200);
+        res.end;
+    })
+
     // renvoi le membre correspondant à l email
     app.get('/membres/email/:email', (req, res) => {
         res.setHeader('Content-type', 'application/json; charset=UTF-8');
@@ -636,6 +656,22 @@ MongoClient.connect(url, {
         res.setHeader('Content-type', 'application/json; charset=UTF-8');
         res.setHeader('access-control-allow-origin', '*');
         db.collection("Competences").find().toArray((err, documents) => {
+            let liste = [];
+            for (let document of documents) {
+                liste.push(document);
+            }
+            let json = JSON.stringify(liste);
+            console.log(json);
+            res.end(json);
+        });
+    });
+
+    app.get('/competences/ville/:ville', (req, res) => {
+        let ville = req.params.ville;
+        console.log("je suis dans /competences/ville");
+        res.setHeader('Content-type', 'application/json; charset=UTF-8');
+        res.setHeader('access-control-allow-origin', '*');
+        db.collection("Competences").find({"ville":ville}).toArray((err, documents) => {
             let liste = [];
             for (let document of documents) {
                 liste.push(document);
