@@ -7,7 +7,9 @@
       Voici la liste des biens :
 
 
-      <table class="table table-bordered table-striped">
+      <table id="monTableau" class="table table-bordered table-striped">
+          <thead>
+
       			<tr>
       				<th>Descriptif</th>
                     <th>Type</th>
@@ -17,6 +19,9 @@
       				<th>Voir</th>
 
       			</tr>
+            </thead>
+            <tbody>
+
 
                   <tr *ngFor="let bien of biens">
 
@@ -38,6 +43,7 @@
 
 
                   </tr>
+              </tbody>
 
       		</table>
 </div>
