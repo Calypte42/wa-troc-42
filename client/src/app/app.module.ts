@@ -7,6 +7,7 @@ import { TrajetsModule } from './trajets/trajets.module';
 import { BiensModule} from './biens/biens.module';
 import { CompetencesModule} from './competences/competences.module';
 import { EmpruntModule} from './emprunt/emprunt.module';
+import { ServiceModule} from './service/service.module';
 
 import { InscriptionMembreComponent} from './membres/inscription-membre/inscription-membre.component';
 import { MembresComponent} from './membres/membres/membres.component';
@@ -26,6 +27,9 @@ import { FicheBienComponent } from './biens/fiche-bien/fiche-bien.component';
 
 import { GestionEmpruntsComponent } from './emprunt/gestion-emprunts/gestion-emprunts.component';
 import { MesEmpruntsComponent } from './emprunt/mes-emprunts/mes-emprunts.component';
+
+import { GestionServicesComponent } from './service/gestion-services/gestion-services.component';
+import { MesServicesComponent } from './service/mes-services/mes-services.component';
 
 import { MesCookies} from './mesCookies';
 
@@ -51,7 +55,9 @@ const appRoutes: Routes = [
   { path : 'ficheBien/:id', component: FicheBienComponent},
   { path : 'mesBiens', component:MesBiensComponent},
   { path : 'gestionEmprunts', component:GestionEmpruntsComponent},
-  { path : 'mesEmprunts', component:MesEmpruntsComponent}
+  { path : 'mesEmprunts', component:MesEmpruntsComponent},
+  { path : 'gestionServices', component:GestionServicesComponent},
+  { path : 'mesServices', component:MesServicesComponent}
 ];
 
 @NgModule({
@@ -66,6 +72,7 @@ const appRoutes: Routes = [
     BiensModule,
     CompetencesModule,
     EmpruntModule,
+    ServiceModule,
     RouterModule.forRoot(appRoutes)
   ],
   providers: [MesCookies],

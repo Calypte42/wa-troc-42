@@ -55,6 +55,14 @@ export class AppComponent {
       this.router.navigate(['mesEmprunts']);
   }
 
+  gestionServices() {
+      this.router.navigate(['gestionServices']);
+  }
+
+  mesServices() {
+      this.router.navigate(['mesServices']);
+  }
+
 
 
 

@@ -847,6 +847,65 @@ MongoClient.connect(url, {
         })
     });
 
+    app.get('/utilisations/membre/preteur/competences/service/:email', (req, res) => {
+        let email = req.params.email;
+        res.setHeader('Content-type', 'application/json; charset=UTF-8');
+        res.setHeader('access-control-allow-origin', '*');
+        db.collection("Competences").aggregate([{
+                $match: {
+                    "email": email
+                }
+            },
+            {
+                $lookup: {
+                    from: 'Utilisations',
+                    localField: '_id',
+                    foreignField: 'ID_comp_bien',
+                    as: 'listeCompetencesUtilisations'
+                }
+            },
+            {
+                "$unwind": "$listeCompetencesUtilisations"
+            },
+            {
+                $match: {
+                    "listeCompetencesUtilisations.status": {
+                        $in: ["attente", "en_cours"]
+                    }
+                }
+            },
+            {
+                $lookup: {
+                    from: "Membres",
+                    localField: "listeCompetencesUtilisations.email",
+                    foreignField: "email",
+                    as: "utilisateur"
+                }
+            },
+            {
+                "$unwind": "$utilisateur"
+            }
+        ]).toArray(function(err, documents) {
+            let liste = [];
+            for (let document of documents) {
+                console.log(document);
+                let serviceUtilisation = document['listeCompetencesUtilisations'];
+                serviceUtilisation['utilisateur'] = document['utilisateur'];
+                delete document['listeCompetencesUtilisations'];
+                delete document['utilisateur'];
+                delete document['disponibilite'];
+                let date = serviceUtilisation['date'].split('/');
+                serviceUtilisation['date'] = date[0];
+                serviceUtilisation['heureD'] = date[1];
+                serviceUtilisation['heureF'] = date[2];
+                serviceUtilisation['competence'] = document;
+                liste.push(serviceUtilisation);
+            }
+            let json = JSON.stringify(liste);
+            res.end(json);
+        })
+    });
+
     app.get('/utilisations/membre/preteur/competences/:email', (req, res) => {
         let email = req.params.email;
         res.setHeader('Content-type', 'application/json; charset=UTF-8');
@@ -876,7 +935,7 @@ MongoClient.connect(url, {
         })
     });
 
-    app.get('/utilisations/membre/utilisateur/:email', (req, res) => {
+    app.get('/utilisations/membre/utilisateur/biens/:email', (req, res) => {
         let email = req.params.email;
 
         res.setHeader('Content-type', 'application/json; charset=UTF-8');
@@ -918,6 +977,57 @@ MongoClient.connect(url, {
         });
     });
 
+    app.get('/utilisations/membre/utilisateur/competences/:email', (req, res) => {
+        let email = req.params.email;
+
+        res.setHeader('Content-type', 'application/json; charset=UTF-8');
+        res.setHeader('access-control-allow-origin', '*');
+        db.collection("Utilisations").aggregate([{
+                $match: {
+                          $and: [
+                              {email: {$in: [email]}},
+                              {status: {$in: ["en_cours", "attente"]}}
+                          ]
+                     }
+            },
+            {
+                $lookup: {
+                    from: 'Competences',
+                    localField: 'ID_comp_bien',
+                    foreignField: '_id',
+                    as: 'competence'
+                }
+            },
+            {
+                "$unwind": "$competence"
+            },
+            {
+                $lookup: {
+                    from: "Membres",
+                    localField: "competence.email",
+                    foreignField: "email",
+                    as: "fournisseur"
+                }
+            },
+            {
+                "$unwind": "$fournisseur"
+            }
+        ]).toArray((err, documents) => {
+            let liste = [];
+            for (let document of documents) {
+
+                let date = document["date"].split("/");
+                document["date"] = date[0]
+                document["heureD"] = date[1]
+                document["heureF"] = date[2]
+                delete document["competence"]["disponibilite"]
+                liste.push(document);
+            }
+            let json = JSON.stringify(liste);
+            res.end(json);
+        });
+    });
+
     app.get('/utilisations/id/:id', (req, res) => {
         let id = req.params.id;
 
@@ -938,14 +1048,18 @@ MongoClient.connect(url, {
     /* -------------------     POST UTILISATION  -----------------------------------*/
 
     app.post('/add/utilisation', (req, res) => {
-        console.log(req.body);
-        db.collection("Utilisations").insert({
+        let donnees = {
             "email": req.body["email"],
             "ID_comp_bien": ObjectId(req.body["ID_comp_bien"]),
             "type": req.body["type"],
-            "date": new Date(Date.now()),
             "status": "attente"
-        });
+        };
+        if (req.body["type"] == "competence") {
+            donnees["date"] = req.body["date"] + "/" + req.body["heureD"] + "/" + req.body["heureF"];
+        } else {
+            donnees["date"] = new Date(Date.now());
+        }
+        db.collection("Utilisations").insert(donnees);
         db.collection("Membres").update({
                 "email": req.body["email"]
             }, {
@@ -974,7 +1088,7 @@ MongoClient.connect(url, {
         );
         if (req.body["status"] == "en_cours") {
             db.collection("Membres").update({
-                    "email": req.body["emailPreteur"]
+                    "email": req.body["emailFournisseur"]
                 }, {
                     $inc: {
                         score: 1
