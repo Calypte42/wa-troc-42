@@ -27,12 +27,12 @@ export class MesEmpruntsComponent implements OnInit {
 
   ngOnInit() {
     this.userMail = this.mesCookies.getUserMail();
-    this.empruntService.getEmprunt("/membre/utilisateur/" + this.mesCookies.getUserMail()).subscribe(res => this.mesEmprunts = res);
+    this.empruntService.getEmprunt("/membre/utilisateur/biens/" + this.mesCookies.getUserMail()).subscribe(res => this.mesEmprunts = res);
   }
 
   annuler(id, emailEmprunteur) {
     this.empruntService.deleteEmprunt(id).subscribe(res => {
-        this.empruntService.getEmprunt("/membre/preteur/biens/demandeEmprunt/" + this.mesCookies.getUserMail()).subscribe(res => this.mesEmprunts = res);
+        this.empruntService.getEmprunt("/membre/utilisateur/biens/" + this.mesCookies.getUserMail()).subscribe(res => this.mesEmprunts = res);
         this.empruntService.remboursement(emailEmprunteur).subscribe();
     });
   }

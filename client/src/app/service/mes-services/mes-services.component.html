@@ -1,0 +1,35 @@
+<div class="row">
+  <p *ngIf='this.userMail==""'>Nous n'etes pas connecté veuillez vous connecter ou vous rendre à l'accueil !</p>
+</div>
+<div class="row" *ngIf='this.userMail!=""'>
+
+  Mes services en cours :
+
+
+  <table class="table table-bordered table-striped">
+    <tr>
+        <th>Descriptif</th>
+        <th>Date</th>
+        <th>Utilisateur</th>
+        <th>Status</th>
+        <th colspan="2">Gestion</th>
+    </tr>
+
+    <tr *ngFor="let service of mesServices">
+
+        <td>{{service['competence'].descriptif}}</td>
+        <td>{{service.date}} {{service.heureD}} {{service.heureF}}</td>
+        <td>{{service['fournisseur'].prenom}} {{service['fournisseur'].nom}}<br>
+          {{service['fournisseur'].email}}
+        </td>
+      <td>
+        <p *ngIf="service.status =='attente'">DEMANDE DE SERVICE</p>
+        <p *ngIf="service.status =='en_cours'">SERVICE EN COURS</p>
+      </td>
+      <div *ngIf="service.status =='attente'">
+        <td> <button (click)="annuler(service._id, this.userMail)">Annuler</button> </td>
+      </div>
+
+    </tr>
+
+  </table>

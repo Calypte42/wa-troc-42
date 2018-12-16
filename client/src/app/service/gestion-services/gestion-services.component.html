@@ -1,0 +1,39 @@
+<div class="row">
+  <p *ngIf='this.userMail==""'>Nous n'etes pas connecté veuillez vous connecter ou vous rendre à l'accueil !</p>
+</div>
+<div class="row" *ngIf='this.userMail!=""'>
+
+  Gestion des emprunts :
+
+
+  <table class="table table-bordered table-striped">
+    <tr>
+      <th>Descriptif</th>
+      <th>Date</th>
+      <th>Utilisateur</th>
+      <th>Status</th>
+      <th colspan="2">Gestion</th>
+    </tr>
+
+    <tr *ngFor="let service of services">
+
+      <td>{{service['competence'].descriptif}}</td>
+      <td>{{service.date}} {{service.heureD}} {{service.heureF}}</td>
+      <td>{{service['utilisateur'].prenom}} {{service['utilisateur'].nom}}<br>
+        {{service['utilisateur'].email}}
+      </td>
+      <td>
+        <p *ngIf="service.status =='attente'">DEMANDE DE SERVICE</p>
+        <p *ngIf="service.status =='en_cours'">SERVICE à REALISER</p>
+      </td>
+      <div *ngIf="service.status =='attente'">
+        <td> <button (click)="accepter(service._id,service['utilisateur'].email)">Accepter</button> </td>
+        <td> <button (click)="refuser(service._id, service['utilisateur'].email)">Refuser</button> </td>
+      </div>
+      <div *ngIf="service.status =='en_cours'">
+        <td> <button (click)="serviceFini(service._id)">Service terminé</button> </td>
+      </div>
+
+    </tr>
+
+  </table>

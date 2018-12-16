@@ -26,9 +26,9 @@ export class EmpruntService {
     return this.http.post(url, data, httpOptions);
   }
 
-  updateEmprunt(id, status, emailEmprunteur = null, emailPreteur = null): Observable<any> {
+  updateEmprunt(id, status, emailUtilisateur = null, emailFournisseur = null): Observable<any> {
     let url = "http://localhost:8888/update/utilisation/" + id;
-    let data={"status":status, "emailEmprunteur":emailEmprunteur, "emailPreteur":emailPreteur};
+    let data={"status":status, "emailUtilisateur":emailUtilisateur, "emailFournisseur":emailFournisseur};
     const httpOptions = { headers: new HttpHeaders({
                     'Content-Type':  'application/json'
                   })
