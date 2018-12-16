@@ -7,7 +7,9 @@
       Voici la liste de vos competences :
 
 
-<table class="table table-bordered table-striped">
+<table id="monTableau" class="table table-bordered table-striped">
+    <thead>
+
 			<tr>
 				<th>Descriptif </th>
 				<th>Mots clés </th>
@@ -15,6 +17,10 @@
 				<th>Modifier </th>
 				<th> Supprimer </th>
 			</tr>
+        </thead>
+        <tbody>
+
+
 
             <tr *ngFor="let competence of competences">
 
@@ -29,5 +35,6 @@
 			   <td> <button (click)="suppression(competence._id)">Supprimer</button> </td>
 
             </tr>
+        </tbody>
 
 		</table>

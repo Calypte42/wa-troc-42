@@ -27,7 +27,10 @@
 
 
 
-      <table class="table table-bordered table-striped">
+      <table id="monTableau" class="table table-bordered table-striped">
+          <thead>
+
+
       			<tr>
       				<th>Descriptif </th>
       				<th>Mots clés </th>
@@ -35,6 +38,9 @@
       				<th>S'inscrire</th>
 
       			</tr>
+            </thead>
+                <tbody>
+
 
                   <tr *ngFor="let competence of competences">
 
@@ -49,6 +55,7 @@
 
 
                   </tr>
+              </tbody>
 
       		</table>
 </div>
