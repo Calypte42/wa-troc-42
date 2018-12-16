@@ -41,10 +41,10 @@ export class ModifMembreComponent implements OnInit {
 
 
   onSubmit(form: NgForm) {
-          console.log("modif membre form : "+form.value['nom']);
           const nom = form.value['nom'];
           const prenom = form.value['prenom'];
-          const email = form.value['email'];
+          const email = this.mesCookies.getUserMail();
+          console.log("Email : "+ form.value['email'])
           const mdp = form.value['password'];
           const ville = form.value['ville'];
           const adresse = form.value['adresse'];
@@ -52,8 +52,9 @@ export class ModifMembreComponent implements OnInit {
 
           let retourServeur = this.membresService.updateMembre(nom, prenom, email, mdp, ville, adresse, telephone).subscribe();
           console.log(retourServeur);
-      let self = this;
-      this.router.navigate(['']);
+
+          this.mesCookies.setVille(ville);
+          this.router.navigate(['']);
 
       //this.ngOnInit();
 

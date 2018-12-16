@@ -8,17 +8,17 @@
                         <div class="row">
                             <div class="col-lg-6">
                                 <input class="form-control" name="email" placeholder="Email" type="email"
-                                required autofocus ngModel email value={{this.user.email}} disabled/>
+                                required autofocus [(ngModel)]="user.email" disabled/>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-xs-6 col-md-6">
                                 <input class="form-control" name="nom" placeholder="Nom" type="text"
-                                required autofocus ngModel value={{this.user.nom}}  />
+                                required autofocus [(ngModel)]="user.nom"  />
                             </div>
                             <div class="col-xs-6 col-md-6">
                                 <input class="form-control" name="prenom" placeholder="Prenom" type="text"
-                                required autofocus ngModel value={{this.user.prenom}}/>
+                                required autofocus [(ngModel)]="user.prenom"/>
                             </div>
                         </div>
 
@@ -26,14 +26,14 @@
                         <div class="row">
                             <div class="col-lg-6">
                                 <input class="form-control" name="password" placeholder="Mots de passe" type="password"
-                                required autofocus ngModel value={{user.MDP}}/>
+                                required autofocus [(ngModel)]="user.MDP"/>
                             </div>
 
                         </div>
                         <div class="row">
                             <div class="col-lg-6">
                                 <input class="form-control" name="ville" placeholder="Ville" type="text"
-                                required autofocus ngModel value={{user.ville}}/>
+                                required autofocus [(ngModel)]="user.ville"/>
 
                             </div>
 
@@ -41,14 +41,14 @@
                         <div class="row">
                             <div class="col-lg-8">
                                 <input class="form-control" name="adresse" placeholder="Adresse" type="text"
-                                required autofocus ngModel value={{user.adresse}}/>
+                                required autofocus [(ngModel)]="user.adresse"/>
                             </div>
 
                         </div>
                         <div class="row">
                             <div class="col-lg-6">
                                 <input class="form-control" name="telephone" placeholder="Telephone" type="tel"
-                                required autofocus ngModel maxlength="12" minlength="10" value={{user.telephone}}/>
+                                required autofocus [(ngModel)]="user.telephone" maxlength="12" minlength="10" />
                             </div>
 
                         </div>
