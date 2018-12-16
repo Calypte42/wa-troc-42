@@ -65,9 +65,10 @@ export class CompetencesService {
       return this.http.put(url,data,httpOptions);
   }
 
-  updateStatusDisponibilite(id,statut,date):Observable<any>{
+  updateStatutDisponibilite(id,statut,date, heureD, heureF):Observable<any>{
       let url="http://localhost:8888/update/statutDisponibilite/"+id;
-      let data={"statut":statut, "date":date};
+      let data={"statut":statut, "date":date, "heureD": heureD, "heureF": heureF};
+      console.log(data);
       const httpOptions = { headers: new HttpHeaders({
                 'Content-Type':  'application/json'
               })

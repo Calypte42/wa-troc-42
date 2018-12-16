@@ -813,6 +813,27 @@ MongoClient.connect(url, {
         res.end();
     });
 
+    app.put('/update/statutDisponibilite/:id', (req, res) => {
+        let id = req.params.id;
+        console.log(req.body);
+        db.collection("Competences").findOneAndUpdate({
+            $and: [
+                {"_id": ObjectId(id)},
+                {"disponibilite.date": {$in: [req.body['date']]}},
+                {"disponibilite.heureD": {$in: [req.body['heureD']]}},
+                {"disponibilite.heureF": {$in: [req.body['heureF']]}}
+            ]
+            }, {
+                $set: {
+                    "disponibilite.$.statut": req.body["statut"]
+                }
+            }
+
+        );
+        res.status(200);
+        res.end();
+    });
+
     /* ------------------- REST Utilisation -----------------------------------*/
 
     app.get('/utilisations', (req, res) => {
