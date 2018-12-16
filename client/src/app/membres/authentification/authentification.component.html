@@ -34,7 +34,7 @@
     </div>
 </div>
 <div *ngIf='this.email!=""'>
-    {{email}} est connecté !
+    <a routerLink="updateMembre">{{email}} </a> est connecté !
 
     <button (click)="logout()">Déconnexion</button>
 </div>

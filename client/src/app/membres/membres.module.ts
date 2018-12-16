@@ -11,11 +11,12 @@ import { RechercheMembreComponent } from './recherche-membre/recherche-membre.co
 import { InscriptionMembreComponent } from './inscription-membre/inscription-membre.component';
 import { AuthentificationComponent } from './authentification/authentification.component';
 import { AccueilComponent } from './accueil/accueil.component';
+import { ModifMembreComponent } from './modif-membre/modif-membre.component';
 
 
 
 @NgModule({
-  declarations: [ MembresComponent, RechercheMembreComponent, InscriptionMembreComponent, AuthentificationComponent, AccueilComponent ],
+  declarations: [ MembresComponent, RechercheMembreComponent, InscriptionMembreComponent, AuthentificationComponent, AccueilComponent, ModifMembreComponent ],
   imports: [ BrowserModule, HttpClientModule, FormsModule,RouterModule ],
   exports: [ MembresComponent, RechercheMembreComponent, InscriptionMembreComponent,AuthentificationComponent ],
   providers: [ MembresService ],

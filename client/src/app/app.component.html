@@ -6,7 +6,8 @@
 			</div>
 
             <div class=" col-lg-offset-1 col-lg-3">
-                <app-authentification (changeUser)="modifUser()" ></app-authentification>
+                <app-authentification (changeUser)="modifUser()"
+                (isAdmin)="isAdmin($event)" ></app-authentification>
 <!-- [isAuth]=isAuth [email]=userMail
 (change)="modifLogIn($event);" (changeUser)="modifUser($event)"
 (changeRole)="modifRole($event)" -->
@@ -36,7 +37,7 @@
                     <li> <a routerLink="">Accueil</a> </li>
                     <li> <a routerLink="listeBien">Les biens</a></li>
                     <li> <a routerLink="listeCompetence">Les competences</a></li>
-                    <li *ngIf='role=="admin"'><a routerLink="gestionAdmin">Admin</a></li>
+                    <li *ngIf='role=="admin"'><a routerLink="gestionAdmin">Admin ({{this.adminNombre}})</a></li>
                   </ul>
                 </div>
               </div>

@@ -54,6 +54,12 @@ onSubmit(form: NgForm) {
 }
 
 onSubmitDispo(form:NgForm){
+
+
+
+    if(form.value['heureF']-form.value['heureD']<=0){
+        console.log("erreur heure");
+    }
     let nouvelleDispo=[];
     for(let dispo of this.competence.disponibilite){
         nouvelleDispo.push(dispo);
@@ -83,5 +89,7 @@ suppressionDate(removeDate, removeHeureD, removeHeureF){
         }
     }
     this.competencesService.updateDisponibilite(this.competence._id,nouvelleDate).subscribe();
+    let self = this;
+    setTimeout(function(){self.ngOnInit()},900);
 }
 }

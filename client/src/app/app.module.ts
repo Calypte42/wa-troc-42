@@ -12,6 +12,7 @@ import { ServiceModule} from './service/service.module';
 import { InscriptionMembreComponent} from './membres/inscription-membre/inscription-membre.component';
 import { MembresComponent} from './membres/membres/membres.component';
 import { AccueilComponent} from './membres/accueil/accueil.component';
+import { ModifMembreComponent} from './membres/modif-membre/modif-membre.component';
 
 import { CompetencesComponent} from './competences/competences/competences.component';
 import { CreationCompetenceComponent} from './competences/creation-competence/creation-competence.component';
@@ -39,6 +40,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 const appRoutes: Routes = [
   { path: 'creationMembre', component: InscriptionMembreComponent },
+  { path: 'updateMembre', component: ModifMembreComponent },
   { path: 'creationMembre/:erreur', component: InscriptionMembreComponent },
   { path: '', component:  AccueilComponent },
   { path:'gestionAdmin', component:MembresComponent},

@@ -117,6 +117,26 @@ MongoClient.connect(url, {
         res.end;
     })
 
+    app.put('/update/membre/:email', (req, res) => {
+        let email = req.params.email;
+        res.setHeader('Content-type', 'application/json; charset=UTF-8');
+        res.setHeader('access-control-allow-origin', '*');
+        db.collection('Membres').update({
+            'email': email
+        }, {
+            $set: {
+                "MDP": req.body["mdp"],
+                "nom": req.body["nom"],
+                "prenom": req.body["prenom"],
+                "ville": req.body["ville"],
+                "adresse": req.body["adresse"],
+                "telephone": req.body["telephone"]
+            }
+        });
+        res.status(200);
+        res.end;
+    })
+
     // renvoi le membre correspondant à l email
     app.get('/membres/email/:email', (req, res) => {
         res.setHeader('Content-type', 'application/json; charset=UTF-8');
@@ -362,6 +382,20 @@ MongoClient.connect(url, {
         res.setHeader('Content-type', 'application/json; charset=UTF-8');
         res.setHeader('access-control-allow-origin', '*');
         db.collection("Biens").find().toArray((err, documents) => {
+            let liste = [];
+            for (let document of documents) {
+                liste.push(document);
+            }
+            let json = JSON.stringify(liste);
+            res.end(json);
+        });
+    });
+
+    app.get('/biens/ville/:ville', (req, res) => {
+        let ville = req.params.ville;
+        res.setHeader('Content-type', 'application/json; charset=UTF-8');
+        res.setHeader('access-control-allow-origin', '*');
+        db.collection("Biens").find({"ville":ville}).toArray((err, documents) => {
             let liste = [];
             for (let document of documents) {
                 liste.push(document);
@@ -644,6 +678,36 @@ MongoClient.connect(url, {
             console.log(json);
             res.end(json);
         });
+    });
+
+
+    app.get('/competences/ville/:ville', (req, res) => {
+        let ville = req.params.ville;
+        res.setHeader('Content-type', 'application/json; charset=UTF-8');
+        res.setHeader('access-control-allow-origin', '*');
+        db.collection("Membres").aggregate([{
+                $match: {
+                    "ville": ville
+                }
+            },
+            {
+                $lookup: {
+                    from: 'Competences',
+                    localField: 'email',
+                    foreignField: 'email',
+                    as: 'listeBiensUtilisations'
+                }
+            }
+        ]).toArray(function(err, documents) {
+            let liste = [];
+            for (let document of documents) {
+                for (let bienUtilisation of document.listeBiensUtilisations) {
+                    liste.push(bienUtilisation);
+                }
+            }
+            let json = JSON.stringify(liste);
+            res.end(json);
+        })
     });
 
     app.get('/competences/membre/:email', (req, res) => {

@@ -6,6 +6,7 @@ export class MesCookies {
     private isAuth: boolean= false;
     private userMail : String = "";
     private role: String = "invit";
+    private ville : String ="";
 
 
     constructor() { }
@@ -27,6 +28,11 @@ export class MesCookies {
 
     setIsAuth(isAuth:boolean){this.isAuth=isAuth;}
 
-    getIsAuth(){return this.isAuth}
+    getIsAuth(){return this.isAuth;}
 
+    setVille(ville:String){
+        this.ville=ville;
+    }
+
+    getVille(){return this.ville;}
 }

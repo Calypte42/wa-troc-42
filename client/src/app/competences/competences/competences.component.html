@@ -4,7 +4,27 @@
 </div>
 <div class="row">
 
-      Voici la liste des competences :
+    <div class="row" *ngIf='voirTout==true'>
+        <div class="col-lg-offset-1 col-lg-5">
+            Voici la liste de toutes les compétences
+        </div>
+        <div class="col-lg-offset-1 col-lg-2">
+            <button *ngIf='isAuth==true' (click)="voirLocal()"> Voir seulement dans ma ville</button>
+        </div>
+
+    </div>
+
+    <div class="row" *ngIf='voirTout==false'>
+        <div class="col-lg-offset-1 col-lg-5">
+            Voici la liste des competences de : {{ville}}
+        </div>
+        <div class="col-lg-offset-1 col-lg-2">
+            <button *ngIf='isAuth==true' (click)="voirToute()"> Voir toutes les compétences</button>
+        </div>
+
+    </div>
+
+
 
 
       <table class="table table-bordered table-striped">
@@ -25,8 +45,8 @@
                              {{dispo.date}}, {{dispo.heureD}}, {{dispo.heureF}}, {{dispo.status}}
                          </li>
                      </ul></td>
-                     <td> <button (click)="inscription(competence._id)">S'inscire</button> </td>
-      			 
+                     <td> <button (click)="inscription(competence._id)">S'inscrire</button> </td>
+
 
                   </tr>
 

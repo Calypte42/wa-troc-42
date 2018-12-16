@@ -21,7 +21,7 @@
                 <label for="descriptif"> descriptif * :</label>
             </div>
             <div class="col-lg-5">
-                <input type="text" value={{competence.descriptif}} placeholder="descriptif" class="form-control" id="descriptif" name="descriptif" ngModel required />
+                <input type="text"  placeholder="descriptif" class="form-control" id="descriptif" name="descriptif" [(ngModel)]="competence.descriptif" required />
             </div>
 
         </div>
@@ -31,7 +31,7 @@
                 <label for="mots_clefs"> Mots clefs * :</label>
             </div>
             <div class="col-lg-5">
-                <input type="text" value={{competence.mots_clefs}} class="form-control" placeholder="Mots clés" id="mots_clefs" name="mots_clefs" ngModel required/>
+                <input type="text" class="form-control" placeholder="Mots clés" id="mots_clefs" name="mots_clefs" [(ngModel)]="competence.mots_clefs" required/>
             </div>
         </div>
 

@@ -56,5 +56,17 @@ export class MembresService {
   }
 
 
+  updateMembre(nom, prenom, email, mdp, ville, adresse, telephone):Observable<any>{
+      console.log(nom+" "+prenom+" "+email+" "+mdp);
+      let url="http://localhost:8888/update/membre/"+email;
+      let data={"nom":nom, "prenom":prenom, "email":email, "mdp":mdp, "ville":ville, "adresse":adresse, "telephone":telephone};
+      const httpOptions = { headers: new HttpHeaders({
+                'Content-Type':  'application/json'
+              })
+            };
+      return this.http.put(url,data,httpOptions);
+  }
+
+
 
 }

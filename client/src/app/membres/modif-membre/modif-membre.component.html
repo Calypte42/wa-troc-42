@@ -1,0 +1,68 @@
+<div class="row">
+    <div class="col-lg-offset-1 col-lg-5 ">
+        <div class="container">
+            Vous pouvez modifier ici vos informations personnelles :
+            <div class="row">
+                <div class="col-xs-12 col-lg-8 col-sm-12 col-md-4 ">
+                    <form (ngSubmit)="onSubmit(f)" #f="ngForm" role="form">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <input class="form-control" name="email" placeholder="Email" type="email"
+                                required autofocus [(ngModel)]="user.email" disabled/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-6 col-md-6">
+                                <input class="form-control" name="nom" placeholder="Nom" type="text"
+                                required autofocus [(ngModel)]="user.nom"  />
+                            </div>
+                            <div class="col-xs-6 col-md-6">
+                                <input class="form-control" name="prenom" placeholder="Prenom" type="text"
+                                required autofocus [(ngModel)]="user.prenom"/>
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <input class="form-control" name="password" placeholder="Mots de passe" type="password"
+                                required autofocus [(ngModel)]="user.MDP"/>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <input class="form-control" name="ville" placeholder="Ville" type="text"
+                                required autofocus [(ngModel)]="user.ville"/>
+
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-8">
+                                <input class="form-control" name="adresse" placeholder="Adresse" type="text"
+                                required autofocus [(ngModel)]="user.adresse"/>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <input class="form-control" name="telephone" placeholder="Telephone" type="tel"
+                                required autofocus [(ngModel)]="user.telephone" maxlength="12" minlength="10" />
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-5">
+                                <button class="btn btn-lg btn-primary btn-block" type="submit" [disabled]="f.invalid">
+                                    Modifier ! </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
