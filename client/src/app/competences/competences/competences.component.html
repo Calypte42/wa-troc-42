@@ -42,7 +42,7 @@
                      <td>{{competence.mots_clefs}}</td>
                      <td><ul>
                          <li *ngFor="let dispo of competence.disponibilite">
-                             {{dispo.date}}, {{dispo.heureD}}, {{dispo.heureF}}, {{dispo.status}}
+                             {{dispo.date}}, {{dispo.heureD}}, {{dispo.heureF}}, {{dispo.statut}}
                          </li>
                      </ul></td>
                      <td> <button (click)="inscription(competence._id)">S'inscrire</button> </td>

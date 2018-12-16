@@ -33,9 +33,9 @@ export class ServiceService {
     return this.http.post(url, data, httpOptions);
   }
 
-  updateService(id, status, emailUtilisateur = null, emailFournisseur = null): Observable<any> {
+  updateService(id, statut, emailUtilisateur = null, emailFournisseur = null): Observable<any> {
     let url = "http://localhost:8888/update/utilisation/" + id;
-    let data = {"status": status, "emailUtilisateur": emailUtilisateur, "emailFournisseur": emailFournisseur};
+    let data = {"statut": statut, "emailUtilisateur": emailUtilisateur, "emailFournisseur": emailFournisseur};
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'

@@ -65,6 +65,16 @@ export class CompetencesService {
       return this.http.put(url,data,httpOptions);
   }
 
+  updateStatusDisponibilite(id,statut,date):Observable<any>{
+      let url="http://localhost:8888/update/statutDisponibilite/"+id;
+      let data={"statut":statut, "date":date};
+      const httpOptions = { headers: new HttpHeaders({
+                'Content-Type':  'application/json'
+              })
+            };
+      return this.http.put(url,data,httpOptions);
+  }
+
 
   getAllInformationCompetence(id):Observable<any>{
        return this.http.get("http://localhost:8888/membres/competence/"+id);

@@ -34,8 +34,8 @@
             <td>{{dispo.date}}</td>
             <td>{{dispo.heureD}}</td>
             <td>{{dispo.heureF}}</td>
-            <td>{{dispo.status}}</td>
-            <td ><button *ngIf='dispo.status=="Disponible" && this.userMail!=""' (click)="reserver(dispo.date, dispo.heureD, dispo.heureF)">Reserver {{dispo.date}} {{dispo.heureD}} {{dispo.heureF}}</button></td>
+            <td>{{dispo.statut}}</td>
+            <td ><button *ngIf='dispo.statut=="Disponible" && this.userMail!=""' (click)="reserver(dispo.date, dispo.heureD, dispo.heureF)">Reserver {{dispo.date}} {{dispo.heureD}} {{dispo.heureF}}</button></td>
         </tr>
 
     </table>

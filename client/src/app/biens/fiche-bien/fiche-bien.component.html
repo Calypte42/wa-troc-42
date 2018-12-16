@@ -27,14 +27,14 @@
 
   <div *ngIf='this.userMail!=""'>
     <div *ngIf='information.derniereUtilisation != null'>
-      <div *ngIf='membre.status != "bloquer"
-                    && information.derniereUtilisation["status"] != "attente"
-                    && information.derniereUtilisation["status"] != "en_cours"'>
+      <div *ngIf='membre.statut != "bloquer"
+                    && information.derniereUtilisation["statut"] != "attente"
+                    && information.derniereUtilisation["statut"] != "en_cours"'>
         <button [disabled]="this.userMail == proprietaire.email" (click)="emprunt()">Emprunter</button>
       </div>
-      <div *ngIf='membre.status != "bloquer"
-                    && (information.derniereUtilisation["status"] == "attente"
-                    || information.derniereUtilisation["status"] == "en_cours")'>
+      <div *ngIf='membre.statut != "bloquer"
+                    && (information.derniereUtilisation["statut"] == "attente"
+                    || information.derniereUtilisation["statut"] == "en_cours")'>
         <p *ngIf='information.derniereUtilisation["email"] == this.userMail'>
           Vous empruntez cet objet, veuillez contacter le propriétaire pour plus d'informations <br>
           Mail du propriétaire : {{this.userMail}}
@@ -45,7 +45,7 @@
       </div>
     </div>
     <button *ngIf='information.derniereUtilisation == null' [disabled]="this.userMail == proprietaire.email" (click)="emprunt()">Emprunter</button>
-    <p *ngIf='membre.status == "bloquer"'>
+    <p *ngIf='membre.statut == "bloquer"'>
       Compte bloqué, vous ne pouvez pas emprunter <br>
       Veuillez contacter admin@allovoisin.fr
     </p>

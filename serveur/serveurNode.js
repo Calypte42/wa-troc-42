@@ -75,7 +75,7 @@ MongoClient.connect(url, {
                     $lte: -5
                 }
             }, {
-                'status': 'bloquer'
+                'statut': 'bloquer'
             }]
         }).toArray((err, documents) => {
             let liste = [];
@@ -95,7 +95,7 @@ MongoClient.connect(url, {
             '_id': ObjectId(id)
         }, {
             $set: {
-                'status': 'debloquer'
+                'statut': 'debloquer'
             }
         });
         res.status(200);
@@ -110,7 +110,7 @@ MongoClient.connect(url, {
             '_id': ObjectId(id)
         }, {
             $set: {
-                'status': 'bloquer'
+                'statut': 'bloquer'
             }
         });
         res.status(200);
@@ -364,7 +364,7 @@ MongoClient.connect(url, {
             "nom": req.body["nom"],
             "prenom": req.body["prenom"],
             "role": req.body["role"],
-            "status": "debloquer",
+            "statut": "debloquer",
             "score": 0,
             "ville": req.body["ville"],
             "adresse": req.body["adresse"],
@@ -879,7 +879,7 @@ MongoClient.connect(url, {
             },
             {
                 $match: {
-                    "listeBiensUtilisations.status": {
+                    "listeBiensUtilisations.statut": {
                         $in: ["attente", "en_cours"]
                     }
                 }
@@ -933,7 +933,7 @@ MongoClient.connect(url, {
             },
             {
                 $match: {
-                    "listeCompetencesUtilisations.status": {
+                    "listeCompetencesUtilisations.statut": {
                         $in: ["attente", "en_cours"]
                     }
                 }
@@ -1050,7 +1050,7 @@ MongoClient.connect(url, {
                 $match: {
                           $and: [
                               {email: {$in: [email]}},
-                              {status: {$in: ["en_cours", "attente"]}}
+                              {statut: {$in: ["en_cours", "attente"]}}
                           ]
                      }
             },
@@ -1116,7 +1116,7 @@ MongoClient.connect(url, {
             "email": req.body["email"],
             "ID_comp_bien": ObjectId(req.body["ID_comp_bien"]),
             "type": req.body["type"],
-            "status": "attente"
+            "statut": "attente"
         };
         if (req.body["type"] == "competence") {
             donnees["date"] = req.body["date"] + "/" + req.body["heureD"] + "/" + req.body["heureF"];
@@ -1145,12 +1145,12 @@ MongoClient.connect(url, {
                 "_id": ObjectId(id)
             }, {
                 $set: {
-                    "status": req.body["status"]
+                    "statut": req.body["statut"]
                 }
             }
 
         );
-        if (req.body["status"] == "en_cours") {
+        if (req.body["statut"] == "en_cours") {
             db.collection("Membres").update({
                     "email": req.body["emailFournisseur"]
                 }, {

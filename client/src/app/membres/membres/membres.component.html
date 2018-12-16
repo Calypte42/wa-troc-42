@@ -1,7 +1,7 @@
 <div class="row">
     <button (click)="actualisation()">Actualiser</button>
   Voici la liste des membres dont le score d'utilisation est inférieur a -5
-  ou dont le status est bloqué :
+  ou dont le statut est bloqué :
 
 
   <table class="table table-bordered table-striped">
@@ -16,10 +16,10 @@
 
                  <td>{{membre.email}}</td>
                  <td>{{membre.score}}</td>
-                 <td>{{membre.status}}</td>
+                 <td>{{membre.statut}}</td>
 
-                 <td> <button *ngIf="membre.status=='bloquer'" (click)="debloquerStatus(membre._id)">Debloquer</button>
-                     <button *ngIf="membre.status=='debloquer'" (click)="bloquerStatus(membre._id)">Bloquer</button>
+                 <td> <button *ngIf="membre.statut=='bloquer'" (click)="debloquerStatus(membre._id)">Debloquer</button>
+                     <button *ngIf="membre.statut=='debloquer'" (click)="bloquerStatus(membre._id)">Bloquer</button>
   			    </td>
 
               </tr>

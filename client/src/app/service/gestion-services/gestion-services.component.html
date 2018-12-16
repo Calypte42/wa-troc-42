@@ -23,14 +23,14 @@
         {{service['utilisateur'].email}}
       </td>
       <td>
-        <p *ngIf="service.status =='attente'">DEMANDE DE SERVICE</p>
-        <p *ngIf="service.status =='en_cours'">SERVICE à REALISER</p>
+        <p *ngIf="service.statut =='attente'">DEMANDE DE SERVICE</p>
+        <p *ngIf="service.statut =='en_cours'">SERVICE à REALISER</p>
       </td>
-      <div *ngIf="service.status =='attente'">
+      <div *ngIf="service.statut =='attente'">
         <td> <button (click)="accepter(service._id,service['utilisateur'].email)">Accepter</button> </td>
         <td> <button (click)="refuser(service._id, service['utilisateur'].email)">Refuser</button> </td>
       </div>
-      <div *ngIf="service.status =='en_cours'">
+      <div *ngIf="service.statut =='en_cours'">
         <td> <button (click)="serviceFini(service._id)">Service terminé</button> </td>
       </div>
 

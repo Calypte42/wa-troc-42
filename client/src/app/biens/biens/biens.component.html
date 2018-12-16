@@ -26,9 +26,9 @@
                      <td>{{bien.prix_neuf}}</td>
                      <td>
                          <div *ngIf="bien['listeBiensUtilisations'].length != 0">
-                             <p *ngIf="bien['listeBiensUtilisations'][bien['listeBiensUtilisations'].length - 1].status =='attente'">INDISPONIBLE</p>
-                             <p *ngIf="bien['listeBiensUtilisations'][bien['listeBiensUtilisations'].length - 1].status =='termine'">DISPONIBLE</p>
-                             <p *ngIf="bien['listeBiensUtilisations'][bien['listeBiensUtilisations'].length - 1].status =='en_cours'">INDISPONIBLE</p>
+                             <p *ngIf="bien['listeBiensUtilisations'][bien['listeBiensUtilisations'].length - 1].statut =='attente'">INDISPONIBLE</p>
+                             <p *ngIf="bien['listeBiensUtilisations'][bien['listeBiensUtilisations'].length - 1].statut =='termine'">DISPONIBLE</p>
+                             <p *ngIf="bien['listeBiensUtilisations'][bien['listeBiensUtilisations'].length - 1].statut =='en_cours'">INDISPONIBLE</p>
                          </div>
                          <div *ngIf="bien['listeBiensUtilisations'].length == 0">
                              DISPONIBLE

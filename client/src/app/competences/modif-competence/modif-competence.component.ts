@@ -66,7 +66,7 @@ onSubmitDispo(form:NgForm){
     }
     nouvelleDispo.push(
         {"date":form.value['date'],"heureD":form.value['heureD'],
-        "heureF":form.value['heureF'],"status":"Disponible"}
+        "heureF":form.value['heureF'],"statut":"Disponible"}
     );
     let retourServeur = this.competencesService.updateDisponibilite(this.id,nouvelleDispo).subscribe();
     let self = this;

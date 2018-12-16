@@ -46,6 +46,7 @@ export class FicheCompetenceComponent implements OnInit {
         this.information = res[0];
       })
     });
+    
   }
 
 }
