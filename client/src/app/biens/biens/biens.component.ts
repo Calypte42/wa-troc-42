@@ -15,6 +15,9 @@ export class BiensComponent implements OnInit {
     private userMail : String;
     private isAuth : boolean = false;
     private params : Params;
+    private ville : String ="";
+
+    private voirTout : boolean = false;
 
     constructor(private mesCookies:MesCookies,private router : Router,
         private biensService : BiensService,
@@ -24,6 +27,10 @@ export class BiensComponent implements OnInit {
 
         this.userMail=this.mesCookies.getUserMail();
         this.isAuth=this.mesCookies.getIsAuth();
+        this.ville=this.mesCookies.getVille();
+        if(this.ville==""){
+            this.voirTout=true;
+        }
         /*this.route.params.subscribe(function(params:Params){
             console.log(params.email);
 
@@ -38,6 +45,7 @@ export class BiensComponent implements OnInit {
         //recuperation des données de la route :
 
         //-------------------------------------
+        
         if (this.userMail != ""){
         console.log(this.userMail);
         this.biensService.getBiens("/avecUtilisations/identifie/"+this.userMail).subscribe(res => this.biens = res);

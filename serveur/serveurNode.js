@@ -391,6 +391,20 @@ MongoClient.connect(url, {
         });
     });
 
+    app.get('/biens/ville/:ville', (req, res) => {
+        let ville = req.params.ville;
+        res.setHeader('Content-type', 'application/json; charset=UTF-8');
+        res.setHeader('access-control-allow-origin', '*');
+        db.collection("Biens").find({"ville":ville}).toArray((err, documents) => {
+            let liste = [];
+            for (let document of documents) {
+                liste.push(document);
+            }
+            let json = JSON.stringify(liste);
+            res.end(json);
+        });
+    });
+
     app.get('/biens/type/:type', (req, res) => {
         res.setHeader('Content-type', 'application/json; charset=UTF-8');
         res.setHeader('access-control-allow-origin', '*');
@@ -666,20 +680,34 @@ MongoClient.connect(url, {
         });
     });
 
+
     app.get('/competences/ville/:ville', (req, res) => {
         let ville = req.params.ville;
-        console.log("je suis dans /competences/ville");
         res.setHeader('Content-type', 'application/json; charset=UTF-8');
         res.setHeader('access-control-allow-origin', '*');
-        db.collection("Competences").find({"ville":ville}).toArray((err, documents) => {
+        db.collection("Membres").aggregate([{
+                $match: {
+                    "ville": ville
+                }
+            },
+            {
+                $lookup: {
+                    from: 'Competences',
+                    localField: 'email',
+                    foreignField: 'email',
+                    as: 'listeBiensUtilisations'
+                }
+            }
+        ]).toArray(function(err, documents) {
             let liste = [];
             for (let document of documents) {
-                liste.push(document);
+                for (let bienUtilisation of document.listeBiensUtilisations) {
+                    liste.push(bienUtilisation);
+                }
             }
             let json = JSON.stringify(liste);
-            console.log(json);
             res.end(json);
-        });
+        })
     });
 
     app.get('/competences/membre/:email', (req, res) => {
