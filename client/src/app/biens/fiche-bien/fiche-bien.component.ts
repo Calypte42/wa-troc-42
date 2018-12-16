@@ -31,13 +31,16 @@ export class FicheBienComponent implements OnInit {
       self.biensService.getAllInformationBien(params.id).subscribe(res => {
         self.information = res[0];
         self.proprietaire = self.information.listeMembres[0];
+        self.membresService.getMembres("/email/" + self.mesCookies.getUserMail()).subscribe(res => self.membre = res[0]);
       });
     });
-    this.membresService.getMembres("/email/" + this.mesCookies.getUserMail()).subscribe(res => this.membre = res[0]);
   }
 
   emprunt() {
-      this.empruntService.empruntBien(this.information._id, this.userMail).subscribe();
+      this.empruntService.empruntBien(this.information._id, this.userMail).subscribe(res => {
+          this.biensService.getAllInformationBien(this.information._id).subscribe(res => {
+            this.information['derniereUtilisation'] = res[0]['derniereUtilisation'];
+      })});
   }
 
   versBiens() {

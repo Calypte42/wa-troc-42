@@ -289,10 +289,24 @@ MongoClient.connect(url, {
                     foreignField: 'email', // le champs de tri sur membres est email
                     as: 'listeMembres' // On nomme le resultat de la jointure pour utilisation
                 }
+            },
+            {
+                $lookup: // On realise ensuite la jointure
+                {
+                    from: 'Utilisations', // en prenant la collection membres comme table de jointure
+                    localField: '_id', // le champs de tri sur biens est email
+                    foreignField: 'ID_comp_bien', // le champs de tri sur membres est email
+                    as: 'listeUtilisations' // On nomme le resultat de la jointure pour utilisation
+                }
             }
         ]).toArray(function(err, documents) {
             let liste = [];
             for (let document of documents) {
+                if (document['listeUtilisations'] != null) {
+                    let nombreUtilisations = document['listeUtilisations'].length;
+                    document['derniereUtilisation'] = document['listeUtilisations'][nombreUtilisations - 1];
+                    delete document['listeUtilisations'];
+                }
                 liste.push(document);
             }
             let json = JSON.stringify(liste);

@@ -1,33 +1,54 @@
-<div class="row" >
-    <p *ngIf='this.userMail==""'>Nous n'etes pas connecté veuillez vous connecter ou vous rendre à l'accueil !</p>
-    <button *ngIf='this.userMail!=""' (click)="versBiens()"> Retour</button>
+<div class="row">
+  <p *ngIf='this.userMail==""'>Nous n'etes pas connecté veuillez vous connecter ou vous rendre à l'accueil !</p>
+  <button *ngIf='this.userMail!=""' (click)="versBiens()"> Retour</button>
 </div>
 <div class="row" *ngIf='this.userMail!=""'>
 
-    Emprunt d'un bien : <br/>
-    {{proprietaire.nom}} {{proprietaire.prenom}} <br/>
+  Emprunt d'un bien : <br />
+  {{proprietaire.nom}} {{proprietaire.prenom}} <br />
 
-    à l'adresse : {{proprietaire.adresse}}  <br/><br/>
+  à l'adresse : {{proprietaire.adresse}} <br /><br />
 
-    Descriptif du bien : <br/>
+  Descriptif du bien : <br />
 
-    {{information.descriptif}} <br/><br/>
+  {{information.descriptif}} <br /><br />
 
-    Type : <br/>
+  Type : <br />
 
-    {{information.type}} <br/><br/>
+  {{information.type}} <br /><br />
 
-    Photo : <br/>
+  Photo : <br />
 
-    <img [src]="information.photo"/> <br/><br/>
+  <img [src]="information.photo" /> <br /><br />
 
-    Prix neuf : <br/>
+  Prix neuf : <br />
 
-    {{information.prix_neuf}} <br/><br/>
+  {{information.prix_neuf}} <br /><br />
 
-<div *ngIf='this.userMail!=""'>
-    <button *ngIf='membre.status != "bloquer"' [disabled]="this.userMail == proprietaire.email" (click)="emprunt()" >Emprunter</button>
-    <p *ngIf='membre.status == "bloquer"'>Compte bloqué, vous ne pouvez pas emprunter</p>
-</div>
+  <div *ngIf='this.userMail!=""'>
+    <div *ngIf='information.derniereUtilisation != null'>
+      <div *ngIf='membre.status != "bloquer"
+                    && information.derniereUtilisation["status"] != "attente"
+                    && information.derniereUtilisation["status"] != "en_cours"'>
+        <button [disabled]="this.userMail == proprietaire.email" (click)="emprunt()">Emprunter</button>
+      </div>
+      <div *ngIf='membre.status != "bloquer"
+                    && (information.derniereUtilisation["status"] == "attente"
+                    || information.derniereUtilisation["status"] == "en_cours")'>
+        <p *ngIf='information.derniereUtilisation["email"] == this.userMail'>
+          Vous empruntez cet objet, veuillez contacter le propriétaire pour plus d'informations <br>
+          Mail du propriétaire : {{this.userMail}}
+        </p>
+        <p *ngIf='information.derniereUtilisation["email"] != this.userMail'>
+          <button disabled="disabled">INDISPONIBLE</button>
+        </p>
+      </div>
+    </div>
+    <button *ngIf='information.derniereUtilisation == null' [disabled]="this.userMail == proprietaire.email" (click)="emprunt()">Emprunter</button>
+    <p *ngIf='membre.status == "bloquer"'>
+      Compte bloqué, vous ne pouvez pas emprunter <br>
+      Veuillez contacter admin@allovoisin.fr
+    </p>
+  </div>
 
 </div>
