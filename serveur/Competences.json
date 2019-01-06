@@ -6,7 +6,7 @@
         "disponibilite":
         [
             {"date":"2018-11-12", "heureD":"03:25", "heureF":"04:00", "statut":"Disponible"},
-            {"date":"2018-11-12", "heureD":"03:25", "heureF":"04:00", "statut":"Disponible"}
+            {"date":"2018-11-12", "heureD":"05:00", "heureF":"07:00", "statut":"Disponible"}
         ]
     },
     {
@@ -16,7 +16,7 @@
         "disponibilite":
         [
             {"date":"2018-11-12", "heureD":"03:25", "heureF":"04:00", "statut":"Disponible"},
-            {"date":"2018-11-12", "heureD":"04:00", "heureF":"05:00", "statut":"Disponible"}
+            {"date":"2018-11-12", "heureD":"05:00", "heureF":"07:00", "statut":"Disponible"}
         ]
     },
     {

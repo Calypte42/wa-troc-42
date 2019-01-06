@@ -32,7 +32,7 @@
                    </li>
                </ul></td>
                <td> <button (click)="modification(competence._id)">Modifier</button> </td>
-			   <td> <button (click)="suppression(competence._id)">Supprimer</button> </td>
+			   <td> <button  [disabled]="competence.verifIndisponible == true" (click)="suppression(competence._id)">Supprimer</button> </td>
 
             </tr>
         </tbody>

@@ -1,42 +1,51 @@
-<div class="row" >
-    <p *ngIf='this.userMail==""'>Nous n'etes pas connecté veuillez vous connecter ou vous rendre à l'accueil !</p>
-    <button *ngIf='this.userMail!=""' (click)="versCompetences()"> Retour</button>
+<div class="row">
+  <p *ngIf='this.userMail==""'>Nous n'etes pas connecté veuillez vous connecter ou vous rendre à l'accueil !</p>
+  <button *ngIf='this.userMail!=""' (click)="versCompetences()"> Retour</button>
 </div>
 <div class="row" *ngIf='this.userMail!=""'>
 
-    Inscription à la competence: <br/>
-    {{proprietaire.nom}} {{proprietaire.prenom}} <br/>
+  Inscription à la competence: <br />
+  {{proprietaire.nom}} {{proprietaire.prenom}} <br />
 
-    à l'adresse : {{proprietaire.adresse}}, {{proprietaire.ville}}  <br />
-
-
-    Descriptif de la compétences :
-
-    {{information.descriptif}}
+  à l'adresse : {{proprietaire.adresse}}, {{proprietaire.ville}} <br />
 
 
+  Descriptif de la compétences :
+
+  {{information.descriptif}}
 
 
-</div>
+
+
+</div><br>
+<p *ngIf='membre.statut == "bloquer"'>
+  Compte bloqué, vous ne pouvez pas réserver de service <br>
+  Veuillez contacter <a href="mailto:admin@allovoisin.fr">admin@allovoisin.fr</a> 
+</p><br>
 <div *ngIf='this.userMail!=""'>
-    Liste des disponibilités :
-    <table class="table table-bordered table-striped">
-        <tr>
-            <th>Date </th>
-            <th>Heure début</th>
-            <th>Heure fin </th>
-            <th>Status </th>
-            <th>Reservation</th>
-        </tr>
+  Liste des disponibilités :
+  <table class="table table-bordered table-striped">
+    <tr>
+      <th>Date </th>
+      <th>Heure début</th>
+      <th>Heure fin </th>
+      <th>Status </th>
+      <th>Reservation</th>
+    </tr>
 
-        <tr *ngFor="let dispo of information.disponibilite">
+    <tr *ngFor="let dispo of information.disponibilite">
 
-            <td>{{dispo.date}}</td>
-            <td>{{dispo.heureD}}</td>
-            <td>{{dispo.heureF}}</td>
-            <td>{{dispo.statut}}</td>
-            <td ><button *ngIf='dispo.statut=="Disponible" && this.userMail!=""' (click)="reserver(dispo.date, dispo.heureD, dispo.heureF)">Reserver {{dispo.date}} {{dispo.heureD}} {{dispo.heureF}}</button></td>
-        </tr>
+      <td>{{dispo.date}}</td>
+      <td>{{dispo.heureD}}</td>
+      <td>{{dispo.heureF}}</td>
+      <td>{{dispo.statut}}</td>
+      <td>
+        <div *ngIf='membre.statut != "bloquer"'>
+          <button *ngIf='dispo.statut=="Disponible" && this.userMail!=""' [disabled]="this.userMail == proprietaire.email" (click)="reserver(dispo.date, dispo.heureD, dispo.heureF)">Reserver {{dispo.date}} {{dispo.heureD}} {{dispo.heureF}}</button>
+        </div>
+      </td>
 
-    </table>
+    </tr>
+
+  </table>
 </div>

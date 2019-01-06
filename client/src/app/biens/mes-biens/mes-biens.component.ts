@@ -77,8 +77,9 @@ export class MesBiensComponent implements OnInit {
   }
 
   suppression(id) {
-    this.biensService.deleteBien(id).subscribe();
-    this.biensService.getBiens("/membre/" + this.mesCookies.getUserMail()).subscribe(res => this.biens = res);
+    this.biensService.deleteBien(id).subscribe(res => {
+        this.biensService.getBiens("/avecUtilisations/membre/" + this.mesCookies.getUserMail()).subscribe(res => this.biens = res);
+    });
   }
 
   modification(id) {

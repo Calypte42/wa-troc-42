@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CompetencesService } from '../competences.service';
 import { ServiceService } from '../../service/service.service'
+import { MembresService } from '../../membres/membres.service'
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { MesCookies } from '../../mesCookies';
 import { NgForm } from '@angular/forms';
@@ -14,11 +15,13 @@ export class FicheCompetenceComponent implements OnInit {
   private proprietaire: any;
   private userMail: String;
   private information: any;
+  private membre: any;
 
 
   constructor(private mesCookies: MesCookies, private router: Router,
     private competencesService: CompetencesService,
     private serviceService: ServiceService,
+    private membresService: MembresService,
     private route: ActivatedRoute) { }
 
   ngOnInit() {
@@ -31,6 +34,7 @@ export class FicheCompetenceComponent implements OnInit {
         console.log("resultat : " + JSON.stringify(self.information));
         console.log(self.information.listeMembres[0]);
         self.proprietaire = self.information.listeMembres[0];
+        self.membresService.getMembres("/email/" + self.mesCookies.getUserMail()).subscribe(res => self.membre = res[0]);
       });
     });
 
@@ -41,12 +45,16 @@ export class FicheCompetenceComponent implements OnInit {
   }
 
   reserver(date, heureD, heureF) {
+    var self = this;
     this.serviceService.reservationService(this.information._id, this.userMail, date, heureD, heureF).subscribe(res => {
-      this.competencesService.getAllInformationCompetence(this.information._id).subscribe(res => {
-        this.information = res[0];
-      })
+
+      this.competencesService.updateStatutDisponibilite(this.information._id, "Indisponible", date, heureD, heureF).subscribe(res => {
+        self.competencesService.getAllInformationCompetence(self.information._id).subscribe(res => {
+          self.information = res[0];
+        });
+      });
+
     });
-    
   }
 
 }

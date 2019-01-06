@@ -28,10 +28,10 @@
       </td>
       <div *ngIf="service.statut =='attente'">
         <td> <button (click)="accepter(service._id,service['utilisateur'].email)">Accepter</button> </td>
-        <td> <button (click)="refuser(service._id, service['utilisateur'].email)">Refuser</button> </td>
+        <td> <button (click)="refuser(service._id, service['utilisateur'].email, service.ID_comp_bien, service.date, service.heureD, service.heureF)">Refuser</button> </td>
       </div>
       <div *ngIf="service.statut =='en_cours'">
-        <td> <button (click)="serviceFini(service._id)">Service terminé</button> </td>
+        <td> <button (click)="serviceFini(service._id, service['competence']['_id'], service.date, service.heureD, service.heureF)">Service terminé</button> </td>
       </div>
 
     </tr>

@@ -44,10 +44,10 @@
         </p>
       </div>
     </div>
-    <button *ngIf='information.derniereUtilisation == null' [disabled]="this.userMail == proprietaire.email" (click)="emprunt()">Emprunter</button>
+    <button *ngIf='information.derniereUtilisation == null && membre.statut != "bloquer"' [disabled]="this.userMail == proprietaire.email" (click)="emprunt()">Emprunter</button>
     <p *ngIf='membre.statut == "bloquer"'>
       Compte bloqué, vous ne pouvez pas emprunter <br>
-      Veuillez contacter admin@allovoisin.fr
+      Veuillez contacter <a href="mailto:admin@allovoisin.fr">admin@allovoisin.fr</a>
     </p>
   </div>
 

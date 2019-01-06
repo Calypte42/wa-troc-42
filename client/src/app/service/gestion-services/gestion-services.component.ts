@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ServiceService } from '../service.service'
+import { CompetencesService } from '../../competences/competences.service'
 import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { NgForm } from '@angular/forms';
@@ -21,6 +22,7 @@ export class GestionServicesComponent implements OnInit {
   constructor(
     private mesCookies: MesCookies,
     private serviceService: ServiceService,
+    private competencesService: CompetencesService,
     private router: Router) { }
 
   ngOnInit() {
@@ -34,17 +36,35 @@ export class GestionServicesComponent implements OnInit {
     });
   }
 
-  refuser(id, emailUtilisateur) {
+  refuser(id, emailUtilisateur, ID_comp_bien, date, heureD, heureF) {
     this.serviceService.deleteService(id).subscribe(res => {
       this.serviceService.getService("/membre/preteur/competences/service/" + this.mesCookies.getUserMail()).subscribe(res => this.services = res);
       this.serviceService.remboursement(emailUtilisateur).subscribe();
+      this.competencesService.updateStatutDisponibilite(ID_comp_bien, "Disponible", date, heureD, heureF).subscribe();
     });
   }
 
-  serviceFini(id) {
+  serviceFini(id, idComp, removeDate, removeHeureD, removeHeureF) {
     this.serviceService.updateService(id, "termine").subscribe(res => {
       this.serviceService.getService("/membre/preteur/competences/service/" + this.mesCookies.getUserMail()).subscribe(res => this.services = res);
     });
+    let nouvelleDate = [];
+    console.log("yop")
+    let ancienneDate;
+    for (let service of this.services) {
+      if (service['competence']['_id'] == idComp) {
+          console.log(service);
+        ancienneDate = service['competence']['disponibilite'];
+        nouvelleDate = [];
+        for (let dispo of ancienneDate) {
+          if (dispo.date != removeDate || dispo.heureD != removeHeureD || dispo.heureF != removeHeureF) {
+            nouvelleDate.push(dispo);
+          }
+        }
+      }
+    }
+    this.competencesService.updateDisponibilite(idComp, nouvelleDate).subscribe();
+
   }
 
 }

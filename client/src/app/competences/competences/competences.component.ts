@@ -51,7 +51,7 @@ export class CompetencesComponent implements OnInit {
 
       //-------------------------------------
       if(this.ville!="" && this.voirTout==false){
-            this.competencesService.getCompetences("/ville/"+this.mesCookies.getVille()).subscribe(res => {
+            this.competencesService.getCompetences("/ville/identifie/"+this.mesCookies.getVille()+"/"+this.userMail).subscribe(res => {
                 this.competences = res;
                 this.chRef.detectChanges();
                 const table: any = $('#monTableau');
@@ -86,7 +86,11 @@ export class CompetencesComponent implements OnInit {
             });
         }
         else{
-            this.competencesService.getCompetences("").subscribe(res => {
+            let url ="";
+            if (this.userMail != "") {
+                url = "/identifie/"+this.userMail;
+            }
+            this.competencesService.getCompetences(url).subscribe(res => {
             this.competences = res;
             this.chRef.detectChanges();
             const table: any = $('#monTableau');
