@@ -8,40 +8,56 @@
 
 
   <table id="monTableau" class="table table-bordered table-striped">
-      <thead>
-    <tr>
-      <th>Descriptif</th>
-      <th>Type</th>
-      <th>Mots clés</th>
-      <th>Prix neuf</th>
-      <th>Status</th>
-      <th>Voir</th>
-      <th>Modifier </th>
-      <th> Supprimer </th>
-    </tr>
-</thead>
-<tbody>
-    <tr *ngFor="let bien of biens">
+    <thead>
+      <tr>
+        <th>Descriptif</th>
+        <th>Type</th>
+        <th>Mots clés</th>
+        <th>Prix neuf</th>
+        <th>Status</th>
+        <th>Voir</th>
+        <th>Modifier </th>
+        <th> Supprimer </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let bien of biens">
 
-      <td>{{bien.descriptif}}</td>
-      <td>{{bien.type}}</td>
-      <td>{{bien.mots_clefs}}</td>
-      <td>{{bien.prix_neuf}}</td>
-      <td>
-        <div *ngIf="bien['listeBiensUtilisations'].length != 0">
-          <p *ngIf="bien['listeBiensUtilisations'][bien['listeBiensUtilisations'].length - 1].statut =='attente'">DEMANDE D'EMPRUNT</p>
-          <p *ngIf="bien['listeBiensUtilisations'][bien['listeBiensUtilisations'].length - 1].statut =='termine'">DISPONIBLE</p>
-          <p *ngIf="bien['listeBiensUtilisations'][bien['listeBiensUtilisations'].length - 1].statut =='en_cours'">EN COURS D'EMPRUNT</p>
-        </div>
-        <div *ngIf="bien['listeBiensUtilisations'].length == 0">
-          DISPONIBLE
-        </div>
-      </td>
-      <td> <button (click)="inscription(bien._id)" width="50px" height="50px">Voir</button> </td>
-      <td> <button (click)="modification(bien._id)">Modifier</button> </td>
-      <td> <button (click)="suppression(bien._id)">Supprimer</button> </td>
+        <td>{{bien.descriptif}}</td>
+        <td>{{bien.type}}</td>
+        <td>{{bien.mots_clefs}}</td>
+        <td>{{bien.prix_neuf}}</td>
+        <td>
+          <div *ngIf="bien['listeBiensUtilisations'].length != 0">
+            <p *ngIf="bien['listeBiensUtilisations'][bien['listeBiensUtilisations'].length - 1].statut =='attente'">DEMANDE D'EMPRUNT</p>
+            <p *ngIf="bien['listeBiensUtilisations'][bien['listeBiensUtilisations'].length - 1].statut =='termine'">DISPONIBLE</p>
+            <p *ngIf="bien['listeBiensUtilisations'][bien['listeBiensUtilisations'].length - 1].statut =='en_cours'">EN COURS D'EMPRUNT</p>
+          </div>
+          <div *ngIf="bien['listeBiensUtilisations'].length == 0">
+            DISPONIBLE
+          </div>
+        </td>
+        <td> <button (click)="inscription(bien._id)" width="50px" height="50px">Voir</button> </td>
+        <td>
+          <div *ngIf="bien['listeBiensUtilisations'].length != 0">
+            <button [disabled]="bien['listeBiensUtilisations'][bien['listeBiensUtilisations'].length - 1].statut !='termine'" (click)="modification(bien._id)">Modifier</button>
+          </div>
+          <div *ngIf="bien['listeBiensUtilisations'].length == 0">
+            <button (click)="modification(bien._id)">Modifier</button>
+          </div>
+        </td>
 
-    </tr>
-</tbody>
+
+        <td>
+          <div *ngIf="bien['listeBiensUtilisations'].length != 0">
+            <button [disabled]="bien['listeBiensUtilisations'][bien['listeBiensUtilisations'].length - 1].statut !='termine'" (click)="suppression(bien._id)">Supprimer</button>
+          </div>
+          <div *ngIf="bien['listeBiensUtilisations'].length == 0">
+            <button (click)="suppression(bien._id)">Supprimer</button>
+          </div>
+        </td>
+
+      </tr>
+    </tbody>
 
   </table>

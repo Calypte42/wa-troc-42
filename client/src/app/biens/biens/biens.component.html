@@ -4,7 +4,25 @@
 </div>
 <div class="row">
 
-      Voici la liste des biens :
+    <div class="row" *ngIf='voirTout==true'>
+        <div class="col-lg-offset-1 col-lg-5">
+            Voici la liste de toutes les compétences
+        </div>
+        <div class="col-lg-offset-1 col-lg-2">
+            <button *ngIf='isAuth==true' (click)="voirLocal()"> Voir seulement dans ma ville</button>
+        </div>
+
+    </div>
+
+    <div class="row" *ngIf='voirTout==false'>
+        <div class="col-lg-offset-1 col-lg-5">
+            Voici la liste des biens de : {{ville}}
+        </div>
+        <div class="col-lg-offset-1 col-lg-2">
+            <button *ngIf='isAuth==true' (click)="voirToute()"> Voir tous les biens</button>
+        </div>
+
+    </div>
 
 
       <table id="monTableau" class="table table-bordered table-striped">

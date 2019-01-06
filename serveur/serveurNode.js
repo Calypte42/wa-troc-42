@@ -395,7 +395,9 @@ MongoClient.connect(url, {
         let ville = req.params.ville;
         res.setHeader('Content-type', 'application/json; charset=UTF-8');
         res.setHeader('access-control-allow-origin', '*');
-        db.collection("Biens").find({"ville":ville}).toArray((err, documents) => {
+        db.collection("Biens").find({
+            "ville": ville
+        }).toArray((err, documents) => {
             let liste = [];
             for (let document of documents) {
                 liste.push(document);
@@ -508,6 +510,57 @@ MongoClient.connect(url, {
             let liste = [];
             for (let document of documents) {
                 liste.push(document);
+            }
+            let json = JSON.stringify(liste);
+            res.end(json);
+        })
+    });
+
+    app.get('/biens/ville/avecUtilisations/identifie/:ville/:email', (req, res) => {
+        let email = req.params.email;
+        let ville = req.params.ville;
+        res.setHeader('Content-type', 'application/json; charset=UTF-8');
+        res.setHeader('access-control-allow-origin', '*');
+        db.collection("Membres").aggregate([{
+                $match: {
+                    "ville": ville
+                }
+            },
+            {
+                $lookup: {
+                    from: 'Biens',
+                    localField: 'email',
+                    foreignField: 'email',
+                    as: 'listeBiens'
+                }
+            },
+            {
+                $match: {
+                    "email": {
+                        "$nin": [email]
+                    }
+                }
+            },
+            {
+                $lookup: {
+                    from: 'Utilisations',
+                    localField: 'listeBiens._id',
+                    foreignField: 'ID_comp_bien',
+                    as: 'listeBiensUtilisations'
+                }
+            },
+            {
+                $sort: {
+                    date: 1
+                }
+            }
+        ]).toArray(function(err, documents) {
+            let liste = [];
+            for (let document of documents) {
+                for (let bienUtilisation of document.listeBiens) {
+                    bienUtilisation['listeBiensUtilisations'] = document['listeBiensUtilisations']
+                    liste.push(bienUtilisation);
+                }
             }
             let json = JSON.stringify(liste);
             res.end(json);
@@ -681,8 +734,9 @@ MongoClient.connect(url, {
     });
 
 
-    app.get('/competences/ville/:ville', (req, res) => {
+    app.get('/competences/ville/identifie/:ville/:email', (req, res) => {
         let ville = req.params.ville;
+        let email = req.params.email;
         res.setHeader('Content-type', 'application/json; charset=UTF-8');
         res.setHeader('access-control-allow-origin', '*');
         db.collection("Membres").aggregate([{
@@ -697,6 +751,13 @@ MongoClient.connect(url, {
                     foreignField: 'email',
                     as: 'listeBiensUtilisations'
                 }
+            },
+            {
+                $match: {
+                    "listeBiensUtilisations.email": {
+                        "$nin": [email]
+                    }
+                }
             }
         ]).toArray(function(err, documents) {
             let liste = [];
@@ -704,6 +765,23 @@ MongoClient.connect(url, {
                 for (let bienUtilisation of document.listeBiensUtilisations) {
                     liste.push(bienUtilisation);
                 }
+            }
+            let json = JSON.stringify(liste);
+            res.end(json);
+        })
+    });
+    app.get('/competences/identifie/:email', (req, res) => {
+        let email = req.params.email;
+        res.setHeader('Content-type', 'application/json; charset=UTF-8');
+        res.setHeader('access-control-allow-origin', '*');
+        db.collection("Competences").find({
+            "email": {
+                "$nin": [email]
+            }
+        }).toArray(function(err, documents) {
+            let liste = [];
+            for (let document of documents) {
+                liste.push(document);
             }
             let json = JSON.stringify(liste);
             res.end(json);
@@ -817,12 +895,25 @@ MongoClient.connect(url, {
         let id = req.params.id;
         console.log(req.body);
         db.collection("Competences").findOneAndUpdate({
-            $and: [
-                {"_id": ObjectId(id)},
-                {"disponibilite.date": {$in: [req.body['date']]}},
-                {"disponibilite.heureD": {$in: [req.body['heureD']]}},
-                {"disponibilite.heureF": {$in: [req.body['heureF']]}}
-            ]
+                $and: [{
+                        "_id": ObjectId(id)
+                    },
+                    {
+                        "disponibilite.date": {
+                            $in: [req.body['date']]
+                        }
+                    },
+                    {
+                        "disponibilite.heureD": {
+                            $in: [req.body['heureD']]
+                        }
+                    },
+                    {
+                        "disponibilite.heureF": {
+                            $in: [req.body['heureF']]
+                        }
+                    }
+                ]
             }, {
                 $set: {
                     "disponibilite.$.statut": req.body["statut"]
@@ -978,7 +1069,6 @@ MongoClient.connect(url, {
                 serviceUtilisation['utilisateur'] = document['utilisateur'];
                 delete document['listeCompetencesUtilisations'];
                 delete document['utilisateur'];
-                delete document['disponibilite'];
                 let date = serviceUtilisation['date'].split('/');
                 serviceUtilisation['date'] = date[0];
                 serviceUtilisation['heureD'] = date[1];
@@ -1069,11 +1159,18 @@ MongoClient.connect(url, {
         res.setHeader('access-control-allow-origin', '*');
         db.collection("Utilisations").aggregate([{
                 $match: {
-                          $and: [
-                              {email: {$in: [email]}},
-                              {statut: {$in: ["en_cours", "attente"]}}
-                          ]
-                     }
+                    $and: [{
+                            email: {
+                                $in: [email]
+                            }
+                        },
+                        {
+                            statut: {
+                                $in: ["en_cours", "attente"]
+                            }
+                        }
+                    ]
+                }
             },
             {
                 $lookup: {

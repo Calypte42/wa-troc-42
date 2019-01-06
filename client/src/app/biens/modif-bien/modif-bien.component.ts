@@ -41,16 +41,14 @@ export class ModifBienComponent implements OnInit {
   }
 
   onSubmit(form: NgForm) {
-    console.log(form);
     const descriptif = form.value['descriptif'];
     const mots_clefs = form.value['mots_clefs'];
     const type = form.value['type'];
     const photo = form.value['photo'];
     const prix_neuf = form.value['prix_neuf'];
     let retourServeur = this.biensService.updateBien(this.id, descriptif, type, mots_clefs, photo, prix_neuf).subscribe();
-    console.log(retourServeur);
     let self = this;
-    setTimeout(function() { self.ngOnInit() }, 900);
+    setTimeout(function() { self.router.navigate(['mesBiens']) }, 900);
 
     //this.ngOnInit();
 

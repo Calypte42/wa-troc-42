@@ -17,11 +17,11 @@
 
 
 
-</div>
+</div><br>
 <p *ngIf='membre.statut == "bloquer"'>
   Compte bloqué, vous ne pouvez pas réserver de service <br>
-  Veuillez contacter admin@allovoisin.fr
-</p>
+  Veuillez contacter <a href="mailto:admin@allovoisin.fr">admin@allovoisin.fr</a> 
+</p><br>
 <div *ngIf='this.userMail!=""'>
   Liste des disponibilités :
   <table class="table table-bordered table-striped">

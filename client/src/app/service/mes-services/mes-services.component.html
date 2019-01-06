@@ -10,7 +10,7 @@
     <tr>
         <th>Descriptif</th>
         <th>Date</th>
-        <th>Utilisateur</th>
+        <th>Fournisseur</th>
         <th>Status</th>
         <th colspan="2">Gestion</th>
     </tr>
@@ -27,7 +27,7 @@
         <p *ngIf="service.statut =='en_cours'">SERVICE EN COURS</p>
       </td>
       <div *ngIf="service.statut =='attente'">
-        <td> <button (click)="annuler(service._id, this.userMail)">Annuler</button> </td>
+        <td> <button (click)="annuler(service._id, this.userMail, service.ID_comp_bien, service.date, service.heureD, service.heureF)">Annuler</button> </td>
       </div>
 
     </tr>

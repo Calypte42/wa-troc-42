@@ -50,9 +50,8 @@ export class BiensComponent implements OnInit {
 
         //-------------------------------------
 
-        if (this.userMail != ""){
-        console.log(this.userMail);
-        this.biensService.getBiens("/avecUtilisations/identifie/"+this.userMail).subscribe(res => {
+        if (this.ville!="" && this.voirTout==false){
+        this.biensService.getBiens("/ville/avecUtilisations/identifie/"+this.ville+"/"+ this.userMail).subscribe(res => {
             this.biens = res;
             this.chRef.detectChanges();
             const table: any = $('#monTableau');
@@ -87,7 +86,13 @@ export class BiensComponent implements OnInit {
 
         });
     } else {
-        this.biensService.getBiens("/avecUtilisations").subscribe(res => {
+        let url ="";
+        if (this.userMail != "") {
+            url = "/avecUtilisations/identifie/"+this.userMail;
+        } else {
+            url = "/avecUtilisations/";
+        }
+        this.biensService.getBiens(url).subscribe(res => {
             this.biens = res;
             this.chRef.detectChanges();
             const table: any = $('#monTableau');
@@ -132,6 +137,16 @@ export class BiensComponent implements OnInit {
 
     inscription(id){
         this.router.navigate(['ficheBien',id]);
+    }
+
+    voirToute(){
+        this.voirTout=true;
+        this.ngOnInit();
+    }
+
+    voirLocal(){
+        this.voirTout=false;
+        this.ngOnInit();
     }
 
 }

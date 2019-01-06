@@ -45,14 +45,16 @@ export class FicheCompetenceComponent implements OnInit {
   }
 
   reserver(date, heureD, heureF) {
+    var self = this;
     this.serviceService.reservationService(this.information._id, this.userMail, date, heureD, heureF).subscribe(res => {
 
-      this.competencesService.updateStatutDisponibilite(this.information._id, "Indisponible", date, heureD, heureF).subscribe();
-      this.competencesService.getAllInformationCompetence(this.information._id).subscribe(res => {
-        this.information = res[0];
-      })
-    });
+      this.competencesService.updateStatutDisponibilite(this.information._id, "Indisponible", date, heureD, heureF).subscribe(res => {
+        self.competencesService.getAllInformationCompetence(self.information._id).subscribe(res => {
+          self.information = res[0];
+        });
+      });
 
+    });
   }
 
 }
